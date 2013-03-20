@@ -169,8 +169,9 @@ class Ajax extends CI_Controller
         $id_alojamiento = $this->input->post('ID_Alojamiento');
         $nombreimagen = $this->input->post('NombreImagen');
         $imagendescripcion = $this->input->post('ImagenDescripcion');
-        $query = sprintf('update alojamientos_imagenes set ImagenDescripcion="%s" where ID_Alojamiento=%s and ImagenDescripcion=%s', $imagendescripcion, $id_alojamiento, $nombreimagen);
+        $query = sprintf('update alojamientos_imagenes set ImagenDescripcion="%s" where ID_Alojamiento=%s and NombreImagen=%s', $imagendescripcion, $id_alojamiento, $nombreimagen);
         $this->db->query($query);
+        echo $query;
     }
 }
 ?>
