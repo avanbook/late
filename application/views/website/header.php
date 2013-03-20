@@ -3,40 +3,47 @@
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <title><?php echo $title ; ?></title>
+    <!-- TITUTLO-->
+    <?php if (isset($title)) {?>
+     <title><?php echo $title ; ?></title><?php } else {?>
+     <title>San Rafael Mendoza | San Rafael Late</title>
+     <?php } ?>
+     <!-- descripcion -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo $descripcion ;?>">
-    <meta name="author" content="">
+    <?php if (isset($title)) {?> <meta name="description" content="<?php echo $descripcion ;?>"><?php } else {?>
+    <meta name="description" content="Portal de Turismo de San Rafael Mendoza - San Rafael late - ">
+     <?php } ?>
+     <!-- Keywords-->
+      <?php if (isset($keywords)) {?> <meta name="Keywords" content="<?php echo $keywords ;?>"><?php } else {?>
+    <meta name="Keywords" content="san, Rafael, Turismo, Mendoza, Etc"><?php } ?>
+    <meta name="author" content="sanrafaellate.com.ar">
 
 
-    <!-- Le styles asdasdas  nuevac  qweqwe gsdfsdfsdfs d sfdsfsdfs dsadasda sdas dasda PRUEBAAAAAAAAAAAAAAAAAA d fdfdsfsdfds ffsdfdsf sd
-    <link href="boostrap/css/bootstrap.css" rel="stylesheet">
-    <link href="boostrap/css/bootstrap-responsive.css" rel="stylesheet">-->
-
-
-
-<!-- JQUERY CSS
-
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
-<!-- offline-->
+<!-- JQUERY CSS 
+-->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> 
+ <!-- offline -->
   <link rel="stylesheet" href="<?php echo base_url() ?>css/jquery-ui-1.9.2.custom.css" />
 
 <!--FIN JQUERY CSS -->
+
+<!-- CSS --> 
+
+<?php if (isset($css)): ?>
+        <?php foreach ($css as $var): ?>
+            <link type="text/css" href="<?php echo base_url() . $var ?>.css" rel="stylesheet" />
+        <?php endforeach ?>
+<?php endif; ?>
+
+
+
       <!-- Start VideoLightBox.com HEAD section -->
 <link rel="stylesheet" href="<?php echo base_url() ?>js/engine/css/videolightbox.css" type="text/css" />
 <style type="text/css">#videogallery a#videolb{display:none}</style>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>js/engine/css/overlay-minimal.css"/>
 
-<!--        -------- START CSS STYLE ---------      -->
-<link href="<?php echo base_url() ?>css/normalize.min.css" rel="stylesheet"> 
-<link href="<?php echo base_url() ?>css/estilos.css" rel="stylesheet">
-<link href="<?php echo base_url() ?>css/responsive.css" rel="stylesheet">
-    
-<!--        -------- END CSS STYLE ---------       -->
-
 
   </head>
-
   <body>
  
 <div align="center" id="general"> 
@@ -51,13 +58,13 @@
 <!-- SAN RAFAEL INFO -->
 <div><ul class="">
  <li><h2><img src="<?php echo base_url() ?>iconos/info.jpg" class="ico" alt="Informacion San Rafael">Info San Rafael</h2></li>
-  <li><a href="http://sanrafaellate.com.ar/san-rafael/San-Rafael.html" title="reseña Historia de San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta hostel San Rafael">Reseña Histotica</a></li>
+  <li><a href="http://sanrafaellate.com.ar/san-rafael/San-Rafael.html" title="Reseña Historia de San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta hostel San Rafael">Reseña Histotica</a></li>
   <li><a href="http://sanrafaellate.com.ar/san-rafael/san_rafael_demografia.html" tilte="informacion geografica de San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta hostel San Rafael">Geografia</a></li>
   <li><a href="http://sanrafaellate.com.ar/san_rafael_mapa.html" title="Mapa Interactivo de San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta hostel San Rafael">Mapa Interactivo Ciudad</a></li>
   <li><a href="http://sanrafaellate.com.ar/transporte/transportes.html" title="Guia de transporte Urbano de San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta hostel San Rafael">Guia de Transporte</a></li>
   <li><a href="http://sanrafaellate.com.ar/san-rafael/datos-utiles.html" title="Datos Utiles de San Rafael" ><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta hostel San Rafael">Telefonos de Utilidad</a></li>
  
-</ul></div>|
+</ul></div>
 
 <!-- MULTIMEDIA -->
 <div><ul class="">
@@ -115,25 +122,26 @@
 <div id="alojamiento" class="border_rigth">
  
  <h2><img src="<?php echo base_url() ?>iconos/aloja.jpg" class="ico" alt="alojamientos San Rafael">Alojamientos</h2>
- <ul class="twocolum">
+<ul class="twocolum">
   <li><a href="http://sanrafaellate.com.ar/alojamiento/hoteles-san-rafael.html" title="Listado de Hoteles en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta hoteles San Rafael">Hoteles</a></li>
   <li><a href="http://sanrafaellate.com.ar/alojamiento/cabanas-san-rafael.html" title="Cabañas en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Cabañas San Rafael">Cabañas</a></li>
   <li><a href="http://sanrafaellate.com.ar/alojamiento/apartHoteles-san-rafael.html" title="Apart Hoteles en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Aparthoteles San Rafael">Apart Hoteles</a></li>
   <li><a href="http://sanrafaellate.com.ar/alojamiento/hostel-san-rafael.html" title="Hostel en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta hostel San Rafael">Hostel</a></li>
-  <li><a href="http://sanrafaellate.com.ar/alojamiento/departamentos-casas-san-rafael.html" title="Departamentos en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Departamentos San Rafael">Departamentos</a></li>
+  <li><a href="http://sanrafaellate.com.ar/alojamiento/departamentos-san-rafael.html" title="Departamentos en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Departamentos San Rafael">Departamentos</a></li>
   <li><a href="http://sanrafaellate.com.ar/alojamiento/chalets-san-rafael.html" title="Chalet en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Chalets San Rafael">Chalets</a></li>
   <li><a href="http://sanrafaellate.com.ar/alojamiento/casas-campo-san-rafael.html" title="Casas de campo San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Casas de Campo San Rafael">Casas de Campo</a></li>
-  <li><a href="http://sanrafaellate.com.ar/alojamiento/compejos-turisticos-san-rafael.htm" title="Complejos Turisticos San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Complejos Turisticos San Rafael">Complejos Turisticos</a></li>
-   <li><a href="http://sanrafaellate.com.ar/alojamiento/campings-san-rafael.html" title="Camping San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Campings San Rafael">Campings</a></li>
-    <li><a href="http://sanrafaellate.com.ar/alojamiento/hosterias-san-rafael.html" title="Hosterias y Hospedajes en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Hosterias San Rafae">Hosterias</a></li>
-     <li><a href="http://sanrafaellate.com.ar/alojamiento/agroturismo-san-rafael.html" title="Agroturismo San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Agroturismo San Rafae">Agroturismo</a></li>
+  <li><a href="http://sanrafaellate.com.ar/alojamiento/compejos-turisticos-san-rafael.html" title="Complejos Turisticos San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Complejos Turisticos San Rafael">Complejos Turisticos</a></li>
+  <li><a href="http://sanrafaellate.com.ar/alojamiento/campings-san-rafael.html" title="Camping San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Campings San Rafael">Campings</a></li>
+  <li><a href="http://sanrafaellate.com.ar/alojamiento/hosterias-san-rafael.html" title="Hosterias y Hospedajes en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Hosterias San Rafae">Hosterias</a></li>
+  <li><a href="http://sanrafaellate.com.ar/alojamiento/agroturismo-san-rafael.html" title="Agroturismo San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="viñeta Agroturismo San Rafae">Agroturismo</a></li>
 </ul> 
 </div>
 <!-- RESERVA ONLINE -->
-<div id="buscador_a" class="border_rigth"><form action="Http://sanrafaellate.com.ar/buscar.php" id="balojar"><div id="bAlojar">
- <h2>Buscar Alojamiento</h2>
-  <div class="fecha"><label for="in">Llegada</label><input type="text" value="fecha Llegada" id="in"></div>
-  <div class="fecha"><label for="out">Salida</label><input type="text" value="Fecha Salida" id="out"></div><div><label for="tipo">Tipo alojamiento</label><br><select name="tipo" id="tipo"><option value="hotel">Hotel</option><option value="cabanas">Cabañas</option>  <option value="depto">Departmentos</option>   </select> <button>BUSCAR</button></div>
+<div id="buscador_a" class="border_rigth"><form action="http://sanrafaellate.com.ar/servicios/buscador-rutas.html" id="balojar"><div id="bAlojar">
+ <h2>Buscador de Rutas</h2>
+ <p>Enontra la mejor ruta a San Rafael desde tu casa.</p>
+  <div class=""><label for="desde">Desde:</label><input type="text" value="Direccion, Ciudad, Provincia" id="desde"></div>
+  <div class=""><label for="hsta">Hasta</label><input type="text" value="Mitre 200, San Rafael, Mendoza " id="hasta"></div><div> <button>BUSCAR</button></div>
  
 </div></form></div>  
 <!-- SERVICIOS TURISTAS -->
@@ -159,39 +167,39 @@
 <!-- ##########SUBMENU FIN PREPARA ######## -->
       </li>
       <li class="menuss"><span class="title">Circuitos</span><br><span class="info">Conoce los circuitos turistico de San Rafael </span>
-<div class="submenu" align="left">
+<div class="submenu" align="center">
   <div id="circuitos">
     <div>
       <img src="<?php echo base_url() ?>imagenes/valleGrande.jpg" alt="Valle Grande San Rafael">
-      <h3><a href="http://sanrafaellate.com.ar/circuitos-turistico/valle-grande.html" title="Descubri Valle Grande San Rafael">Valle Grande</a></h3>
+      <h3><a href="http://sanrafaellate.com.ar/circuitos-turisticos/valle-grande.html" title="Descubri Valle Grande San Rafael">Valle Grande</a></h3>
     </div>
     <div>
       <img src="<?php echo base_url() ?>imagenes/losReyunos.jpg" alt="Los Reyunos San Rafael">
-      <h3><a href="http://sanrafaellate.com.ar/circuitos-turistico/los-reyunos.html" title="Descubre el Imponente Lago Los Reyunos">Los Reyunos</a></h3>
+      <h3><a href="http://sanrafaellate.com.ar/circuitos-turisticos/los-reyunos.html" title="Descubre el Imponente Lago Los Reyunos">Los Reyunos</a></h3>
     </div>
     <div>
       <img src="<?php echo base_url() ?>imagenes/nihuil1.jpg" alt="El Nihuil San Rafael">
-      <h3><a href="http://sanrafaellate.com.ar/circuitos-turistico/e-nihiul.html" title="Playa, arena , relax en el Nihiul .. Descubrelo">El Nihuil</a></h3>
+      <h3><a href="http://sanrafaellate.com.ar/circuitos-turisticos/el-nihiul.html" title="Playa, arena , relax en el Nihiul .. Descubrelo">El Nihuil</a></h3>
     </div>
     <div>
       <img src="<?php echo base_url() ?>imagenes/villa25mayo.jpg" alt="villa 25 de mayo San Rafael">
-      <h3><a href="http://sanrafaellate.com.ar/circuitos-turistico/villa-25-mayo.html" title="Patrimonia de La humanidad , UNICO museo Viviente del Mundo">Villa 25 de Mayo</a></h3>
+      <h3><a href="http://sanrafaellate.com.ar/circuitos-turisticos/villa-25-mayo.html" title="Patrimonia de La humanidad , UNICO museo Viviente del Mundo">Villa 25 de Mayo</a></h3>
     </div>
     <div>
       <img src="<?php echo base_url() ?>imagenes/ciudad.jpg" alt="Ciudad de San Rafael">
-      <h3><a href="http://sanrafaellate.com.ar/circuitos-turistico/ciudad-san-rafael.html" title="descubre todo lo que podes hacer en la Ciudad">Ciudad y Vinos</a></h3>
+      <h3><a href="http://sanrafaellate.com.ar/circuitos-turisticos/ciudad-san-rafael.html" title="descubre todo lo que podes hacer en la Ciudad">Ciudad y Vinos</a></h3>
     </div>
     <div>
       <img src="<?php echo base_url() ?>imagenes/sosneado.jpg" alt="El sosneado San Rafael">
-      <h3><a href="http://sanrafaellate.com.ar/circuitos-turistico/el-sosneado.html" title="El Sosneado Relax, tranquilidad y Aventura">El Sosneado</a></h3>
+      <h3><a href="http://sanrafaellate.com.ar/circuitos-turisticos/el-sosneado.html" title="El Sosneado Relax, tranquilidad y Aventura">El Sosneado</a></h3>
     </div>
       <div>
       <img src="<?php echo base_url() ?>imagenes/lasLenas.jpg" alt="las leñas San Rafael">
-      <h3><a href="http://sanrafaellate.com.ar/circuitos-turistico/las-lenas.html" title="Las Leñas, el mejor centro de Esqui Argentina.">Las Leñas</a></h3>
+      <h3><a href="http://sanrafaellate.com.ar/circuitos-turisticos/las-lenas.html" title="Las Leñas, el mejor centro de Esqui Argentina.">Las Leñas</a></h3>
     </div>
       <div>
       <img src="<?php echo base_url() ?>imagenes/canonAtuel.jpg" alt="Cañon del atuel San Rafael">
-      <h3><a href="http://sanrafaellate.com.ar/circuitos-turistico/canon-atuel.html" title="El Imponente Cañon de Atuel">cañon del Atuel</a></h3>
+      <h3><a href="http://sanrafaellate.com.ar/circuitos-turisticos/canon-atuel.html" title="El Imponente Cañon de Atuel">cañon del Atuel</a></h3>
     </div>
     
   </div>
@@ -243,36 +251,26 @@
 </ul></div>
 <div id="agenda">
 <h2><img src="<?php echo base_url() ?>iconos/agenda.jpg" class="ico " alt="">Agenda Eventos</h2>
+
+<?php
+$i=0;
+ foreach ($row_A as $var): 
+$i++;
+if($i<=3) { ?>
   <div>
     <div class="fecha_ag">
-      <p>17/01</p>
+      <p><?php echo $var['fechaA']; ?></p>
     </div>
     <div class="info_ag">
-      <h3>Encuetro GEEK</h3>
-      <p>entro gde geek en SAn Rafael</p>
+      <h3><?php echo $var['Titulo']; ?> </h3>
+      <p><?php echo substr(strip_tags($var['Descripcion']),0, 50) ?></p>
     </div>
-  </div>
-  <div>
-    <div class="fecha_ag">
-      <p>22/01</p>
-    </div>
-    <div class="info_ag">
-      <h3>Tango en Plaza</h3>
-      <p>Parejas de tango en plaza San Martin</p>
-    </div>
-  </div>
-  <div>
-    <div class="fecha_ag">
-      <p>23/01</p>
-    </div>
-    <div class="info_ag">
-      <h3>Fiesta Vendimia</h3>
-      <p>fiesta de la vendimia en San rafael</p>
-    </div>
-  </div>
+</div>
+  <?php } 
+  endforeach ?>  
 </div>
 
-  </div>
+  
   <!-- FIN AGENDA-->
       </li>
     

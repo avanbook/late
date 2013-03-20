@@ -26,12 +26,42 @@ class Home extends CI_Controller {
 		$rows_p =$rows5->result_array();
 		$data['row_p']=$rows_p;
 
+//AGENDA 
+		$query4= "Select Date_format(Fecha,'%m/%d') as fechaA, ID_Agenda,Titulo, Descripcion  FROM agendas WHERE Fecha>(now())- interval 8 day ORDER BY  Fecha ASC ";
+		$rowsA=$this->db->query($query4);
+		$rows_A =$rowsA->result_array();
+		$data['row_A']=$rows_A;
 
 //PASAR DATOS	
 		$data['row4']=$rows4;
+		
+		$data['js']=array(
+			//esto es carusel 
+			"js/carusel/js/jquery.smoothdivscroll-1.3-min",
+			"js/carusel/js/jquery.mousewheel.min",
+			//JS generales
+			"js/funcionesG",
+			//JS Home
+			"js/home"
+
+			);
+		$data['css']=array(
+			//CSS globales
+			"css/normalize.min",
+			"css/estilos",
+			"css/responsive",
+			//CARUSELL
+			"js/carusel/css/smoothDivScroll"
+
+			
+
+		);
+		//DATOS DE LA PAGINA
 		$data['body']="website/body_home";
-		$data['title']="Turismo San Rafael Mendoza | San Rafael Late | !";
+		$data['title']="Turismo en San Rafael Mendoza | San Rafael Late | !";
 		$data['descripcion']="HOLA LOCOS";
+		$data['keywords']="";
+
 		$this->load->view('templates/website/template_home', $data);
 
 	}
@@ -44,3 +74,5 @@ class Home extends CI_Controller {
 
 /* End of file home.php */
 /* Location: ./application/controllers/home.php */
+
+?>

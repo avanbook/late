@@ -96,19 +96,56 @@ BEGUIN CONTENIDOS
                        <?php foreach ($row_p as $var): ?>
                 <div>
 
-                    <div class="imag"><img src="<?php echo base_url() . "upload/paginas/thumb/" . $var['ID_Pagina'] . "_1p.jpg" ?>" alt=""> </div>
+                    <div class="imag"><img src="<?php echo base_url() . "upload/paginas/thumb/" . $var['ID_Pagina'] . "_1_p.jpg" ?>" alt=""> </div>
                     <h3><a href="<?php echo base_url() .$var['Url'] ; ?>" title="<?php echo ucwords($var['TituloContenido']); ?> - San Rafael - Ver Info completa"><?php echo ucwords($var['TituloContenido']); ?></a></h3>
                     <p><?php echo substr(strip_tags($var['Contenido']),0, 200) ?>... <a href="<?php echo base_url() .$var['Url'] ; ?>" title="<?php echo ucwords($var['TituloContenido']); ?> - San Rafael - Ver Info completa">Seguir Leyendo</a>
                 </div>
                   <?php endforeach ?>
             </div>
             <!-- FIN  DESTACADOS-->
-
+            <br>
+            <div align="center"> <a href="http://www.despegar.com.ar/hoteles/hl-mdz-i1/hoteles-en-mendoza/?cid=19" class="titulos_12_grisc">Hoteles en Mendoza</a></div>
+            <!-- BEGUIN AGENDA-->
+            <br>
+<div id="agendaC">
+    <h2>Agenda Cultural</h2>
+    <p>Los mejores Eventos en San Rafael para organizar tus dias.</p>
+    <div id="carusel">
+      <?php foreach ($row_A as $var): ?>
+        <div class="carusell">
+             <p class="fecha"><?php echo $var['fechaA']; ?></p>
+            <img src="<?php echo base_url() . "upload/agendas/thumb/" . $var['ID_Agenda'] . "_1_p.jpg" ?>" alt="">
+            <h3><a href="<?php echo base_url(). "agenda/" . trim($var['Titulo'])."-".$var['ID_Agenda']; ?>" title="<?php echo "Ver Detalle Evento - ".ucwords($var['Titulo'])."- San Rafael"; ?>"><?php echo ucwords($var['Titulo']); ?></a></h3>
+           
+        </div>
+        <?php endforeach ?>
+    </div>
+</div>
+            <!-- END AGENDA-->
         </div>
         <!-- fin PPAL-->
 
         <!-- BEGUIN ADS-->
-        <div id="cont_ads"><p></p><p></p><img src="<?php echo base_url() ?>imagenes/publi_p.jpg" alt=""></div>
+        
+        <div id="cont_ads">
+            <div id="buscadorC" align="left"> 
+                <form>
+            <h2>Buscador de Alojamientos</h2>
+
+<div class=""><label for="in">Llegada</label><br><input type="text" class="fechass" value="fecha Llegada" id="from"></div>
+  <div class=""><label for="out">Salida</label><br><input type="text" value="Fecha Salida" id="to"></div>
+  <div><label for="tipo">Tipo alojamiento</label>
+<select name="tipo" id="tipo">
+    <option value="hotel">Hotel</option>
+    <option value="cabanas">Cabañas</option>
+    <option value="depto">Departmentos</option> 
+</select> 
+  </div>
+  <div align="center"><button>Buscar..</button> </div>
+</form>
+           </div>
+
+           <img src="<?php echo base_url() ?>imagenes/publi_p.jpg" alt=""></div>
         <!-- END ADS-->
     </div>
     <!-- FIN CONT GRAL-->

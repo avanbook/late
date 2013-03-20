@@ -73,129 +73,60 @@
 </div>
 
 <!-- =================| SCRIPTS |============== -->
-
 <!-- jQuery JS -->
-
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-
-<!-- offline -->
 <script src="<?php echo base_url() ?>js/jquery-ui/js/jquery-1.8.3.js"></script>
   <script src="<?php echo base_url() ?>js/jquery-ui/js/jquery-ui-1.9.2.custom.js"></script>
 
-<!-- RELOJ -->
-
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/scroll-infinite/jquery.infinitescroll.js"></script>
 <script type="text/javascript">
-$(function() {
+$(document).ready(function() {
+  $( '#dir_' ).infinitescroll({
+ 
+  navSelector  : "div#paginacion",            
+                 // selector for the paged navigation (it will be hidden)
+ 
+  nextSelector : ".nextR a:first",    
+                 // selector for the NEXT link (to page 2)
+ 
+  itemSelector :  ".items" ,          
+                 // selector for all items you'll retrieve
+ 
+  debug        : true,                        
+                 // enable debug messaging ( to console.log )
+ 
+  loadingImg   : "../../../js/infinite-scroll/images/loading.gif",          
+                 // loading image.
+                 // default: "http://www.infinite-scroll.com/loading.gif"
+ 
+  loadingText  : "Cargando Alojamientos...",      
+                 // text accompanying loading image
+                 // default: "<em>Loading the next set of posts...</em>"
+ 
+  animate      : true
+                 // boolean, if the page will do an animated scroll when new content loads
+                 // default: false
+ 
 
-// ---------------------REJOJ-----------------------------------------
-// Create two variable with the names of the months and days in an array
-var monthNames = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "diciembre" ]; 
-var dayNames= ["domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"]
-
-// Create a newDate() object
-var newDate = new Date();
-// Extract the current date from Date object
-newDate.setDate(newDate.getDate());
-// Output the day, date, month and year    
-$('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
-
-setInterval( function() {
-  // Create a newDate() object and extract the seconds of the current time on the visitor's
-  var seconds = new Date().getSeconds();
-  // Add a leading zero to seconds value
-  $("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
-  },1000);
-  
-setInterval( function() {
-  // Create a newDate() object and extract the minutes of the current time on the visitor's
-  var minutes = new Date().getMinutes();
-  // Add a leading zero to the minutes value
-  $("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
-    },1000);
-  
-setInterval( function() {
-  // Create a newDate() object and extract the hours of the current time on the visitor's
-  var hours = new Date().getHours();
-  // Add a leading zero to the hours value
-  $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
-    }, 1000);
-  
- });
-
-//TABS ---------------------------------------------->
- $(  "#tabs"  ).tabs();
-
-
- // MENU ----------------------------------------
-//SUBMENU DISPLAY
-$(".submenu").css({display: "none"});
-//HOVER MENU
-$('#menu2 li:has(div.submenu)').hover(
-    function(e)
-   {
-       $(this).find('div').fadeIn();
-  },
-     function(e)
-      {
-     $(this).find('div').fadeOut("fast");
-      }
- );
-
-
-// HOVER UI DATEPICKER
-
-$('#ui-datepicker-div').live('mouseover',function(e){$('li#preptuviaje:has(div.submenu)').find('div').show();});
-//  <<<<< --------  >>>>>  //
-
-//SCROLL MENU 
- $(window).scroll(function() {           
-    if($(this).scrollTop() >= 80){
-    
-        
-            $( "#menu2" ).addClass("fixed");
-           
-            
-    }else{              
-            $( "#menu2" ).removeClass("fixed");
-    }
-    
+    });
 });
-// fin MENU ----------------------------------------
-
-$('.imagico').click( function() {
-  
-var hrefs=$(this).attr('rel');
-window.location= "http://"+hrefs;
-
-
-
-});
-
-
-var dates = $( "#in, #out" ).datepicker({ 
-dateFormat: "dd/mm/yy",
-changeMonth: false,
-numberOfMonths: 2,
-onSelect: function( selectedDate ) {
-var option = this.id == "in" ? "minDate" : "maxDate",
-instance = $( this ).data( "datepicker" ),
-date = $.datepicker.parseDate(
-instance.settings.dateFormat ||
-$.datepicker._defaults.dateFormat,
-selectedDate, instance.settings );
-dates.not( this ).datepicker( "option", option, date );
-$('#out').focus();
-}
-
-});
-
 </script>
+   <?php if (isset($js)): ?>
+        <?php foreach ($js as $var): ?>
+            <script type="text/javascript" src="<?php echo base_url() . $var ?>.js"></script>
+        <?php endforeach; ?>
+    <?php endif; ?>
 
-<!-- VIDEO LIGHTBOX -->
+
+
+
+
+
+<!-- VIDEO LIGHTBOX 
       <script src="<?php echo base_url() ?>js/engine/js/jquery.tools.min.js" type="text/javascript"></script>
-      <script src="<?php echo base_url() ?>js/engine/js/swfobject.js" type="text/javascript"></script>
-      <!-- make all links with the 'rel' attribute open overlays -->
+      <script src="<?php echo base_url() ?>js/engine/js/swfobject.js" type="text/javascript"></script>-->
+      <!-- make all links with the 'rel' attribute open overlays 
       <script src="<?php echo base_url() ?>js/engine/js/videolightbox.js" type="text/javascript"></script>
       <script type="text/javascript">
 
@@ -204,11 +135,12 @@ $('#out').focus();
       ytplayer.setVolume(100); 
       } 
 
-</script> 
+</script> -->
 
 
+<!-- CARUSEL -->
 
- 
+
 
 </body>
 </html>
