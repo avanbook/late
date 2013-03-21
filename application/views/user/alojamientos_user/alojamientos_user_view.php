@@ -4,24 +4,12 @@
     <hr>
 </div>    
 <div class="row-fluid">
-    <div class="span3">
-        <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-                <?php foreach ($alojamientos_menu_sidebar as $var): ?>
-                    <li <?php echo $this->gf->comparar_general($var['tipo'], $menu_activo, "class='active'") ?>><a href="<?php echo base_url() . $var['href'] . $info_array->ID_Alojamiento . "/?&pestania=" . $var['tipo'] ?>"><?php echo $var['nombre'] ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div><!--/.well -->
-    </div><!--/span-->
     <div class="span9">
         <ul class="nav nav-tabs" id="myTab">
             <li <?php echo $this->gf->comparar_general('info', $p_a, "class='active'") ?>><a href="#descripcion">Descripción</a></li>
             <li <?php echo $this->gf->comparar_general('servicios', $p_a, "class='active'") ?>><a href="#servicios">Servicios</a></li>
-            <li <?php echo $this->gf->comparar_general('publicidad', $p_a, "class='active'") ?>><a href="#publicidad">Publicidad</a></li>
             <li <?php echo $this->gf->comparar_general('imagenes', $p_a, "class='active'") ?>><a href="#fotos" >Fotos</a></li>
             <li <?php echo $this->gf->comparar_general('ubicacion', $p_a, "class='active'") ?>><a href="#ubicacion" >Ubicación</a></li>
-            <li <?php echo $this->gf->comparar_general('habitaciones', $p_a, "class='active'") ?>><a href="#habitaciones" >Habitaciones</a></li>
-            <li <?php echo $this->gf->comparar_general('clientes', $p_a, "class='active'") ?>><a href="#clientes" >Clientes</a></li>
         </ul>
 
         <div class="tab-content"><!-- Div Descripcion -->
@@ -57,6 +45,9 @@
                         <p><?php echo $info_array->Descripcion ?></p>
                     </div>
                 </div>
+                <div class="offset8">
+                    <a class="btn btn-large btn-primary" href="<?php echo base_url()."user/alojamientos_user/form_user/".$ID_Alojamiento ?>">Editar</a>
+                </div>
             </div><!-- fin div descripcion -->
             <!-- Div Servicios -->
             <div class="tab-pane <?php echo $this->gf->comparar_general('servicios', $p_a, " active") ?>" id="servicios"><!-- Div Servicios -->
@@ -83,47 +74,6 @@
                 <?php endif ?>
 
             </div> <!-- Fin DIV servicios -->
-
-
-            <!-- Div publicidad -->
-            <div class="tab-pane <?php echo $this->gf->comparar_general('publicidad', $p_a, " active") ?>" id="publicidad">
-
-                <?php if (count($publicidad_array) > 0): ?>
-                    <table class="table">
-                        <tr><th>Tipo</th><th>Precio</th><th>Fecha</th><th>Estado</th><th>Meses</th><th>Detalle</th><th>Acción</th></tr> 
-
-                        <?php
-                        foreach ($publicidad_array as $var):
-                            $class = "";
-                            if ($var['Activo'] == 0)
-                                $class = "error";
-                            elseif ($var['Activo'] == 1)
-                                $class = "success";
-                            elseif ($var['Meses'] == 11)
-                                $class = "warning";
-                            ?>
-                            <tr class="<?php echo $class ?>">
-                                <td><?php echo $var['TipoPublicidad'] ?></td>
-                                <td><?php echo $var['Precio'] ?></td>
-                                <td><?php echo $var['FechaPublicidad'] ?></td>
-                                <td><?php echo $var['Activo'] ?></td>
-                                <td><?php echo $var['Meses'] ?></td>
-                                <td><?php echo $var['DetallePublicidad'] ?></td>
-                                <td><a onclick="confirmar(<?php echo $info_array->ID_Alojamiento ?>,<?php echo $var['ID_Publicidad'] ?>,'activar')" href="#"><i class="icon-check"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="confirmar(<?php echo $info_array->ID_Alojamiento ?>,<?php echo $var['ID_Publicidad'] ?>,'renovar')" ><i class="icon-retweet"></i></a></td>
-                            </tr>
-
-                        <?php endforeach; ?>
-                    </table>
-                <?php else: ?>
-                    <br>
-                    <br>
-                    <div style="text-align: center">
-                        <a class="btn btn-large btn-primary" href="<?php echo base_url() . "alojamientos/alojamientos_publicidad_form/" . $info_array->ID_Alojamiento ?>">Agregar una publicidad</a>
-                    </div>
-
-                <?php endif ?>
-
-            </div> <!-- Fin DIV publicidad -->
 
             <!-- Div Imagenes -->
             <div class="tab-pane <?php echo $this->gf->comparar_general('imagenes', $p_a, " active") ?>" id="fotos">
@@ -191,53 +141,6 @@
                 </div>
             </div>
             <!-- Fin ubicacion -->
-            <!-- habitaciones div -->
-            <div class="tab-pane <?php echo $this->gf->comparar_general('habitaciones', $p_a, " active") ?>" id="habitaciones">
-                <div class="row-fluid">
-                    <table class="table">
-                        <tr><th>Nombre</th><th>Desayuno</th><th>Máximo</th><th>Adulto</th><th>Niño</th><th>Tipo</th><th>Acciones</th></tr>
-                        <?php foreach ($habitaciones_array as $var): ?>
-                            <tr id="h_<?php echo $var['ID_Habitacion'] ?>">
-                                <td><?php echo $var['NombreHab'] ?></td>
-                                <td><?php echo $var['Desayuno'] ?></td>
-                                <td><?php echo $var['PaxMax'] ?></td>
-                                <td><?php echo $var['PaxAdulto'] ?></td>
-                                <td><?php echo $var['PaxNinio'] ?></td>
-                                <td><?php echo $var['TipoHabitacion'] ?></td>
-                                <td>
-                                    <a href="<?php echo base_url() . "admin/alojamientos/alojamientos_habitaciones_form/" . $var['ID_Alojamiento'] . "/?ID_Habitacion=" . $var['ID_Habitacion'] ?>"><i class="icon-edit"></i></a>
-                                    <a href= "#myModal" onclick="habitacion_eliminar('<?php echo $var['ID_Habitacion'] ?>')"  data-toggle="modal"><i class="icon-remove"></i></a>&nbsp;&nbsp;
-                                    <a href="<?php echo base_url() . "admin/alojamientos/alojamientos_habitaciones_list/" . $var['ID_Alojamiento'] . "/?ID_Habitacion=" . $var['ID_Habitacion'] ?>"><i class="icon-picture"></i></a>&nbsp;&nbsp;
-                                    <a href="<?php echo base_url() . "admin/alojamientos/alojamientos_calendario_hab/" . $info_array->ID_Alojamiento . "/?id_habitacion=" . $var['ID_Habitacion'] ?>"><i class="icon-calendar"></i></a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-
-            </div> <!-- fin habitaciones -->
-            <div class="tab-pane <?php echo $this->gf->comparar_general('clientes', $p_a, " active") ?>" id="clientes"><!-- Clientes -->
-                <div class="row-fluid">
-                    <table class="table">
-                        <tr><th>Usuario</th><th>Clave</th><th>Nombre</th><th>Apellido</th><th>Email</th><th>Cargo</th><th>Acciones</th></tr>
-                        <?php foreach ($clientes_array as $var): ?>
-                            <tr id="<?php echo "a_" . $var['ID_Cliente'] ?>">
-                                <td><?php echo $var['Usuario'] ?></td>
-                                <td><?php echo $var['Clave'] ?></td>
-                                <td><?php echo $var['NombreCliente'] ?></td>
-                                <td><?php echo $var['ApellidoCliente'] ?></td>
-                                <td><?php echo $var['EmailCliente'] ?></td>
-                                <td><?php echo $var['Cargo'] ?></td>
-                                <td>
-                                    <a href="<?php echo base_url() . "admin/alojamientos/alojamientos_clientes_form/" . $info_array->ID_Alojamiento . "/?ID_Cliente=" . $var['ID_Cliente'] ?>"><i class="icon-edit"></i></a>&nbsp;&nbsp;
-                                    <a href= "#myModal" onclick="cliente_eliminar('<?php echo $var['ID_Cliente'] ?>')"  data-toggle="modal"><i class="icon-remove"></i></a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-            </div><!-- Fin Clientes -->
-            <div class="tab-pane" id="disponibilidad">ubicacion</div>
         </div>
 
 

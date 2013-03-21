@@ -132,6 +132,70 @@ class Alojamientos_user_model extends CI_Model
         return $rows;
     }
 
+    function alojamiento_find($id_alojamiento)
+    {
+        $query = sprintf('
+                select 
+                ID_Alojamiento,
+                ID_Categorias,
+                ID_TipoAlojamiento,
+                DestaOrden,
+                DestaHome,
+                Url,
+                informaciongeneral.ID_InformacionGeneral,
+                metododepago.ID_MP, 
+                Nombre,
+                Direccion,
+                Telefono,
+                Email,
+                WebSite,
+                Basico,
+                Responsable,
+                Descripcion,
+                Coordenadas,
+                TipoAcuerdo,
+                Pais,
+                Provincia,
+                Ciudad,
+                Localidad,
+                Restaurant,
+                InformacionRestaurant,
+                Checkin,
+                Checkout,
+                PoliticaCancelacion,
+                DiasPolitica,
+                Senia,
+                GarantiaDebooking,
+                Anticipado,
+                ComisionSenia,
+                AceptaSenia,
+                Comision,
+                MejorPrecio
+                from alojamientos
+                inner join 
+                informaciongeneral 
+                on  
+                alojamientos.ID_InformacionGeneral = informaciongeneral.ID_InformacionGeneral 
+                inner join
+                metododepago
+                on
+                alojamientos.ID_MP=metododepago.ID_MP
+                where 
+                ID_Alojamiento=%s', $id_alojamiento);
+
+        $rows = $this->db->query($query);
+
+        return $rows;
+    }
+
+    function paises()
+    {
+        $query = "select * from paises order by CountryName asc";
+        $rows  = $this->db->query($query);
+        $rows  = $rows->result_array();
+        return $rows;
+    }
+
 }
 
 ?>
