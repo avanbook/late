@@ -52,7 +52,7 @@ $config['alojamientos_menu_sidebar'] =array(
         'href'   => 'admin/alojamientos/alojamientos_ubicacion_form/',
         'tipo'   => 'ubicacion'
     ),
-    'li_5' => array(
+    'li_6' => array(
         'nombre' => 'Agregar Publicidad',
         'href'   => 'admin/alojamientos/alojamientos_publicidad_form/',
         'tipo'   => 'publicidad'
