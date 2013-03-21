@@ -1,6 +1,7 @@
-<div id="contenedor2">
-	<div id="cont_full">
+<div id="contenedorInt">
+	<div id="cont_int">
 	<div id="fichasD" >
+    <div id="toplinks" align="left"><?php echo $tipoalojamientos; ?></div>
 		<h1 align="left"><?php echo $row_Al['TipoAlojamiento']; ?> <?php echo $row_Al['Nombre']; ?></h1>
 	<!-- FICHAS INFORMARIVAS -->
 	<div id="ficha_info">
@@ -53,7 +54,7 @@
 	</div>
 	<!-- FICHAS DATOS -->
 	<div id="ficha_datos">
-		<div id="datos_alojar" class="border-Corner borde-verde " align="left">
+		<div id="datos_alojar" class="border-Corner borde-gris " align="left">
 			<h2>Datos Alojamientos</h2>
 			<p><img src="<?php echo base_url() . "iconos/direction.png"; ?>" alt="direccion - <?php echo $row_Al['TipoAlojamiento']; ?>"> <b>Direccion:</b> Almafuerte 225 - San Rafael - Mendoza</p>
 			<p><img src="<?php echo base_url() . "iconos/phone.png"; ?>" alt=""> <b>Teleono: </b><?php echo $row_Al['Telefono']; ?></p>

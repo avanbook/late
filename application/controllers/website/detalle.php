@@ -40,12 +40,24 @@ public function alojar($a,$b,$c)
 		$rowsA=$this->db->query($query4);
 		$rows_A =$rowsA->result_array();
 		$data['row_A']=$rows_A;
-	
+// DESCRIPCION Y KEYS
+		if ($result_Al['TipoAlojamiento'] =="Hotel") {
+		$descripcion=$result_Al['TipoAlojamiento']." ".$result_Al['Nombre']." - ". substr($result_Al['Descripcion'],0,200).".. - San Rafael Late - www.sanrafaellate.com" ;
+		$keywords="";
+		$tipoalojamientos="hoteles";
+}
+else {
 
+$descripcion="";
+		$keywords="";
+		$tipoalojamientos="hoteles";
+
+}
 		$data['body']="website/body_fichas";
-		$data['title']="Turismo San Rafael Mendoza | San Rafael Late | !";
-		$data['descripcion']="HOLA LOCOS";
-	
+		$data['title']= $result_Al['TipoAlojamiento']." ".$result_Al['Nombre']." | San Rafael Mendoza | San Rafael Late ";
+		$data['descripcion']=$descripcion;
+		$data['keywords']=$keywords;
+		$data['tipoalojamientos']=$tipoalojamientos;
 	 //javascript	
 		$data['js']=array(
 			"js/fichas",

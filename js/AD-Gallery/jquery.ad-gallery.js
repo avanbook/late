@@ -528,7 +528,7 @@
           context.thumbs_wrapper.animate({scrollLeft: left +'px'});
           return false;
         }
-      ).css('opacity', 0.6).hover(
+      ).css('opacity', 0.9).hover(
         function() {
           var direction = 'left';
           if($(this).is('.ad-forward')) {

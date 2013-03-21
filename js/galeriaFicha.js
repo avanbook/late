@@ -17,7 +17,8 @@ var galleries = $(".ad-gallery").adGallery({
     autostart: false,
     speed: 5000,
     
-  }
+  },
+  effect: 'fade'
 
 
   

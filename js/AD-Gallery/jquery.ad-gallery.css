@@ -8,7 +8,7 @@
  * Demo and documentation: http://coffeescripter.com/code/ad-gallery/
  */
 .ad-gallery {
-  width: 600px;
+  width: 100%;
 }
 .ad-gallery, .ad-gallery * {
   margin: 0;
@@ -87,8 +87,9 @@
         text-align: left;
         width: 100%;
         z-index: 2;
-        background: url(opa75.png);
-        color: #000;
+        background: #222;
+        background-color: rgba(2,2,2,0.7);
+        color: #FFF;
       }
       * html .ad-gallery .ad-image-wrapper .ad-image .ad-image-description {
         background: none;
@@ -119,8 +120,9 @@
       font-style: italic;
     }
   .ad-gallery .ad-nav {
-    width: 100%;
+    width: 93%;
     position: relative;
+   height: 60px;
   }
     .ad-gallery .ad-forward, .ad-gallery .ad-back {
       position: absolute;
@@ -130,30 +132,35 @@
     }
     /* IE 6 doesn't like height: 100% */
     * html .ad-gallery .ad-forward, .ad-gallery .ad-back {
-      height: 100px;
+      height: 60px;
     }
     .ad-gallery .ad-back {
-      cursor: pointer;
-      left: -20px;
-      width: 13px;
+   cursor: pointer;
+      left: -19px;
+      border-radius: 7px 0px 0px 7px;
+      width: 20px;
       display: block;
-      background: url(ad_scroll_back.png) 0px 22px no-repeat;
+      background: url(ad_scroll_back.png) 3px 21px no-repeat #96A929;
     }
     .ad-gallery .ad-forward {
       cursor: pointer;
       display: block;
-      right: -20px;
-      width: 13px;
-      background: url(ad_scroll_forward.png) 0px 22px no-repeat;
+      right: -19px;
+      border-radius: 0 7px 7px 0;
+      width: 20px;
+      background: url(ad_scroll_forward.png) 4px 21px no-repeat #96A929;     
     }
     .ad-gallery .ad-nav .ad-thumbs {
       overflow: hidden;
       width: 100%;
+
     }
       .ad-gallery .ad-thumbs .ad-thumb-list {
         float: left;
         width: 9000px;
         list-style: none;
+       background-color: #96A929;
+
       }
         .ad-gallery .ad-thumbs li {
           float: left;
@@ -163,8 +170,10 @@
             display: block;
           }
             .ad-gallery .ad-thumbs li a img {
-              border: 3px solid #CCC;
+              border: 3px solid #96A929;
               display: block;
+              width: 70px;
+              height: auto;
             }
             .ad-gallery .ad-thumbs li a.ad-active img {
               border: 3px solid #616161;

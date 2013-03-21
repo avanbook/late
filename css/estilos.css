@@ -33,6 +33,8 @@ z-index: 2;
  #myCarousel img { width: 100%;
  height: 350px; margin:0; padding: 0;}
 
+
+
 /* MENU */
 .fixed {background-color: rgba(255,255,255,0.8);box-shadow: 0 5px 7px #666;-moz-box-shadow: 0 5px 7px #666;-webkit-box-shadow: 0 5px 7px #666;	behavior: url(PIE.htc);}
 .nofixed {background-color: #FFF; height: 110px; width: 100%;} 
@@ -568,16 +570,28 @@ div.carusell p.fecha{margin: 0px; padding: 3px 0; font-family: arial; font-size:
 /* ======================= */
 /*  FICHAS DETALLES        */
 /*  */ 
+/* CONTENEDOR INTERNO */
+#contenedorInt {
+width: 100%;
+background-color: #eee;
+position: relative; 
+padding: 20px 0 20px 0;
+}
+#cont_int { width: 80%;background-color: #fff;min-width: 990px; padding: 0; border:1px solid #eee; margin:0 0 0 0;  max-width: 1200px;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box; border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;	behavior: url(PIE.htc); }
+#toplinks {height: 40px; width: 100%; padding: 12px 5px 10px 5px; background-color: #666; color:#fff; border-radius: 8px 8px 0 0 ;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;	behavior: url(PIE.htc);}
+#toplinks {font-family: tahoma; font-size: 11px; color:#FFF;}
 #fichasD {width: 100%;}
 #fichasD div {display: inline-block; vertical-align: top;}
-#fichasD h1 {color:#222; padding: 25px 0 0 40px; font-family: Tahoma; font-size: 35px; }
+#fichasD h1 {color:#666; padding: 0 0 0 30px; margin: 10px 0; font-family: Tahoma; font-size: 35px; }
 
 /* Ficha con informacion del alojamiento   */
-#ficha_info {width:68%; min-width: 600px; background-color: #fff; margin: 10px 10px 0 0 ; padding: 5px;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+#ficha_info {width:66%; min-width: 600px; margin: 0px 5px 0 0 ; padding: 5px 0;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
 -o-box-sizing:border-box;-ms-box-sizing:border-box;	behavior: url(PIE.htc);}
 
 /* TABS FOTOS*/ 
-#ficha-tabs, #ficha-tabs2  {width: 95%;background-color:#fff; padding: 0px; margin-bottom: 20px;}
+#ficha-tabs, #ficha-tabs2  {width: 95%; padding: 0px; margin-bottom: 20px; border:1px solid #eee; border-radius: 8px;background-color:#f9f9f9;}
 
 #ficha-tabs .ui-tabs-nav , 
 #ficha-tabs2 .ui-tabs-nav { 
@@ -585,27 +599,27 @@ background:#96A929;
     border-width: 0px 0px 1px 0px; 
     -moz-border-radius: 0px; 
     -webkit-border-radius: 0px; 
-    border-radius: 0px; 
+    border-radius: 8px 8px 0 0; 
    margin: 0;
-   padding: 8px 0  0 5px; ;
+   padding: 18px 0  0 5px; ;
 }
 
 #ficha-tabs .ui-tabs-nav .ui-state-default,
 #ficha-tabs2 .ui-tabs-nav .ui-state-default { 
-    background:#E9ECE6; font-size: 14px;
+    background:#ddd; font-size: 14px;
 
 } 
 #ficha-tabs .ui-tabs-nav .ui-state-active,
 #ficha-tabs2 .ui-tabs-nav .ui-state-active {
-background: #FFF;font-size: 14px;
+background: #f9f9f9;font-size: 14px; color:#96A929;font-weight: bold
 	}
 
 
 /* Ficha con datos del alojamiento   */
 #ficha_datos {width: 30%; padding: 5px; margin:10px 0 0 0; background-color:#fff;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
 -o-box-sizing:border-box;-ms-box-sizing:border-box;	behavior: url(PIE.htc); }
-#ficha_datos>div {padding: 8px; background-color: #F7F7F7; width: 100%;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
--o-box-sizing:border-box;-ms-box-sizing:border-box;	behavior: url(PIE.htc);}
+#ficha_datos>div {padding: 8px; background-color: #f9f9f9; width: 100%;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;	-moz-border-radius: 7px; 	-webkit-border-radius: 7px; 	border-radius: 7px; behavior: url(PIE.htc);}
 
 #datos_alojar>h2 {font-family: tahoma; font-size: 19px; color:#333; padding: 5px 0px;margin:0px:;}
 #datos_alojar>p {font-family: tahoma;font-size: 11px; color: #666; }
@@ -614,7 +628,7 @@ lkdskdjjfmjnvhfhhbnnb
 m
 .border-Corner {-moz-border-radius: 7px; 	-webkit-border-radius: 7px; 	border-radius: 7px; behavior: url(PIE.htc);} 
 .borde-verde {border: 1px solid #96A929;}
-.borde-gris {border: 1px solid #666;}
+.borde-gris {border: 1px solid #eee;}
 /* ============== */
 /*  FOOTER        */
 /* ============== */
