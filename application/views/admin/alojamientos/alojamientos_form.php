@@ -133,11 +133,6 @@
                     <textarea rows="3" name="InformacionRestaurant"><?php echo $InformacionRestaurant ?></textarea>
                 </div>
                 <br>
-
-            </div>
-        </div>
-        <div class="span6">
-            <div class="control-group">
                 <label class="control-label" >Checkin:</label>
                 <div class="controls">
                     <input type="text" name="Checkin" value="<?php echo $Checkin ?>">
@@ -157,6 +152,17 @@
                 <div class="controls">
                     <textarea rows="3" name="DiasPolitica"><?php echo $DiasPolitica ?></textarea>
                 </div>
+
+            </div>
+        </div>
+        <div class="span6">
+            <div class="row-fluid">
+                <label>Descripción:</label>
+            </div>
+            <div class="row-fluid">
+                <textarea class="ckeditor" rows="10" name="Descripcion"><?php echo $Descripcion ?></textarea>
+            </div>
+            <div class="control-group">
                 <!-------------------------------------------------- ################## Metodos de Pago ############################################ ----->
                 <h4>Métodos de Pago</h4>
                 <hr>

@@ -1,10 +1,10 @@
 <?php
 
-class Clientes_user_model extends CI_Model
+class Alojamientos_servicios_user_model extends CI_Model
 {
 
-    const tabla = 'clientes';
-    const id_tabla = 'ID_Cliente';
+    const tabla = 'alojamientos_servicios';
+    const id_tabla = 'ID_Alojamiento';
 
     /* ------------------------ INSERTAR EN LA BASE DE DATOS----------------------- */
 
@@ -54,32 +54,25 @@ class Clientes_user_model extends CI_Model
         $this->db->query($query);
     }
     
-    /*-----------------------------ENCONTRAR SI EXISTE UN NICK REPETIDO(VALIDAR CON AJAX)---------------*/
     
-    function find_nick($Usuario,$ID_Cliente)
+    function find_id_alojamiento_inner_servicios($id_alojamientos)
     {
-        $query = sprintf("select * from clientes where Usuario='%s' and ID_Cliente<>%s", $Usuario,$ID_Cliente);
-        $row = $this->db->query($query);
-        return $row;
-        
+        $query = sprintf("
+        select 
+        servicios.ID_Servicio,
+        Servicio 
+        from servicios 
+        inner join 
+        alojamientos_servicios 
+        on 
+        servicios.ID_Servicio = alojamientos_servicios.ID_Servicio 
+        where 
+        ID_Alojamiento =%s", $id_alojamientos);
+        $rows  = $this->db->query($query);
+        $rows  = $rows->result_array();
+        return $rows;
     }
     
-    function login($Usuario, $Clave)
-    {
-        
-        $query=sprintf("select * from clientes where Usuario='%s' and Clave='%s' ",$Usuario,$Clave);
-        $row = $this->db->query($query);
-        
-        if($row->num_rows()==0)
-        {
-            return false;  
-        }
-        else
-        {
-          return $row->row();
-        }
-
-    }
     
 }
 

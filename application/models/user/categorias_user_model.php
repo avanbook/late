@@ -1,10 +1,10 @@
 <?php
 
-class Clientes_user_model extends CI_Model
+class Categorias_user_model extends CI_Model
 {
 
-    const tabla = 'clientes';
-    const id_tabla = 'ID_Cliente';
+    const tabla = 'categorias';
+    const id_tabla = 'ID_Categorias';
 
     /* ------------------------ INSERTAR EN LA BASE DE DATOS----------------------- */
 
@@ -54,32 +54,7 @@ class Clientes_user_model extends CI_Model
         $this->db->query($query);
     }
     
-    /*-----------------------------ENCONTRAR SI EXISTE UN NICK REPETIDO(VALIDAR CON AJAX)---------------*/
     
-    function find_nick($Usuario,$ID_Cliente)
-    {
-        $query = sprintf("select * from clientes where Usuario='%s' and ID_Cliente<>%s", $Usuario,$ID_Cliente);
-        $row = $this->db->query($query);
-        return $row;
-        
-    }
-    
-    function login($Usuario, $Clave)
-    {
-        
-        $query=sprintf("select * from clientes where Usuario='%s' and Clave='%s' ",$Usuario,$Clave);
-        $row = $this->db->query($query);
-        
-        if($row->num_rows()==0)
-        {
-            return false;  
-        }
-        else
-        {
-          return $row->row();
-        }
-
-    }
     
 }
 

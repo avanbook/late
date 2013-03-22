@@ -46,33 +46,42 @@
                     </div>
                 </div>
                 <div class="offset8">
-                    <a class="btn btn-large btn-primary" href="<?php echo base_url()."user/alojamientos_user/form_user/".$ID_Alojamiento ?>">Editar</a>
+                    <a class="btn btn-large btn-primary" href="<?php echo base_url() . "user/alojamientos_user/form_user/" . $ID_Alojamiento ?>">Editar</a>
                 </div>
             </div><!-- fin div descripcion -->
             <!-- Div Servicios -->
             <div class="tab-pane <?php echo $this->gf->comparar_general('servicios', $p_a, " active") ?>" id="servicios"><!-- Div Servicios -->
 
-                <?php if (count($servicios_array) > 0): ?>
-                    <table class="table">
-                        <tr><th>#</th><th>Nombre Servicio</th></tr> 
-
-                        <?php foreach ($servicios_array as $var): ?>
-                            <tr>
-                                <td><?php echo $var['ID_Servicio'] ?></td>
-                                <td><?php echo $var['Servicio'] ?></td>
-                            </tr>
-
-                        <?php endforeach; ?>
-                    </table>
-                <?php else: ?>
-                    <br>
-                    <br>
-                    <div style="text-align: center">
-                        <a class="btn btn-large btn-primary" href="<?php echo base_url() . "alojamientos/servicios_form/" . $info_array->ID_Alojamiento ?>">Agregar un nuevo servicio</a>
+                <div class="row-fluid">
+                    <div class="span9">
+                        <div class="row-fluid">
+                            <h3>Agregar Servicio</h3>
+                            <br>
+                        </div>
+                        <form action="<?php echo base_url() ?>admin/alojamientos/servicios_save" method="post">
+                            <div class="row-fluid">
+                                <div class="offset1">
+                                    <ol>
+                                        <?php foreach ($servicios_array as $var): ?>
+                                            <li style="display: inline-block;width: 20%">
+                                                <label class="checkbox">
+                                                    <input <?php echo $var['checked'] ?>  value="<?php echo $var['ID_Servicio'] ?>" name="<?php echo $var['ID_Servicio'] ?>" type="checkbox">
+                                                    <?php echo $var['Servicio'] ?>
+                                                </label>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ol>
+                                </div>      
+                            </div>
+                            <br>
+                            <div class="row-fluid">
+                                <div class="span2">
+                                    <input type="submit" class="btn btn-large btn-primary" value="Guardar">
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
-                <?php endif ?>
-
+                </div>
             </div> <!-- Fin DIV servicios -->
 
             <!-- Div Imagenes -->

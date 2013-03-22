@@ -174,8 +174,10 @@ class Alojamientos extends CI_Controller
         $data['localidades_array'] = $this->alojamientos_model->localidades($Pais, $Provincia, $Ciudad);
         $data['tipoalojamientos_array'] = $this->alojamientos_model->tipo_alojamientos();
         $data['categorias_array'] = $this->alojamientos_model->categorias();
-        $data['paises_array'] = $this->alojamientos_model->paises();
-        $data['js'] = array('js/admin/alojamientos_form');
+        $data['js'] = array(
+            'js/admin/alojamientos_form',
+            'js/ckeditor/ckeditor'
+            );
         $data['css'] = array('css/admin/alojamientos_list');
         $data['view'] = 'admin/alojamientos/alojamientos_form';
         $this->load->view('admin/templates/temp_menu', $data);

@@ -1,10 +1,10 @@
 <?php
 
-class Clientes_user_model extends CI_Model
+class Localidades_user_model extends CI_Model
 {
 
-    const tabla = 'clientes';
-    const id_tabla = 'ID_Cliente';
+    const tabla = 'localidades';
+    const id_tabla = 'ID_Localidad';
 
     /* ------------------------ INSERTAR EN LA BASE DE DATOS----------------------- */
 
@@ -54,32 +54,17 @@ class Clientes_user_model extends CI_Model
         $this->db->query($query);
     }
     
-    /*-----------------------------ENCONTRAR SI EXISTE UN NICK REPETIDO(VALIDAR CON AJAX)---------------*/
+    //--------------------- ENCONTRAR POR PAIS PROVINCIA CIUDAD--------------------
     
-    function find_nick($Usuario,$ID_Cliente)
+     function find_from_pais_provincia_ciudad($pais, $provincia, $ciudad)
     {
-        $query = sprintf("select * from clientes where Usuario='%s' and ID_Cliente<>%s", $Usuario,$ID_Cliente);
-        $row = $this->db->query($query);
-        return $row;
-        
+        $query = sprintf("select * from localidades where Country='%s' and Subdivision='%s' and Location='%s' ", $pais, $provincia, $ciudad);
+        $array = $this->db->query($query);
+        $array = $array->result_array();
+        return $array;
     }
     
-    function login($Usuario, $Clave)
-    {
-        
-        $query=sprintf("select * from clientes where Usuario='%s' and Clave='%s' ",$Usuario,$Clave);
-        $row = $this->db->query($query);
-        
-        if($row->num_rows()==0)
-        {
-            return false;  
-        }
-        else
-        {
-          return $row->row();
-        }
-
-    }
+    
     
 }
 

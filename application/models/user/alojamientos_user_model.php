@@ -188,13 +188,6 @@ class Alojamientos_user_model extends CI_Model
         return $rows;
     }
 
-    function paises()
-    {
-        $query = "select * from paises order by CountryName asc";
-        $rows  = $this->db->query($query);
-        $rows  = $rows->result_array();
-        return $rows;
-    }
 
 }
 
