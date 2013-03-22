@@ -5,6 +5,7 @@
 		<h1 align="left"><?php echo $row_Al['TipoAlojamiento']; ?> <?php echo $row_Al['Nombre']; ?></h1>
 	<!-- FICHAS INFORMARIVAS -->
 	<div id="ficha_info">
+
 		<div id="ficha-tabs">
                 <ul>
                     <li><a href= "#tabs-1"  ></span>Fotos</a></li>
@@ -61,6 +62,17 @@
 			<p><img src="<?php echo base_url() . "iconos/url2.png"; ?>" alt=""> <b>Website:</b> <a href="<?php echo base_url(). "website/contador/url/" .$row_Al['ID_Alojamiento']; ?>" "Vistie el Web del Alojamiento"><?php echo $row_Al['WebSite']; ?></a></p>
 	
 		</div>
+<div class="border-Corner borde-gris" align="left">  <h2>Enviar una Consulta</h2>   <div id="form"  align="left" >
+   <!-- <div id="loading"><img src="images/ajax-loader.gif" alt=""></div>-->
+    <div><label for="name">Nombre y Apellido:</label><br/><input type="text" name="nombre" id="name" placeholder="Su nombre Aqui"/> </div>
+    <div class="fechadiv"><label for="llegada">Llegada:</label><br/><input type="text" name="llegada" id="from" class="fechainput"/> </div>
+     <div class="fechadiv"><label for="Salida">salida:</label><br/><input type="text" name="salido" id="to" class="fechainput"/> </div>
+    <div><label for="email">Email:</label><br/><input type="text" name="email" placeholder="Su email Aqui" id="email"/> </div>
+    <div><label for="telefono">Telefono:</label><br/><input type="text" name="telefono" id="telefono" placeholder="Su telefono Aqui"/> </div>
+    <div><label for="consulta">Consulta:</label><br/><textarea name="consulta" id="consulta" cols="20" rows="6" id="consulta" placeholder="Agregue su consulta"></textarea> </div>
+    <div align="right"><button type="submit" id="enviar">Enviar</button></div>
+  </div>
+  </div>
 	</div>
 		</div>
 	</div>
