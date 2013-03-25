@@ -51,13 +51,15 @@ class Alojamientos_user extends CI_Controller
         //Meto una combinacion de esos array en un array nuevo
         //La funcion esta al final de este archivo php
         $data['servicios_array'] = $this->alojamientos_servicios_array_final($servicios_total, $servicios_alojamiento);
-        $data['fotos_array']               = $this->alojamientos_imagenes_user_model->find_from_id_alo($ID_Alojamiento);
-        $data['js']                        = array(
+        $data['fotos_array']     = $this->alojamientos_imagenes_user_model->find_from_id_alo($ID_Alojamiento);
+        $data['js']              = array(
             'js/fancybox/jquery.mousewheel-3.0.4.pack',
             'js/fancybox/jquery.fancybox-1.3.4.pack',
             'js/blockui-master/jquery.blockUI',
-            'js/user/alojamientos_user_view'
+            'js/user/alojamientos_user_view',
+            'js/user/alojamientos_ubicacion_form_user'
         );
+        $data['js_ext'] = array('http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAHTiRdnf18YS9VpJkmeSyhBTxt8bDmcuMY2RDz1zwKk3UO1V6uRSXgsbPej969xits0R1bko5xtIfTQ');
         $data['css'] = array('css/admin/alojamientos_list', 'js/fancybox/jquery.fancybox-1.3.4');
         $data['view'] = 'user/alojamientos_user/alojamientos_user_view';
         $this->load->view('user/templates_user/temp_menu_user', $data);
@@ -162,103 +164,103 @@ class Alojamientos_user extends CI_Controller
         $data['categorias_array']       = $this->categorias_user_model->find_all();
         $data['js']                     = array(
             'js/user/alojamientos_form_user',
-             'js/ckeditor/ckeditor'
-            );
+            'js/ckeditor/ckeditor'
+        );
         $data['view'] = 'user/alojamientos_user/alojamientos_form_user';
         $this->load->view('user/templates_user/temp_menu_user', $data);
     }
-    
-        //Guardar Formulario alojamiento
+
+    //Guardar Formulario alojamiento
     function save()
     {
-        $accion = $this->input->post('accion');
-        $ID_Alojamiento = $this->input->post('ID_Alojamiento');
+        $accion                = $this->input->post('accion');
+        $ID_Alojamiento        = $this->input->post('ID_Alojamiento');
         $ID_InformacionGeneral = $this->input->post('ID_InformacionGeneral');
-        $ID_MP = $this->input->post('ID_MP');
-        
+        $ID_MP                 = $this->input->post('ID_MP');
+
         $data_info_gral = array(
-            'Nombre' => $this->input->post('Nombre'),
-            'Direccion' => $this->input->post('Direccion'),
-            'Telefono' => $this->input->post('Telefono'),
-            'Email' => $this->input->post('Email'),
-            'WebSite' => $this->input->post('WebSite'),
-            'Responsable' => $this->input->post('Responsable'),
-            'Descripcion' => $this->input->post('Descripcion'),
-            'Coordenadas' => $this->input->post('Coordenadas'),
-            'Restaurant' => $this->input->post('Restaurant'),
-            'InformacionRestaurant' => $this->input->post('InformacionRestaurant'),
+            'Nombre'                  => $this->input->post('Nombre'),
+            'Direccion'               => $this->input->post('Direccion'),
+            'Telefono'                => $this->input->post('Telefono'),
+            'Email'                   => $this->input->post('Email'),
+            'WebSite'                 => $this->input->post('WebSite'),
+            'Responsable'             => $this->input->post('Responsable'),
+            'Descripcion'             => $this->input->post('Descripcion'),
+            'Coordenadas'             => $this->input->post('Coordenadas'),
+            'Restaurant'              => $this->input->post('Restaurant'),
+            'InformacionRestaurant'   => $this->input->post('InformacionRestaurant'),
             'InformacionHabitaciones' => $this->input->post('InformacionHabitaciones'),
-            'Checkin' => $this->input->post('Checkin'),
-            'Checkout' => $this->input->post('Checkout'),
-            'PoliticaCancelacion' => $this->input->post('PoliticaCancelacion'),
-            'DiasPolitica' => $this->input->post('DiasPolitica')
+            'Checkin'                 => $this->input->post('Checkin'),
+            'Checkout'                => $this->input->post('Checkout'),
+            'PoliticaCancelacion'     => $this->input->post('PoliticaCancelacion'),
+            'DiasPolitica'            => $this->input->post('DiasPolitica')
         );
 
         $data_metodo_pago = array(
-            'Senia' => $this->input->post('Senia'),
+            'Senia'             => $this->input->post('Senia'),
             'GarantiaDebooking' => $this->input->post('GarantiaDebooking'),
-            'Anticipado' => $this->input->post('Anticipado'),
-            'ComisionSenia' => $this->input->post('ComisionSenia'),
-            'AceptaSenia' => $this->input->post('AceptaSenia'),
-            'Comision' => $this->input->post('Comision'),
-            'MejorPrecio' => $this->input->post('MejorPrecio')
+            'Anticipado'        => $this->input->post('Anticipado'),
+            'ComisionSenia'     => $this->input->post('ComisionSenia'),
+            'AceptaSenia'       => $this->input->post('AceptaSenia'),
+            'Comision'          => $this->input->post('Comision'),
+            'MejorPrecio'       => $this->input->post('MejorPrecio')
         );
 
         if ($accion == 'crear')
         {
-            $id_data_info_gral = $this->informaciongeneral_user_model->insert($data_info_gral);
+            $id_data_info_gral   = $this->informaciongeneral_user_model->insert($data_info_gral);
             $id_data_metodo_pago = $this->metododepago_user_model->insert($data_metodo_pago);
 
             $data_alojamientos = array(
                 'ID_InformacionGeneral' => $id_data_info_gral,
-                'ID_Imagenes' => 0, //no se sabe
-                'ID_TipoAlojamiento' => $this->input->post('ID_TipoAlojamiento'),
-                'ID_Categorias' => $this->input->post('ID_Categorias'),
-                'Url' => $this->input->post('Url'),
-                'TipoAcurdo' => $this->input->post('TipoAcuerdo'),
-                'DestaOrden' => $this->input->post('DestaOrden'),
-                'DestaHome' => $this->input->post('DestaHome'),
-                'ID_MP' => $id_data_metodo_pago,
-                'ID_Modulos' => '0', //no se sabe
-                'Votos' => '0', //no se sabe
-                'Activo' => 'A', //no se sabe
-                'Basico' => $this->input->post('Basico')
+                'ID_Imagenes'           => 0, //no se sabe
+                'ID_TipoAlojamiento'    => $this->input->post('ID_TipoAlojamiento'),
+                'ID_Categorias'         => $this->input->post('ID_Categorias'),
+                'Url'                   => $this->input->post('Url'),
+                'TipoAcurdo'            => $this->input->post('TipoAcuerdo'),
+                'DestaOrden'            => $this->input->post('DestaOrden'),
+                'DestaHome'             => $this->input->post('DestaHome'),
+                'ID_MP'                 => $id_data_metodo_pago,
+                'ID_Modulos'            => '0', //no se sabe
+                'Votos'                 => '0', //no se sabe
+                'Activo'                => 'A', //no se sabe
+                'Basico'                => $this->input->post('Basico')
             );
 
             $id_data_alojamientos = $this->alojamientos_model->insert($data_alojamientos);
-            redirect(base_url().'user/alojamientos_user/form_view_user/' . $id_data_alojamientos . "/?pestania=info", 'refresh');
+            redirect(base_url() . 'user/alojamientos_user/form_view_user/' . $id_data_alojamientos . "/?pestania=info", 'refresh');
         }
         elseif ($accion == 'editar')
         {
             $data_alojamientos = array(
                 'ID_InformacionGeneral' => $this->input->post('ID_InformacionGeneral'),
-                'ID_Imagenes' => 0, //no se sabe
-                'ID_TipoAlojamiento' => $this->input->post('ID_TipoAlojamiento'),
-                'ID_Categorias' => $this->input->post('ID_Categorias'),
-                'Url' => $this->input->post('Url'),
-                'TipoAcuerdo' => $this->input->post('TipoAcuerdo'),
-                'DestaOrden' => $this->input->post('DestaOrden'),
-                'DestaHome' => $this->input->post('DestaHome'),
-                'ID_MP' => $this->input->post('ID_MP'),
-                'ID_Modulos' => '0', //no se sabe
-                'Votos' => '0', //no se sabe
-                'Activo' => 'A', //no se sabe
-                'Basico' => $this->input->post('Basico')
+                'ID_Imagenes'           => 0, //no se sabe
+                'ID_TipoAlojamiento'    => $this->input->post('ID_TipoAlojamiento'),
+                'ID_Categorias'         => $this->input->post('ID_Categorias'),
+                'Url'                   => $this->input->post('Url'),
+                'TipoAcuerdo'           => $this->input->post('TipoAcuerdo'),
+                'DestaOrden'            => $this->input->post('DestaOrden'),
+                'DestaHome'             => $this->input->post('DestaHome'),
+                'ID_MP'                 => $this->input->post('ID_MP'),
+                'ID_Modulos'            => '0', //no se sabe
+                'Votos'                 => '0', //no se sabe
+                'Activo'                => 'A', //no se sabe
+                'Basico'                => $this->input->post('Basico')
             );
 
             $this->metododepago_user_model->update($ID_MP, $data_metodo_pago);
             $this->informaciongeneral_user_model->update($ID_InformacionGeneral, $data_info_gral);
             $this->alojamientos_user_model->update($ID_Alojamiento, $data_alojamientos);
 
-            redirect(base_url().'user/alojamientos_user/form_view_user/', 'refresh');
+            redirect(base_url() . 'user/alojamientos_user/form_view_user/', 'refresh');
         }
     }
-    
+
     //Guardar Servicios
     function servicios_user_save()
     {
         $id_alojamiento = $this->input->post('ID_Alojamiento');
-        $post_array = $this->input->post();
+        $post_array     = $this->input->post();
 
         //Saco el ultimo elemento del array post que es el id_alojamiento;
         array_pop($post_array);
@@ -273,16 +275,16 @@ class Alojamientos_user extends CI_Controller
             $this->alojamientos_servicios_user_model->insert_alojamientos_servicios($id_alojamiento, $var);
         }
 
-        redirect(base_url().'user/alojamientos_user/form_view_user/' . $id_alojamiento . "/?pestania=servicios");
+        redirect(base_url() . 'user/alojamientos_user/form_view_user/' . $id_alojamiento . "/?pestania=servicios");
     }
-    
-        //Funciones para guardar muchas imagenes
+
+    //Funciones para guardar muchas imagenes
     function alojamientos_imagenes_save()
     {
 
         $id_alojamiento = $this->input->post('ID_Alojamiento');
-        $tipo = $this->input->post('tipo');
-        $nombre_imagen = $this->input->post('foto_numero');
+        $tipo           = $this->input->post('tipo');
+        $nombre_imagen  = $this->input->post('foto_numero');
 
         $cantidad_fotos = 0;
 
@@ -308,35 +310,35 @@ class Alojamientos_user extends CI_Controller
 
                         if ($tipo == 'muchas_fotos')
                         {
-                            $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $i . ".jpg";
+                            $image_name   = $this->config->item('upload_path') . $id_alojamiento . "_" . $i . ".jpg";
                             $thumb_grande = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $i . "_p" . ".jpg";
-                            $thumb_chica = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $i . ".jpg";
+                            $thumb_chica  = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $i . ".jpg";
                         }
                         elseif ($tipo == 'foto_comun')
                         {
-                            $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
+                            $image_name   = $this->config->item('upload_path') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
                             $thumb_grande = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $nombre_imagen . "_p" . ".jpg";
-                            $thumb_chica = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
+                            $thumb_chica  = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
                         }
                         elseif ($tipo == 'foto_mas')
                         {
-                            $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
+                            $image_name   = $this->config->item('upload_path') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
                             $thumb_grande = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $cantidad_fotos . "_p" . ".jpg";
-                            $thumb_chica = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
+                            $thumb_chica  = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
                         }
 
 
-                        $image = ImageCreateFromJPEG($file);
+                        $image      = ImageCreateFromJPEG($file);
                         //ancho
-                        $width = imagesx($image);
+                        $width      = imagesx($image);
                         //alto imagen
-                        $height = imagesy($image);
+                        $height     = imagesy($image);
                         //nuevo ancho imagen
-                        $new_width = 550;
+                        $new_width  = 550;
                         //calcular alto 
                         $new_height = ($new_width * $height) / $width;
                         //crear imagen nueva
-                        $thumb = imagecreatetruecolor($new_width, $new_height);
+                        $thumb      = imagecreatetruecolor($new_width, $new_height);
                         //redimensiono
                         imagecopyresized($thumb, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                         //Guardo imagen final 
@@ -344,11 +346,11 @@ class Alojamientos_user extends CI_Controller
 
                         //Thumb
                         //nuevo ancho imagen
-                        $new_width = 100;
+                        $new_width  = 100;
                         //calcular alto 
                         $new_height = ($new_width * $height) / $width;
                         //crear imagen nueva
-                        $thumb = imagecreatetruecolor($new_width, $new_height);
+                        $thumb      = imagecreatetruecolor($new_width, $new_height);
                         //redimensiono
                         imagecopyresized($thumb, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                         //Guardo imagen final 
@@ -360,9 +362,9 @@ class Alojamientos_user extends CI_Controller
                             //nuevo ancho imagen
                             $new_height = 270;
                             //calcular alto 
-                            $new_width = ($new_height * $width) / $height;
+                            $new_width  = ($new_height * $width) / $height;
                             //crear imagen nueva
-                            $thumb = imagecreatetruecolor($new_width, $new_height);
+                            $thumb      = imagecreatetruecolor($new_width, $new_height);
                             //redimensiono
                             imagecopyresized($thumb, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                             //Guardo imagen final 
@@ -380,20 +382,27 @@ class Alojamientos_user extends CI_Controller
                 }
             }
         }
-        redirect(base_url().'user/alojamientos_user/form_view_user/' . $id_alojamiento . "/?pestania=imagenes", 'refresh');
+        redirect(base_url() . 'user/alojamientos_user/form_view_user/' . $id_alojamiento . "/?pestania=imagenes", 'refresh');
     }
-    
+
+    function alojamientos_ubicacion_save()
+    {
+        $post_array = $this->input->post();
+        $this->informaciongeneral_user_model->coordenadas_update($post_array['ID_Alojamiento'], $post_array['Coordenadas']);
+        redirect(base_url().'user/alojamientos_user/form_view_user/' . $post_array['ID_Alojamiento'] . "/?pestania=ubicacion", 'refresh');
+    }
+
     //------------------------------------------- Funciones que solo se usan en este controlador-----------------------------------
     private function alojamientos_servicios_array_final($servicios_total = array(), $servicios_alojamiento = array())
     {
 
         //Inicializo la variable que sera a donde se metan todos los array
-        $a[] = "";
+        $a[]     = "";
         //La variable que contrendra cuales son los check chekeados
         $checked = "";
         //Un contador para pugar el primer elemento cosa que el array tenga el primer elemento
         //para luego pugar los demas
-        $count = 0;
+        $count   = 0;
         foreach ($servicios_total as $var0)
         {
             $count++;
@@ -411,9 +420,9 @@ class Alojamientos_user extends CI_Controller
             }
 
             $b = array(
-                'Servicio' => $var0['Servicio'],
+                'Servicio'    => $var0['Servicio'],
                 'ID_Servicio' => $var0['ID_Servicio'],
-                'checked' => $checked
+                'checked'     => $checked
             );
 
             if ($count == 1)
@@ -426,7 +435,6 @@ class Alojamientos_user extends CI_Controller
 
         return $a;
     }
-
 
 }
 

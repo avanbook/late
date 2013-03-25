@@ -54,6 +54,18 @@ class Informaciongeneral_user_model extends CI_Model
         $this->db->query($query);
     }
     
+     //---------------------------------------- SE UTILIZA PARA GUARDAR LAS CORDENADAS EN INFORMACION GENERL ------------------------
+    function coordenadas_update($id_alojamiento, $coordenadas)
+    {
+        $query = sprintf("select ID_InformacionGeneral from alojamientos where ID_Alojamiento=%s", $id_alojamiento);
+        $row   = $this->db->query($query);
+        $row   = $row->row();
+
+
+        $query = sprintf('update informaciongeneral set Coordenadas="%s" where ID_InformacionGeneral=%s', $coordenadas, $id_alojamiento);
+
+        $this->db->query($query);
+    }
     
 }
 

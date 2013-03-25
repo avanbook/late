@@ -18,8 +18,11 @@ $(function () {
     $('#myTab a[href="#ubicacion"]').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
-        initialize();
-        $('#ubicacion').css({left : '-10000px' });
+        //initialize();
+
+        $('#ubicacion').css({
+            left : '-10000px'
+        });
     })
            
     $('#myTab a[href="#habitaciones"]').click(function (e) {
@@ -32,7 +35,7 @@ $(function () {
         $(this).tab('show');
     })
     
-     $('#myTab a[href="#publicidad"]').click(function (e) {
+    $('#myTab a[href="#publicidad"]').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
     })
@@ -59,7 +62,7 @@ $(function () {
         var id_emp =$('form#'+ids).children('input#ID_Alojamiento_'+ids).val();
         base_url = $('#base_url').val();   
         
-       $.blockUI({
+        $.blockUI({
             message: '<img src="'+base_url+'img/ajax-loader.gif" />'
         });
         
@@ -79,56 +82,10 @@ $(function () {
         })
     });
     
+    
+    
            
 })
-
-
-
-/*function cliente_eliminar(id)
-{
-    $('myModal').modal('show');
-    $('#eliminar').click(function(){
-        base_url = $('#base_url').val();   
-    
-        datos={
-            ID_Cliente: id
-        }
-        //AJAX
-        $.ajax({
-            url: base_url+"admin/ajax/clientes_eliminar/",
-            type: 'POST',
-            data: datos,
-            success: function(msg) {
-                
-                $('#a_'+id).hide();
-                $('#myModal').modal('hide');
-            }
-        })
-        
-    });
-}   */
-
-/*function habitacion_eliminar(id)
-{
-    $('myModal').modal('show');
-    $('#eliminar').click(function(){
-        base_url = $('#base_url').val();   
-        datos={
-            ID_Habitacion: id
-        }
-        //AJAX
-        $.ajax({
-            url: base_url+"admin/ajax/habitaciones_eliminar/",
-            type: 'POST',
-            data: datos,
-            success: function(msg) {
-                $('#h_'+id).hide();
-                $('#myModal').modal('hide');
-            }
-        })
-        
-    });
-}*/
 
 function alojamientos_imagenes_delete(id_alojamiento,nombre_imagen)
 {
@@ -141,7 +98,7 @@ function alojamientos_imagenes_delete(id_alojamiento,nombre_imagen)
         }
         //AJAX
         $.ajax({
-            url: base_url+"admin/ajax/alojamientos_imagenes_delete/",
+            url: base_url+"user/ajax_user/alojamientos_imagenes_delete/",
             type: 'POST',
             data: datos,
             success: function(msg) {
@@ -152,76 +109,91 @@ function alojamientos_imagenes_delete(id_alojamiento,nombre_imagen)
         
     });
 }
-            
-         
-         
-    
+
+
+
+//<![CDATA[
+
 // Inicialización de variables.
 var map      = null;
+var geocoder = null;
 
-function initialize() {   
-    
-    var coordenadas =document.getElementById('Coordenadas').value;   
-    var coordenadas_split = coordenadas.split(',')
-    
-    latitud = coordenadas_split[0];
-    longitud = coordenadas_split[1];
-    
-    
-    directionsDisplay = new google.maps.DirectionsRenderer();
-    Size = new google.maps.Size(800,450);
+function load() {                                      // Abre LLAVE 1.
+    if (GBrowserIsCompatible()) {						   // Abre LLAVE 2.
+        map = new GMap2(document.getElementById("map"));
+        Size = new google.maps.Size(600,450);
+        map.setCenter(new GLatLng(-35.675147,-64.965822), 4);
+        map.addControl(new GSmallMapControl());
+        map.addControl(new GMapTypeControl());
 
-    var myOptions = {
-        zoom: 15,
-        center: new google.maps.LatLng(latitud,longitud),
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: true,
-        mapTypeControlOptions: {
-            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.TOP_RIGHT
-        },
-        navigationControl: true,
-        navigationControlOptions: {
-            style: google.maps.NavigationControlStyle.ZOOM_PAN,
-            position: google.maps.ControlPosition.TOP_LEFT
-        },
-        scaleControl: true
-         
+        geocoder = new GClientGeocoder();
+
+
+        //---------------------------------//
+        //   MARCADOR AL HACER CLICK
+        //---------------------------------//
+        GEvent.addListener(map, "click",
+            function(marker, point) {
+                if (marker) {
+                    null;
+                } else {
+                    map.clearOverlays();
+                    var marcador = new GMarker(point);
+                    map.addOverlay(marcador);
+                    //marcador.openInfoWindowHtml("<b><br>Coordenadas:<br></b>Latitud : "+point.y+"<br>Longitud : "+point.x+"<a href=http://www.mundivideo.com/fotos_pano.htm?lat="+point.y+"&lon="+point.x+"&mapa=3 TARGET=fijo><br><br>Fotografias</a>");
+                    //marcador.openInfoWindowHtml("<b>Coordenadas:</b> "+point.y+","+point.x);
+                    document.getElementById('Coordenadas').value = point.y+","+point.x;
+                }
+            }
+            );
+    //---------------------------------//
+    //   FIN MARCADOR AL HACER CLICK
+    //---------------------------------//
+
+    } // Cierra LLAVE 1.
+}   // Cierra LLAVE 2.
+
+//---------------------------------//
+//           GEOCODER
+//---------------------------------//
+function showAddress(address, zoom) {
+    if (geocoder) {
+        geocoder.getLatLng(address,
+            function(point) {
+                if (!point) {
+                    alert(address + " not found");
+                } else {
+                    map.setCenter(point, zoom);
+                    var marker = new GMarker(point);
+                    map.addOverlay(marker);
+                    //marker.openInfoWindowHtml("<b>"+address+"</b><br>Coordenadas:<br>Latitud : "+point.y+"<br>Longitud : "+point.x+"<a href=http://www.mundivideo.com/fotos_pano.htm?lat="+point.y+"&lon="+point.x+"&mapa=3 TARGET=fijo><br><br>Fotografias</a>");
+                    // marker.openInfoWindowHtml("<b>Coordenadas:</b> "+point.y+","+point.x);
+                   
+                    document.getElementById('Coordenadas').value = point.y+","+point.x;
+                //document.form1.coordenadas.value = 
+                }
+            }
+            );
     }
-    var map = new google.maps.Map(document.getElementById("map"),
-        myOptions);  
-                                                                 
-       
-    var image = 'http://sanrafaelhoteles.com/imagenes/hotel.png';
-    var myLatLng = new google.maps.LatLng(latitud,longitud);
-    var beachMarker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        icon: image
-    });
- 
-
- 
 }
+//---------------------------------//
+//     FIN DE GEOCODER
+//---------------------------------//
 
-/*
-
-function confirmar(id_alojamiento,id_publicidad,accion)
+//]]>
+    
+    
+window.onload=function()
 {
-    base_url = $('#base_url').val();  
-
-    if(accion=='activar')
-    {
-            if(confirm('Esta seguro que desea cambiar el estado '))
-                window.location = base_url+"admin/alojamientos/alojamientos_publicidad_estado/"+id_alojamiento+"/?ID_Publicidad="+id_publicidad;
-            
-    }else if(accion=='renovar')
-    if(confirm('Esta seguro que desea renovar esta publicidad'))
-                window.location = base_url+"admin/alojamientos/alojamientos_publicidad_renovar/"+id_alojamiento+"/?ID_Publicidad="+id_publicidad;
+    self.focus();
+    load();
 }
 
-*/
- 
 
+function posicion()
+{
+    direccion = $('#Direccion').val()
+    showAddress(direccion, 15);
+}
 
        

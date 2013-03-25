@@ -133,34 +133,60 @@
             </div><!-- fin div imagenes -->
             <!-- Ubicacion -->
             <div class="tab-pane" id="ubicacion">
-                <p><b>Coordenadas:&nbsp;&nbsp;</b><input id="Coordenadas" type="text" value="<?php echo $info_array->Coordenadas ?>" disabled="disabled" /></p>
-                <div id="map" style="width: 800px; height: 450px; z-index: 2"> 
+                <div class="span9">
+                    <div class="row-fluid">
+                        <h3>Agregar Ubicación</h3>
+                        <br>
+                    </div>
+                    <div class="row-fluid">
+                        <form class="form-horizontal" method="post" action="<?php echo base_url() ?>user/alojamientos_user/alojamientos_ubicacion_save" enctype="multipart/form-data">
+                            <div class="control-group">
+                                <label class="control-label" >Dirección:</label>
+                                <div class="controls">
+                                    <input type="text"  name="Direccion" id="Direccion" value="<?php echo $info_array->Direccion ?>" >
+                                    <a href="#" onclick="posicion()" class="btn btn-success">Buscar</a>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" >Coordenadas:</label>
+                                <div class="controls">
+                                    <input type="text" name="Coordenadas" id="Coordenadas" value="<?php echo $info_array->Coordenadas ?>"  >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="submit" class="btn btn-primary" value="Guardar"  >
+                                </div>
+                            </div>
+                            <input type="hidden" name="ID_Alojamiento" value="<?php echo $info_array->ID_Alojamiento ?>">
+                        </form>
+                    </div>
+                    <div id="map" align="center" style="width: 800px; height: 450px; "></div>    
                 </div>
+                <!-- Fin ubicacion -->
             </div>
-            <!-- Fin ubicacion -->
+
+
         </div>
+    </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Eliminar </h3>
+        </div>
+        <div class="modal-body">
+            <p>¿Esta seguro que desea eliminar?</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+            <button id="eliminar" class="btn btn-danger">Eliminar</button>
+        </div>
+    </div>
+    <input id="base_url" value="<?php echo base_url() ?>" type="hidden">
 
-
-    </div>
-</div>
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Eliminar </h3>
-    </div>
-    <div class="modal-body">
-        <p>¿Esta seguro que desea eliminar?</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button id="eliminar" class="btn btn-danger">Eliminar</button>
-    </div>
-</div>
-<input id="base_url" value="<?php echo base_url() ?>" type="hidden">
-
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script>
-    var coordenadas2 = "<?php echo $info_array->Coordenadas ?>";
-</script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script>
+        var coordenadas2 = "<?php echo $info_array->Coordenadas ?>";
+    </script>
 
