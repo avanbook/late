@@ -6,12 +6,11 @@ class Alojamientos_user extends CI_Controller
     function __construct()
     {
         parent::__construct();
-
-
         $this->load->library('gf');
         $this->load->model('user/alojamientos_clientes_user_model');
         $this->load->model('user/alojamientos_user_model');
         $this->load->model('user/categorias_user_model');
+        $this->load->model('user/alojamientos_imagenes_user_model');
         $this->load->model('user/ciudades_user_model');
         $this->load->model('user/localidades_user_model');
         $this->load->model('user/paises_user_model');
@@ -19,6 +18,8 @@ class Alojamientos_user extends CI_Controller
         $this->load->model('user/tipoalojamiento_user_model');
         $this->load->model('user/servicios_user_model');
         $this->load->model('user/alojamientos_servicios_user_model');
+        $this->load->model('user/informaciongeneral_user_model');
+        $this->load->model('user/metododepago_user_model');
         $this->load->config('avanbook_config');
     }
 
@@ -50,13 +51,12 @@ class Alojamientos_user extends CI_Controller
         //Meto una combinacion de esos array en un array nuevo
         //La funcion esta al final de este archivo php
         $data['servicios_array'] = $this->alojamientos_servicios_array_final($servicios_total, $servicios_alojamiento);
-        $data['fotos_array']               = $this->alojamientos_user_model->fotos_list($ID_Alojamiento);
-        $data['alojamientos_menu_sidebar'] = $this->config->item('alojamientos_menu_sidebar');
+        $data['fotos_array']               = $this->alojamientos_imagenes_user_model->find_from_id_alo($ID_Alojamiento);
         $data['js']                        = array(
             'js/fancybox/jquery.mousewheel-3.0.4.pack',
             'js/fancybox/jquery.fancybox-1.3.4.pack',
             'js/blockui-master/jquery.blockUI',
-            'js/admin/alojamientos_view'
+            'js/user/alojamientos_user_view'
         );
         $data['css'] = array('css/admin/alojamientos_list', 'js/fancybox/jquery.fancybox-1.3.4');
         $data['view'] = 'user/alojamientos_user/alojamientos_user_view';
@@ -88,10 +88,6 @@ class Alojamientos_user extends CI_Controller
         $data['Responsable']           = & $Responsable;
         $data['Descripcion']           = & $Descripcion;
         $data['Coordenadas']           = & $Coordenadas;
-        $data['Pais']                  = & $Pais;
-        $data['Provincia']             = & $Provincia;
-        $data['Ciudad']                = & $Ciudad;
-        $data['Localidad']             = & $Localidad;
         $data['Restaurant']            = & $Restaurant;
         $data['InformacionRestaurant'] = & $InformacionRestaurant;
         $data['Checkin']               = & $Checkin;
@@ -143,10 +139,6 @@ class Alojamientos_user extends CI_Controller
             $Responsable           = $row->Responsable;
             $Descripcion           = $row->Descripcion;
             $Coordenadas           = $row->Coordenadas;
-            $Pais                  = $row->Pais;
-            $Provincia             = $row->Provincia;
-            $Ciudad                = $row->Ciudad;
-            $Localidad             = $row->Localidad;
             $Restaurant            = $row->Restaurant;
             $InformacionRestaurant = $row->InformacionRestaurant;
             $Checkin               = $row->Checkin;
@@ -165,14 +157,13 @@ class Alojamientos_user extends CI_Controller
             $MejorPrecio       = $row->MejorPrecio;
         }
 
-        //Array segun lugar para mostrar
-        $data['paises_array']           = $this->paises_user_model->find_all();
-        $data['provincias_array']       = $this->provincias_user_model->find_from_pais($Pais);
-        $data['ciudades_array']         = $this->ciudades_user_model->find_form_pais_provincia($Pais, $Provincia);
-        $data['localidades_array']      = $this->localidades_user_model->find_from_pais_provincia_ciudad($Pais, $Provincia, $Ciudad);
+        //Array segun lugar para mostrar                                                     
         $data['tipoalojamientos_array'] = $this->tipoalojamiento_user_model->find_all();
         $data['categorias_array']       = $this->categorias_user_model->find_all();
-        $data['js']                     = array('js/user/alojamientos_form');
+        $data['js']                     = array(
+            'js/user/alojamientos_form_user',
+             'js/ckeditor/ckeditor'
+            );
         $data['view'] = 'user/alojamientos_user/alojamientos_form_user';
         $this->load->view('user/templates_user/temp_menu_user', $data);
     }
@@ -194,10 +185,6 @@ class Alojamientos_user extends CI_Controller
             'Responsable' => $this->input->post('Responsable'),
             'Descripcion' => $this->input->post('Descripcion'),
             'Coordenadas' => $this->input->post('Coordenadas'),
-            'Localidad' => $this->input->post('Localidad'),
-            'Ciudad' => $this->input->post('Ciudad'),
-            'Provincia' => $this->input->post('Provincia'),
-            'Pais' => $this->input->post('Pais'),
             'Restaurant' => $this->input->post('Restaurant'),
             'InformacionRestaurant' => $this->input->post('InformacionRestaurant'),
             'InformacionHabitaciones' => $this->input->post('InformacionHabitaciones'),
@@ -219,8 +206,8 @@ class Alojamientos_user extends CI_Controller
 
         if ($accion == 'crear')
         {
-            $id_data_info_gral = $this->alojamientos_model->insert('informaciongeneral', $data_info_gral);
-            $id_data_metodo_pago = $this->alojamientos_model->insert('metododepago', $data_metodo_pago);
+            $id_data_info_gral = $this->informaciongeneral_user_model->insert($data_info_gral);
+            $id_data_metodo_pago = $this->metododepago_user_model->insert($data_metodo_pago);
 
             $data_alojamientos = array(
                 'ID_InformacionGeneral' => $id_data_info_gral,
@@ -238,8 +225,8 @@ class Alojamientos_user extends CI_Controller
                 'Basico' => $this->input->post('Basico')
             );
 
-            $id_data_alojamientos = $this->alojamientos_model->insert('alojamientos', $data_alojamientos);
-            redirect('user/alojamientos_user/' . $id_data_alojamientos . "/?pestania=info", 'refresh');
+            $id_data_alojamientos = $this->alojamientos_model->insert($data_alojamientos);
+            redirect(base_url().'user/alojamientos_user/form_view_user/' . $id_data_alojamientos . "/?pestania=info", 'refresh');
         }
         elseif ($accion == 'editar')
         {
@@ -259,12 +246,141 @@ class Alojamientos_user extends CI_Controller
                 'Basico' => $this->input->post('Basico')
             );
 
-            $this->alojamientos_model->update($ID_MP, $data_metodo_pago, 'ID_MP', 'metododepago');
-            $this->alojamientos_model->update($ID_InformacionGeneral, $data_info_gral, 'ID_InformacionGeneral', 'informaciongeneral');
-            $this->alojamientos_model->update($ID_Alojamiento, $data_alojamientos, 'ID_Alojamiento', 'alojamientos');
+            $this->metododepago_user_model->update($ID_MP, $data_metodo_pago);
+            $this->informaciongeneral_user_model->update($ID_InformacionGeneral, $data_info_gral);
+            $this->alojamientos_user_model->update($ID_Alojamiento, $data_alojamientos);
 
-            redirect('admin/alojamientos/form_view/' . $ID_Alojamiento . "/?pestania=info", 'refresh');
+            redirect(base_url().'user/alojamientos_user/form_view_user/', 'refresh');
         }
+    }
+    
+    //Guardar Servicios
+    function servicios_user_save()
+    {
+        $id_alojamiento = $this->input->post('ID_Alojamiento');
+        $post_array = $this->input->post();
+
+        //Saco el ultimo elemento del array post que es el id_alojamiento;
+        array_pop($post_array);
+
+        //Elimino todos los servicios que existen en este alojamiento,
+        //Para que no de conflicto al insertarlo de nuevo (se borra y se agregan los ya ingresados mas los nuevos)
+        $this->alojamientos_servicios_user_model->delete_alojamientos_servicios($id_alojamiento);
+
+        $array_comas = "";
+        foreach ($post_array as $var)
+        {
+            $this->alojamientos_servicios_user_model->insert_alojamientos_servicios($id_alojamiento, $var);
+        }
+
+        redirect(base_url().'user/alojamientos_user/form_view_user/' . $id_alojamiento . "/?pestania=servicios");
+    }
+    
+        //Funciones para guardar muchas imagenes
+    function alojamientos_imagenes_save()
+    {
+
+        $id_alojamiento = $this->input->post('ID_Alojamiento');
+        $tipo = $this->input->post('tipo');
+        $nombre_imagen = $this->input->post('foto_numero');
+
+        $cantidad_fotos = 0;
+
+        if (isset($_FILES['filesToUpload']['tmp_name']))
+        {
+            if (count($_FILES['filesToUpload']['tmp_name']))
+            {
+
+                //Borrar las imagenes de la tabla imagenes_alojamientos ya que se agregaran varias mas
+                if ($tipo == 'foto_comun')
+                    $this->alojamientos_imagenes_user_model->images_delete_nombre_imagen($id_alojamiento, $nombre_imagen);
+
+                $i = 0;
+                foreach ($_FILES['filesToUpload']['tmp_name'] as $file)
+                {
+
+                    $i++;
+                    $cantidad_fotos = $this->alojamientos_imagenes_user_model->images_count($id_alojamiento);
+                    $cantidad_fotos = $cantidad_fotos + 1;
+
+                    if ($cantidad_fotos <= 12)
+                    {
+
+                        if ($tipo == 'muchas_fotos')
+                        {
+                            $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $i . ".jpg";
+                            $thumb_grande = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $i . "_p" . ".jpg";
+                            $thumb_chica = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $i . ".jpg";
+                        }
+                        elseif ($tipo == 'foto_comun')
+                        {
+                            $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
+                            $thumb_grande = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $nombre_imagen . "_p" . ".jpg";
+                            $thumb_chica = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
+                        }
+                        elseif ($tipo == 'foto_mas')
+                        {
+                            $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
+                            $thumb_grande = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $cantidad_fotos . "_p" . ".jpg";
+                            $thumb_chica = $this->config->item('upload_path_thumb') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
+                        }
+
+
+                        $image = ImageCreateFromJPEG($file);
+                        //ancho
+                        $width = imagesx($image);
+                        //alto imagen
+                        $height = imagesy($image);
+                        //nuevo ancho imagen
+                        $new_width = 550;
+                        //calcular alto 
+                        $new_height = ($new_width * $height) / $width;
+                        //crear imagen nueva
+                        $thumb = imagecreatetruecolor($new_width, $new_height);
+                        //redimensiono
+                        imagecopyresized($thumb, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                        //Guardo imagen final 
+                        ImageJPEG($thumb, $image_name);
+
+                        //Thumb
+                        //nuevo ancho imagen
+                        $new_width = 100;
+                        //calcular alto 
+                        $new_height = ($new_width * $height) / $width;
+                        //crear imagen nueva
+                        $thumb = imagecreatetruecolor($new_width, $new_height);
+                        //redimensiono
+                        imagecopyresized($thumb, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                        //Guardo imagen final 
+                        ImageJPEG($thumb, $thumb_chica);
+
+                        if ($i == 1 or $cantidad_fotos == 1 or $nombre_imagen == '1')
+                        {
+                            //Thumprincipal
+                            //nuevo ancho imagen
+                            $new_height = 270;
+                            //calcular alto 
+                            $new_width = ($new_height * $width) / $height;
+                            //crear imagen nueva
+                            $thumb = imagecreatetruecolor($new_width, $new_height);
+                            //redimensiono
+                            imagecopyresized($thumb, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                            //Guardo imagen final 
+                            ImageJPEG($thumb, $thumb_grande);
+                        }
+
+                        //Guardar imagenes en la table alojamientos_imagenes
+                        if ($tipo == 'foto_comun')
+                            $this->alojamientos_imagenes_user_model->images_save($id_alojamiento, $nombre_imagen);
+                        elseif ($tipo == 'muchas_fotos')
+                            $this->alojamientos_imagenes_user_model->images_save($id_alojamiento, $i);
+                        elseif ($tipo == 'foto_mas')
+                            $this->alojamientos_imagenes_user_model->images_save($id_alojamiento, $cantidad_fotos);
+                    }
+                }
+            }
+        }
+        redirect(base_url().'user/alojamientos_user/form_view_user/' . $id_alojamiento . "/?pestania=imagenes", 'refresh');
     }
     
     //------------------------------------------- Funciones que solo se usan en este controlador-----------------------------------

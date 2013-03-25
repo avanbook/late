@@ -1,9 +1,9 @@
 <?php
 
-class Alojamientos_servicios_user_model extends CI_Model
+class Alojamientos_imagenes_user_model extends CI_Model
 {
 
-    const tabla    = 'alojamientos_servicios';
+    const tabla    = 'alojamientos_imagenes';
     const id_tabla = 'ID_Alojamiento';
 
     /* ------------------------ INSERTAR EN LA BASE DE DATOS----------------------- */
@@ -52,39 +52,38 @@ class Alojamientos_servicios_user_model extends CI_Model
         $this->db->query($query);
     }
 
-    function find_id_alojamiento_inner_servicios($id_alojamientos)
+    function find_from_id_alo($id_alojamiento)
     {
-        $query = sprintf("
-        select 
-        servicios.ID_Servicio,
-        Servicio 
-        from servicios 
-        inner join 
-        alojamientos_servicios 
-        on 
-        servicios.ID_Servicio = alojamientos_servicios.ID_Servicio 
-        where 
-        ID_Alojamiento =%s", $id_alojamientos);
+        $query = sprintf("select * from alojamientos_imagenes where ID_Alojamiento=%s", $id_alojamiento);
         $rows  = $this->db->query($query);
         $rows  = $rows->result_array();
         return $rows;
     }
-
-    function insert_alojamientos_servicios($id_alojamientos, $id_servicios)
+    
+        function images_save($id_alojamiento, $nombre_imagen)
     {
-        $query = sprintf("insert 
-                          into 
-                          alojamientos_servicios 
-                          (ID_Alojamiento, ID_Servicio) 
-                          values 
-                          (%s,%s)", $id_alojamientos, $id_servicios);
+        $query = sprintf("insert into alojamientos_imagenes (ID_Alojamiento,NombreImagen) values (%s,%s)", $id_alojamiento, $nombre_imagen);
         $this->db->query($query);
     }
 
-    function delete_alojamientos_servicios($id_alojamiento)
+    function images_delete($id_alojamiento)
     {
-        $query = sprintf("delete from alojamientos_servicios where ID_Alojamiento=%s", $id_alojamiento);
+        $query = sprintf("delete from alojamientos_imagenes where ID_Alojamiento=%s", $id_alojamiento);
         $this->db->query($query);
+    }
+
+    function images_delete_nombre_imagen($id_alojamiento, $nombre_foto)
+    {
+        $query = sprintf("delete from alojamientos_imagenes where ID_Alojamiento=%s and NombreImagen=%s", $id_alojamiento, $nombre_foto);
+        $this->db->query($query);
+    }
+
+    function images_count($id_alojamiento)
+    {
+        $query = sprintf("select MAX(NombreImagen) as count from alojamientos_imagenes where ID_Alojamiento=%s", $id_alojamiento);
+        $rows  = $this->db->query($query);
+        $rows  = $rows->row();
+        return $rows->count;
     }
 
 }

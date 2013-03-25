@@ -4,7 +4,7 @@
     <hr>
 </div>    
 <div class="row-fluid">
-    <div class="span9">
+    <div class="span12">
         <ul class="nav nav-tabs" id="myTab">
             <li <?php echo $this->gf->comparar_general('info', $p_a, "class='active'") ?>><a href="#descripcion">Descripción</a></li>
             <li <?php echo $this->gf->comparar_general('servicios', $p_a, "class='active'") ?>><a href="#servicios">Servicios</a></li>
@@ -33,8 +33,6 @@
                         <p><b>Teléfono:&nbsp;</b><?php echo $info_array->Telefono ?></p>
                         <p><b>Responsable:&nbsp;</b><?php echo $info_array->Responsable ?></p>
                         <p><b>Email:&nbsp;</b><?php echo $info_array->Email ?></p>
-                        <p><b>Ciudad:&nbsp;</b><?php echo $info_array->Name ?></p>
-                        <p><b>Mendoza:&nbsp;</b><?php echo $info_array->SUName ?></p>
                         <p><b>Checkin:&nbsp;</b><?php echo $info_array->Checkin ?></p>
                         <p><b>Checkout:&nbsp;</b><?php echo $info_array->Checkout ?></p>
                     </div>
@@ -58,7 +56,7 @@
                             <h3>Agregar Servicio</h3>
                             <br>
                         </div>
-                        <form action="<?php echo base_url() ?>admin/alojamientos/servicios_save" method="post">
+                        <form action="<?php echo base_url() ?>user/alojamientos_user/servicios_user_save" method="post">
                             <div class="row-fluid">
                                 <div class="offset1">
                                     <ol>
@@ -79,6 +77,7 @@
                                     <input type="submit" class="btn btn-large btn-primary" value="Guardar">
                                 </div>
                             </div>
+                            <input type="hidden" value="<?php echo $ID_Alojamiento ?>" name="ID_Alojamiento">
                         </form>
                     </div>
                 </div>
@@ -87,20 +86,9 @@
             <!-- Div Imagenes -->
             <div class="tab-pane <?php echo $this->gf->comparar_general('imagenes', $p_a, " active") ?>" id="fotos">
                 <div class="row-fluid">
-                    <div class="span3">
-                        <h4>Agregar muchas fotos</h4>
-                    </div>
-                    <div class="span3">
-                        <h4>Agregar Mas fotos</h4>
-                    </div>
-                </div>
-
-                <div class="row-fluid">
-                    <div class="span3">
-                        <a  class="btn btn-info" href="<?php echo base_url() . "admin/alojamientos/alojamientos_imagenes_form/" . $info_array->ID_Alojamiento ?>">Subir</a>
-                    </div>
                     <div class="span5">
-                        <form action="<?php echo base_url() ?>admin/alojamientos/alojamientos_imagenes_save/" method="post" enctype="multipart/form-data">
+                        <h4>Agregar más fotos</h4>
+                        <form action="<?php echo base_url() ?>user/alojamientos_user/alojamientos_imagenes_save/" method="post" enctype="multipart/form-data">
                             <input type="file" name="filesToUpload[]" id="filesToUpload" multiple="" onchange="makeFileList();" value="Agregar Foto">
                             <input type="submit" value="subir" class="btn btn-primary"/>
                             <input name="ID_Alojamiento" value="<?php echo $info_array->ID_Alojamiento ?>" type="hidden">
@@ -120,7 +108,7 @@
                                     <a rel="example_group" href="<?php echo base_url() . "upload/alojamientos/" . $var['ID_Alojamiento'] . "_" . $var['NombreImagen'] . ".jpg" ?>"><img  class="last" width="50px" src="<?php echo base_url() . "upload/alojamientos/" . $var['ID_Alojamiento'] . "_" . $var['NombreImagen'] . ".jpg" ?>"></a>
                                 </td>
                                 <td>
-                                    <form action="<?php echo base_url() ?>admin/alojamientos/alojamientos_imagenes_save/" method="post" enctype="multipart/form-data">
+                                    <form action="<?php echo base_url() ?>user/alojamientos_user/alojamientos_imagenes_save/" method="post" enctype="multipart/form-data">
                                         <input type="file" name="filesToUpload[]" id="filesToUpload" multiple="" onchange="makeFileList();" value="Agregar Foto">
                                         <input type="submit" value="subir" class="btn btn-primary"/>
                                         <input name="ID_Alojamiento" value="<?php echo $var['ID_Alojamiento'] ?>" type="hidden">

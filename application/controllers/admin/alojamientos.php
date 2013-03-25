@@ -258,7 +258,7 @@ class Alojamientos extends CI_Controller
                 'ID_TipoAlojamiento' => $this->input->post('ID_TipoAlojamiento'),
                 'ID_Categorias' => $this->input->post('ID_Categorias'),
                 'Url' => $this->input->post('Url'),
-                'TipoAcurdo' => $this->input->post('TipoAcuerdo'),
+                'TipoAcuerdo' => $this->input->post('TipoAcuerdo'),
                 'DestaOrden' => $this->input->post('DestaOrden'),
                 'DestaHome' => $this->input->post('DestaHome'),
                 'ID_MP' => $id_data_metodo_pago,
