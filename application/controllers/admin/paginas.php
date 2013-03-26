@@ -10,7 +10,7 @@ class Paginas extends CI_Controller
         $this->load->config('avanbook_config');
         $this->load->library('gf');
     }
-    
+
     function index()
     {
         $this->lists();
@@ -19,8 +19,8 @@ class Paginas extends CI_Controller
     function lists()
     {
         $data['paginas_array'] = $this->paginas_model->paginas_list();
-        $data['title'] = "Listado Páginas";
-        $data['js'] = array('js/admin/paginas_lists');
+        $data['title']         = "Listado Páginas";
+        $data['js']            = array('js/admin/paginas_lists');
         $data['view'] = 'admin/paginas/paginas_list';
         $this->load->view('admin/templates/temp_menu', $data);
     }
@@ -28,25 +28,25 @@ class Paginas extends CI_Controller
     function view($id_pagina = 0)
     {
         $query_rows = $this->paginas_model->paginas_find($id_pagina);
-        $row = $query_rows->row();
+        $row        = $query_rows->row();
         if ($query_rows->num_rows() == 0)
         {
             echo "esta pagina no existe";
         }
         else
         {
-            $data['ID_Pagina'] = $row->ID_Pagina;
-            $data['MetaTitulo'] = $row->MetaTitulo;
+            $data['ID_Pagina']       = $row->ID_Pagina;
+            $data['MetaTitulo']      = $row->MetaTitulo;
             $data['MetaDescripcion'] = $row->MetaDescripcion;
-            $data['Keywords'] = $row->Keywords;
+            $data['Keywords']        = $row->Keywords;
             $data['TituloContenido'] = $row->TituloContenido;
-            $data['Contenido'] = $row->Contenido;
-            $data['Subtitulo'] = $row->Subtitulo;
-            $data['Url'] = $row->Url;
-            $data['title'] = $row->TituloContenido;
-            $data['keywords'] = $row->Keywords;
-            $data['description'] = $row->MetaDescripcion;
-            $data['js'] = array('js/admin/paginas_lists');
+            $data['Contenido']       = $row->Contenido;
+            $data['Subtitulo']       = $row->Subtitulo;
+            $data['Url']             = $row->Url;
+            $data['title']           = $row->TituloContenido;
+            $data['keywords']        = $row->Keywords;
+            $data['description']     = $row->MetaDescripcion;
+            $data['js']              = array('js/admin/paginas_lists');
             $data['view'] = 'admin/paginas/paginas_view';
             $this->load->view('admin/templates/temp_menu', $data);
         }
@@ -57,58 +57,92 @@ class Paginas extends CI_Controller
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
-        $data['ID_Pagina'] = & $ID_Pagina;
-        $data['MetaTitulo'] = & $MetaTitulo;
-        $data['MetaDescripcion'] = & $MetaDescripcion;
-        $data['Keywords'] = & $Keywords;
-        $data['TituloContenido'] = & $TituloContenido;
-        $data['Contenido'] = & $Contenido;
-        $data['Subtitulo'] = & $Subtitulo;
-        $data['Url'] = & $Url;
-        $data['ID_TipoPagina'] = & $ID_TipoPagina;
+        $data['ID_Pagina']          = & $ID_Pagina;
+        $data['MetaTitulo']         = & $MetaTitulo;
+        $data['MetaDescripcion']    = & $MetaDescripcion;
+        $data['Keywords']           = & $Keywords;
+        $data['TituloContenido']    = & $TituloContenido;
+        $data['Contenido']          = & $Contenido;
+        $data['Subtitulo']          = & $Subtitulo;
+        $data['Url']                = & $Url;
+        $data['ID_TipoPagina']      = & $ID_TipoPagina;
+        $data['ID_PaginaPrincipal'] = & $ID_PaginaPrincipal;
+        $data['OrdenPagina']        = & $OrdenPagina;
 
         $query_rows = $this->paginas_model->paginas_find($id_pagina);
-        $row = $query_rows->row();
+        $row        = $query_rows->row();
 
         if ($query_rows->num_rows() == 0)
         {
-            $data['title'] = 'Crear Página';
+            $data['title']  = 'Crear Página';
             $data['accion'] = 'crear';
+            $OrdenPagina='top';
         }
         else
         {
-            $data['title'] = 'Editar Página';
+            $data['title']  = 'Editar Página';
             $data['accion'] = 'editar';
 
             //Tabla paginas
-            $ID_Pagina = $row->ID_Pagina;
-            $MetaTitulo = $row->MetaTitulo;
-            $MetaDescripcion = $row->MetaDescripcion;
-            $Keywords = $row->Keywords;
-            $TituloContenido = $row->TituloContenido;
-            $Contenido = $row->Contenido;
-            $Subtitulo = $row->Subtitulo;
-            $Url = $row->Url;
-            $ID_TipoPagina = $row->ID_TipoPagina;
+            $ID_Pagina                  = $row->ID_Pagina;
+            $MetaTitulo                 = $row->MetaTitulo;
+            $MetaDescripcion            = $row->MetaDescripcion;
+            $Keywords                   = $row->Keywords;
+            $TituloContenido            = $row->TituloContenido;
+            $Contenido                  = $row->Contenido;
+            $Subtitulo                  = $row->Subtitulo;
+            $Url                        = $row->Url;
+            $ID_TipoPagina              = $row->ID_TipoPagina;
+            $ID_PaginaPrincipal         = $row->ID_PaginaPrinciapl;
+            $OrdenPagina                = $row->OrdenPagina;
         }
         $data['tipo_paginas_array'] = $this->paginas_model->tipo_pagina_list();
-        $data['js'] = array('js/ckeditor/ckeditor');
+        $data['js']                 = array('js/ckeditor/ckeditor');
+        $data['view'] = "admin/paginas/paginas_form";
+        $this->load->view('admin/templates/temp_menu', $data);
+    }
+
+    function form_interna()
+    {
+        $ID_Pagina=$this->input->get('ID_Pagina');
+        $ID_TipoPagina=$this->input->get('ID_TipoPagina');
+        
+        //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
+        //todo de nuevo uso apuntadores.
+        //Tabla paginas
+        $data['ID_Pagina']          = "";
+        $data['MetaTitulo']         = "";
+        $data['MetaDescripcion']    = "";
+        $data['Keywords']           = "";
+        $data['TituloContenido']    = "";
+        $data['Contenido']          = "";
+        $data['Subtitulo']          = "";
+        $data['Url']                = "";
+        $data['ID_TipoPagina']      = $ID_TipoPagina;
+        $data['ID_PaginaPrincipal'] = $ID_Pagina;
+        $data['OrdenPagina']        = "interna";
+        $data['title']              = 'Crear Página Interna';
+        $data['accion']             = 'crear';
+        $data['tipo_paginas_array'] = $this->paginas_model->tipo_pagina_list();
+        $data['js']                 = array('js/ckeditor/ckeditor');
         $data['view'] = "admin/paginas/paginas_form";
         $this->load->view('admin/templates/temp_menu', $data);
     }
 
     function save()
     {
-        $post_array = $this->input->post();
+        $post_array    = $this->input->post();
         $paginas_array = array(
-            'MetaTitulo' => $post_array['MetaTitulo'],
+            'MetaTitulo'      => $post_array['MetaTitulo'],
             'MetaDescripcion' => $post_array['MetaDescripcion'],
-            'Keywords' => $post_array['Keywords'],
+            'Keywords'        => $post_array['Keywords'],
             'TituloContenido' => $post_array['TituloContenido'],
-            'Contenido' => $post_array['Contenido'],
-            'Subtitulo' => $post_array['Subtitulo'],
-            'Url' => $post_array['Url'],
-            'ID_TipoPagina' => $post_array['ID_TipoPagina']
+            'Contenido'       => $post_array['Contenido'],
+            'Subtitulo'       => $post_array['Subtitulo'],
+            'Url'             => $post_array['Url'],
+            'ID_TipoPagina'   => $post_array['ID_TipoPagina'],
+            'ID_PaginaPrincipal' => $post_array['ID_PaginaPrincipal'],
+            'OrdenPagina' => $post_array['OrdenPagina']
         );
 
         if ($post_array['accion'] == 'crear')
@@ -117,32 +151,32 @@ class Paginas extends CI_Controller
         }
         elseif ($post_array['accion'] == 'editar')
         {
-            $this->paginas_model->update($post_array['ID_Pagina'],$paginas_array,'ID_Pagina','paginas');
+            $this->paginas_model->update($post_array['ID_Pagina'], $paginas_array, 'ID_Pagina', 'paginas');
         }
 
         redirect(base_url() . 'admin/paginas/lists/', 'refresh');
     }
-    
+
     function paginas_imagenes_list($id_pagina)
     {
-         //$data['js'] = array('js/empresas_publicidad_list');
-        $row = $this->paginas_model->paginas_find($id_pagina);
-        $row = $row->row();
-        $data['TituloContenido']=$row->TituloContenido;
-        $data['ID_Pagina']=$row->ID_Pagina;
+        //$data['js'] = array('js/empresas_publicidad_list');
+        $row                            = $this->paginas_model->paginas_find($id_pagina);
+        $row                            = $row->row();
+        $data['TituloContenido']        = $row->TituloContenido;
+        $data['ID_Pagina']              = $row->ID_Pagina;
         $data['paginas_imagenes_array'] = $this->paginas_model->paginas_imagenes_list($id_pagina);
-        $data['title'] = 'Paginas Imagenes';
-        $data['js']=array('js/admin/paginas_imagenes_list','js/blockui-master/jquery.blockUI');
+        $data['title']                  = 'Paginas Imagenes';
+        $data['js']                     = array('js/admin/paginas_imagenes_list', 'js/blockui-master/jquery.blockUI');
         $data['view'] = 'admin/paginas/paginas_imagenes_list';
         $this->load->view('admin/templates/temp_menu', $data);
     }
-    
-     //Funciones para guardar muchas imagenes
+
+    //Funciones para guardar muchas imagenes
     function paginas_imagenes_save()
     {
 
-        $id_pagina = $this->input->post('ID_Pagina');
-        $tipo = $this->input->post('tipo');
+        $id_pagina     = $this->input->post('ID_Pagina');
+        $tipo          = $this->input->post('tipo');
         $nombre_imagen = $this->input->post('foto_numero');
 
         $cantidad_fotos = 0;
@@ -172,35 +206,35 @@ class Paginas extends CI_Controller
 
                         if ($tipo == 'muchas_fotos')
                         {
-                            $image_name = $this->config->item('upload_path_pag') . $id_pagina . "_" . $i . ".jpg";
+                            $image_name   = $this->config->item('upload_path_pag') . $id_pagina . "_" . $i . ".jpg";
                             $thumb_grande = $this->config->item('upload_path_pag_thumb') . $id_pagina . "_" . $i . "_p" . ".jpg";
-                            $thumb_chica = $this->config->item('upload_path_pag_thumb') . $id_pagina . "_" . $i . ".jpg";
+                            $thumb_chica  = $this->config->item('upload_path_pag_thumb') . $id_pagina . "_" . $i . ".jpg";
                         }
                         elseif ($tipo == 'foto_comun')
                         {
-                            $image_name = $this->config->item('upload_path_pag') . $id_pagina . "_" . $nombre_imagen . ".jpg";
+                            $image_name   = $this->config->item('upload_path_pag') . $id_pagina . "_" . $nombre_imagen . ".jpg";
                             $thumb_grande = $this->config->item('upload_path_pag_thumb') . $id_pagina . "_" . $nombre_imagen . "_p" . ".jpg";
-                            $thumb_chica = $this->config->item('upload_path_pag_thumb') . $id_pagina . "_" . $nombre_imagen . ".jpg";
+                            $thumb_chica  = $this->config->item('upload_path_pag_thumb') . $id_pagina . "_" . $nombre_imagen . ".jpg";
                         }
                         elseif ($tipo == 'foto_mas')
                         {
-                            $image_name = $this->config->item('upload_path_pag') . $id_pagina . "_" . $cantidad_fotos . ".jpg";
+                            $image_name   = $this->config->item('upload_path_pag') . $id_pagina . "_" . $cantidad_fotos . ".jpg";
                             $thumb_grande = $this->config->item('upload_path_pag_thumb') . $id_pagina . "_" . $cantidad_fotos . "_p" . ".jpg";
-                            $thumb_chica = $this->config->item('upload_path_pag_thumb') . $id_pagina . "_" . $cantidad_fotos . ".jpg";
+                            $thumb_chica  = $this->config->item('upload_path_pag_thumb') . $id_pagina . "_" . $cantidad_fotos . ".jpg";
                         }
 
 
-                        $image = ImageCreateFromJPEG($file);
+                        $image      = ImageCreateFromJPEG($file);
                         //ancho
-                        $width = imagesx($image);
+                        $width      = imagesx($image);
                         //alto imagen
-                        $height = imagesy($image);
+                        $height     = imagesy($image);
                         //nuevo ancho imagen
-                        $new_width = 550;
+                        $new_width  = 550;
                         //calcular alto 
                         $new_height = ($new_width * $height) / $width;
                         //crear imagen nueva
-                        $thumb = imagecreatetruecolor($new_width, $new_height);
+                        $thumb      = imagecreatetruecolor($new_width, $new_height);
                         //redimensiono
                         imagecopyresized($thumb, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                         //Guardo imagen final 
@@ -208,11 +242,11 @@ class Paginas extends CI_Controller
 
                         //Thumb
                         //nuevo ancho imagen
-                        $new_width = 100;
+                        $new_width  = 100;
                         //calcular alto 
                         $new_height = ($new_width * $height) / $width;
                         //crear imagen nueva
-                        $thumb = imagecreatetruecolor($new_width, $new_height);
+                        $thumb      = imagecreatetruecolor($new_width, $new_height);
                         //redimensiono
                         imagecopyresized($thumb, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                         //Guardo imagen final 
@@ -224,9 +258,9 @@ class Paginas extends CI_Controller
                             //nuevo ancho imagen
                             $new_height = 270;
                             //calcular alto 
-                            $new_width = ($new_height * $width) / $height;
+                            $new_width  = ($new_height * $width) / $height;
                             //crear imagen nueva
-                            $thumb = imagecreatetruecolor($new_width, $new_height);
+                            $thumb      = imagecreatetruecolor($new_width, $new_height);
                             //redimensiono
                             imagecopyresized($thumb, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                             //Guardo imagen final 
@@ -244,15 +278,15 @@ class Paginas extends CI_Controller
                 }
             }
         }
-        redirect(base_url().'admin/paginas/paginas_imagenes_list/' . $id_pagina , 'refresh');
+        redirect(base_url() . 'admin/paginas/paginas_imagenes_list/' . $id_pagina, 'refresh');
     }
-    
-     function paginas_imagenes_delete()
+
+    function paginas_imagenes_delete()
     {
-        $id_pagina = $this->input->get('ID_Pagina');
+        $id_pagina    = $this->input->get('ID_Pagina');
         $ImagenPagina = $this->input->get('ImagenPagina');
-        $this->paginas_model->delete_paginas_imagenespag($id_pagina,$ImagenPagina);
-        redirect(base_url().'admin/paginas/paginas_imagenes_list/' . $id_pagina , 'refresh');
+        $this->paginas_model->delete_paginas_imagenespag($id_pagina, $ImagenPagina);
+        redirect(base_url() . 'admin/paginas/paginas_imagenes_list/' . $id_pagina, 'refresh');
     }
 
 }

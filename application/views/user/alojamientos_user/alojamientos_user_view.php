@@ -161,7 +161,7 @@
                             <input type="hidden" name="ID_Alojamiento" value="<?php echo $info_array->ID_Alojamiento ?>">
                         </form>
                     </div>
-                    <div id="map" align="center" style="width: 800px; height: 450px; "></div>    
+                    <div id="map" align="center" style="width: 600px; height: 450px; "></div>    
                 </div>
                 <!-- Fin ubicacion -->
             </div>

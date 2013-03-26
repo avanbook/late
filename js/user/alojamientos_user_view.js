@@ -18,6 +18,7 @@ $(function () {
     $('#myTab a[href="#ubicacion"]').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
+           load();
         //initialize();
 
         $('#ubicacion').css({
@@ -181,13 +182,14 @@ function showAddress(address, zoom) {
 //---------------------------------//
 
 //]]>
+   
+   if ($('#ubicacion').is (':visible')) {
+       
+      load();
+       
+   };
     
-    
-window.onload=function()
-{
-    self.focus();
-    load();
-}
+
 
 
 function posicion()

@@ -35,12 +35,37 @@ class Paginas_model extends CI_Model
                 TituloContenido,
                 Url,
                 Keywords,
-                TipoPagina
+                TipoPagina,
+                paginas.ID_TipoPagina
                 from
                 paginas
                 inner join
-                tipopagina ON tipopagina.ID_TipoPagina = paginas.ID_TipoPagina";
+                tipopagina 
+                ON 
+                tipopagina.ID_TipoPagina = paginas.ID_TipoPagina
+                where OrdenPagina='top'";
 
+        $rows = $this->db->query($query);
+        $rows = $rows->result_array();
+        return $rows;
+    }
+    
+    function paginas_list_internas($ID_Pagina)
+    {
+        $query =sprintf("select 
+                ID_Pagina,
+                TituloContenido,
+                Url,
+                Keywords,
+                TipoPagina,
+                paginas.ID_TipoPagina
+                from
+                paginas
+                inner join
+                tipopagina 
+                ON 
+                tipopagina.ID_TipoPagina = paginas.ID_TipoPagina
+                where ID_PaginaPrincipal=%s",$ID_Pagina);
         $rows = $this->db->query($query);
         $rows = $rows->result_array();
         return $rows;

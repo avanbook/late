@@ -40,13 +40,25 @@
                 </div>
                 <br>
                 <label class="control-label" >Tipo página:</label>
-                <div class="controls">
-                    <select name="ID_TipoPagina">
-                        <?php foreach ($tipo_paginas_array as $var): ?>
-                            <option <?php echo $this->gf->comparar_general($var['ID_TipoPagina'],$ID_TipoPagina,"selected='selected'") ?> value="<?php echo $var['ID_TipoPagina'] ?>"><?php echo $var['TipoPagina'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+                <?php if ($OrdenPagina == 'interna'): ?>
+                    <div class="controls">
+                        <select disabled="disabled" name="ID_TipoPagina">
+                            <?php foreach ($tipo_paginas_array as $var): ?>
+                                <option <?php echo $this->gf->comparar_general($var['ID_TipoPagina'], $ID_TipoPagina, "selected='selected'") ?> value="<?php echo $var['ID_TipoPagina'] ?>"><?php echo $var['TipoPagina'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <input type="hidden" value="<?php echo $ID_TipoPagina ?>" name="ID_TipoPagina">
+                    </div>
+                <?php else: ?>
+                    <div class="controls">
+                        <select name="ID_TipoPagina">
+                            <?php foreach ($tipo_paginas_array as $var): ?>
+                                <option <?php echo $this->gf->comparar_general($var['ID_TipoPagina'], $ID_TipoPagina, "selected='selected'") ?> value="<?php echo $var['ID_TipoPagina'] ?>"><?php echo $var['TipoPagina'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                <?php endif; ?>
+
                 <br>
                 <div class="offset8"><button class="btn btn-large btn-primary" type="submit" >Guardar</button>&nbsp;&nbsp;<a class="btn btn-large btn-info" href="<?php echo base_url() . "admin/paginas/lists" ?>">Volver</a></div>
             </div>
@@ -54,5 +66,7 @@
         <input type="hidden" id="base_url" value="<?php echo base_url() ?>">
         <input type="hidden" name="accion" value="<?php echo $accion ?>">
         <input type="hidden" name="ID_Pagina" value="<?php echo $ID_Pagina ?>">
+        <input type="hidden" name="ID_PaginaPrincipal" value="<?php echo $ID_PaginaPrincipal ?>">
+        <input type="hidden" name="OrdenPagina" value="<?php echo $OrdenPagina ?>">
     </form>
 </div>
