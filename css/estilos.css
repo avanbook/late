@@ -14,7 +14,7 @@ background-color: #eeeeee;
 width: 100%;
 background-color: #eee;
 position: relative; 
-padding: 0 0 20px 0;
+padding: 20px 0 20px 0;
 
 }
 .clear{clear: both;}	
@@ -198,11 +198,11 @@ min-width: 990px; max-width: 1200px;}
 width: 55%; min-width: 550px; padding: 0 10px 40px 10px; margin-top:-40px;
 }
 #cont_ads {width: 40%; padding:0;}
-#cont_full { width: 80%;background-color: #FFF;min-width: 990px; max-width: 1200px; padding: 0 10px;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
--o-box-sizing:border-box;-ms-box-sizing:border-box;	behavior: url(PIE.htc); }
+#cont_full { width: 80%;background-color: #FFF;min-width: 990px; max-width: 1200px; box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;	border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;	behavior: url(PIE.htc); }
 #cont_full h1 {color:#96A929;  font-family: Tahoma; font-size: 35px; text-shadow: 1px 2px 3px #222;  }
 #h12 {color:#96A929; font-family: 'Rancho',serif; font-size: 38px; }
-
+.cont_margin {padding: 5px 10px 30px 10px;}
 /* ----------tabs ----------------  */
 #tabs {border:0px solid #222; background-color:rgba(255,255,255,0.1); }
 #tabs>div {border:1px solid #d8dcdf;padding: 8px; margin: 0; }
@@ -579,9 +579,15 @@ padding: 20px 0 20px 0;
 }
 #cont_int { width: 80%;background-color: #fff;min-width: 990px; padding: 0; border:1px solid #eee; margin:0 0 0 0;  max-width: 1200px;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
 -o-box-sizing:border-box;-ms-box-sizing:border-box; border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;	behavior: url(PIE.htc); }
-#toplinks {height: 40px; width: 100%; padding: 12px 5px 10px 5px; background-color: #666; color:#fff; border-radius: 8px 8px 0 0 ;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+#toplinks {height: 43px; width: 100%; padding: 14px 5px 10px 35px; background-color: #666;font-size: 12px; color:#fff; border-radius: 8px 8px 0 0 ;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
 -o-box-sizing:border-box;-ms-box-sizing:border-box;	behavior: url(PIE.htc);}
-#toplinks {font-family: tahoma; font-size: 11px; color:#FFF;}
+#toplinks a {font-family: tahoma; font-size: 12px; color:#FFF; text-decoration: none;}
+#toplinks a:hover {text-decoration:underline;}
+
+#contenido {display: inline-block;vertical-align: top; width: 68%;  margin-right:10px; ;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;}
+#adsC {display: inline-block;vertical-align: top; width: 30%; ;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;}
 #fichasD {width: 100%;}
 #fichasD div {display: inline-block; vertical-align: top;}
 #fichasD h1 {color:#666; padding: 0 0 0 30px; margin: 10px 0; font-family: arial; font-size: 35px;font-weight: normal; }
@@ -595,7 +601,7 @@ padding: 20px 0 20px 0;
 
 #ficha-tabs .ui-tabs-nav , 
 #ficha-tabs2 .ui-tabs-nav { 
-background:#96A929;
+background:#DCEA8E;
     border-width: 0px 0px 1px 0px; 
     -moz-border-radius: 0px; 
     -webkit-border-radius: 0px; 
@@ -609,10 +615,15 @@ background:#96A929;
     background:#ddd; font-size: 14px;
     text-shadow: 2px 1px 4px #fff;
 
-} 
+}
+.tituloFicha {width: 100%; margin: 8px 0 0 2px; position: relative;}
+.tituloFicha>div { vertical-align: middle;}
+#share { position: absolute; top:0; right: 0; }
+#share>div {margin: 0 10px; display: inline-block; }
 #ficha-tabs .ui-tabs-nav .ui-state-active,
 #ficha-tabs2 .ui-tabs-nav .ui-state-active {
-background: #f9f9f9;font-size: 14px; color:#96A929;font-weight: bold
+background: #f9f9f9;font-size: 14px; color:#96A929;font-weight: bold;
+
 	}
 
 
@@ -705,6 +716,15 @@ margin: 10px 0 0 30px;
 #form div#loading { width: 100%; height: 100%;  position: absolute;  background-color: #FFF;background-color: rgba(255,255,255,.8);opacity: 0.8; filter:alpha(opacity=80); -moz-opacity:0.8;-webkit-opacity:0.8;  }
 #form div#loading img { position: absolute; width: 16px; height: 16px;top:50%; left:50%;margin: -16px 0 0 -16px;}
 #form .error {border: 1px solid #F00; color:#F00;}
+/* UBICACION */
+#map {width: 600px; height: 450px;}
+
+/* DESCRIPCION - SERVICIOS - OPINIONES */
+#descripcion { font-family: tahoma ; font-size: 14px; color: #333; width: 100%; padding: 15px 10px 8px 10px  }
+#servicios { width: 100%; padding: 15px 10px 8px 10px ; }
+#servicios ul { margin: 0; padding: 0;}
+#servicios ul li { list-style: none; font-family: tahoma ; font-size: 14px; color: #333; padding: 5px 8px 8px 10px; display: inline-block; vertical-align: top;  }
+#servicios ul li img { margin: 0 8px 0 0 ;  }
 
 
 

@@ -79,8 +79,51 @@
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
 <script type="text/javascript" src="<?php echo base_url(); ?>js/scroll-infinite/jquery.infinitescroll.js"></script>
 <script type="text/javascript">
+
+
+ //<![CDATA[
+
+  // Inicialización de variables.
+    var map      = null;
+    var coord    = String($("input#cordeMap").val());
+    var coord2 =coord.split(',');
+    function initialize() {  
+  var map;  
+  
+
+  var myOptions = {
+      zoom: 13,
+  
+    center: new google.maps.LatLng(coord2[0],coord2[1]),
+      mapTypeId: google.maps.MapTypeId.HYBRID,
+      mapTypeControl: true,
+         mapTypeControlOptions: {
+      style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+    },
+    zoomControl: true,
+    zoomControlOptions: {
+      style: google.maps.ZoomControlStyle.SMALL
+    },
+      scaleControl: true
+    
+    }
+    var map = new google.maps.Map(document.getElementById("map"),
+                                  myOptions);
+                  
+  
+  var image = 'http://sanrafaelhoteles.com/imagenes/hotel.png';
+  var myLatLng = new google.maps.LatLng(coord2[0],coord2[1]);
+  var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      icon: image
+  });
+  
+  }
+
 $(document).ready(function() {
   $( '#dir_' ).infinitescroll({
  

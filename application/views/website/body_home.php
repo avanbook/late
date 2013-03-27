@@ -98,7 +98,7 @@ BEGUIN CONTENIDOS
 
                     <div class="imag"><img src="<?php echo base_url() . "upload/paginas/thumb/" . $var['ID_Pagina'] . "_1_p.jpg" ?>" alt=""> </div>
                     <h3><a href="<?php echo base_url() .$var['Url'] ; ?>" title="<?php echo ucwords($var['TituloContenido']); ?> - San Rafael - Ver Info completa"><?php echo ucwords($var['TituloContenido']); ?></a></h3>
-                    <p><?php echo substr(strip_tags($var['Contenido']),0, 200) ?>... <a href="<?php echo base_url() .$var['Url'] ; ?>" title="<?php echo ucwords($var['TituloContenido']); ?> - San Rafael - Ver Info completa">Seguir Leyendo</a>
+                    <p><?php echo substr(strip_tags($var['Contenido']),0, 200) ?>... <a href="<?php echo base_url().$var['TipoPagina']."/" .$var['Url'] ; ?>" title="<?php echo ucwords($var['TituloContenido']); ?> - San Rafael - Ver Info completa">Seguir Leyendo</a>
                 </div>
                   <?php endforeach ?>
             </div>

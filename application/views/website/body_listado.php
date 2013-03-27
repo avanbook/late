@@ -6,6 +6,8 @@ BEGUIN CONTENIDOS
 
  <div id="cont_full">
    <!-- BEGUIN CONT FULL-->
+       <div id="toplinks" align="left"><b>Estas en: </b><a href="http://sanrafaellate.com" title="Ir a home">Home</a> >> <a href="<?php echo base_url().'/alojamientos/alojameintos.html';?>" title="Alojamientos en San Rafael"></a> <?php echo $titulo_p; ?> en San rafael</div>
+<div class="cont_margin" >
 <div id="buscar_FULL" align="left">
   <div id="buscador_aloja"><h2>Buscador de Alojamientos</h2>
 <p>Busca tu alojamiento ideal online!.. consulta disponibilidad , tarifas, servicios, etc en tiempo real de manera facil sencilla y <b>paga en 12 cuotas sin interes!!</b></p>
@@ -132,7 +134,8 @@ BEGUIN CONTENIDOS
 <?php } ?>
 <div class="" id="nextrr">paginar</div>
 </div>
-
+<!-- FIN CONT MARGIN-->
+</div>
 <!-- FIN CONT FULL-->
  </div>
 <!-- END CONTENEDOR-->

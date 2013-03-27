@@ -57,7 +57,7 @@ class Listado_alojar extends CI_Controller {
 	//tipo Deptos
 		if ($tipo=="departamentos-san-rafael.html") 
 		{
-			$tipos=4;
+			$tipos=5;
 			$titulo_p="Departamentos";
 			$tipos2="0";
 			$name_tipo="Departamentos Turisticos";

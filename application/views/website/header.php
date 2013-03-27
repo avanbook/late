@@ -16,7 +16,15 @@
      <!-- Keywords-->
       <?php if (isset($keywords)) {?> <meta name="Keywords" content="<?php echo $keywords ;?>"><?php } else {?>
     <meta name="Keywords" content="san, Rafael, Turismo, Mendoza, Etc"><?php } ?>
-    <meta name="author" content="sanrafaellate.com.ar">
+    <meta name="author" content="sanrafaellate.com">
+    <meta name="copyright" content="© 2013 Franco Gasparini Sanrafaellate.com" />
+    <meta name="contact" content="contacto@sanrafaellate.com" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="content-language" content="es" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <META name="robots" content="INDEX,FOLLOW">
 
 
 <!-- JQUERY CSS 
@@ -233,7 +241,7 @@
 <div class="border_rigth"><ul>
  <li><h2><img src="<?php echo base_url() ?>iconos/vinos.jpg" class="ico " alt="Caminos del Vino">Caminos Del Vino</h2></li>
   <li><a href="http://sanrafaellate.com.ar/vinos/bodegas-san-rafael.html" title="conozca Bodegas en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="bodegas San Rafel">Bodegas</a></li>
-  <li><a href="http://sanrafaellate.com.ar/vinos/vinos.html" title="Toda la informacion sobre Vinos"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="Informacion de Vinos San Rafael ">Informacion de Vinos</a></li>
+  <li><a href="http://sanrafaellate.com.ar/vinos/vinos-san-rafael.html" title="Toda la informacion sobre Vinos"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="Informacion de Vinos San Rafael ">Informacion de Vinos</a></li>
   <li><h2><img src="<?php echo base_url() ?>iconos/olivos.jpg" class="ico " alt="Caminos del Vino">Caminos Del Olivo</h2></li>
   <li><a href="http://sanrafaellate.com.ar/olivos/fabricas.html" title="fabricas de olivos en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="fabricas de Productos Olivos">Fabricas</a></li>
   <li><a href="http://sanrafaellate.com.ar/olivos/olivos.html" title="Olivos en San Rafael"><img src="<?php echo base_url() ?>vineta2.jpg" class="ico" alt="Informacion sobre olivos">Informacion sobre Olivos</a></li>

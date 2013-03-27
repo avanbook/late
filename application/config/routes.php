@@ -41,7 +41,18 @@
 $route['default_controller'] = "principal";
 $route['404_override'] = '';
 $route['franco/nose/vinos.php'] = 'franco/prueba';
+$route['user/loguin']='user/alojamientos_user/form_view_user';
+//AGENDA
+$route['agenda/([^/]+)-([^/]+)'] ='website/agenda/detalle/$2';
 
+//ALOJAMIENTOS
+$route['alojamiento/([^/]+)/([^/]+)/([^/]+)'] ='website/detalle/alojar/$1/$2/$3';
+$route['alojamiento/([^/]+)'] ='website/listado_alojar/alojar/$1/0';
+$route['alojamiento/alojamientos.html'] ='website/general/prueba2/';
+$route['alojamiento/([^/]+)/([^/]+)'] ='website/listado_alojar/alojar/$1/$2';
 
+//PAGINAS
+$route['([^/]+)/([^/]+).html'] ='website/general/paginas/$1/$2';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
+

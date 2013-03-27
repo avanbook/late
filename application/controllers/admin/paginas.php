@@ -93,7 +93,7 @@ class Paginas extends CI_Controller
             $Subtitulo                  = $row->Subtitulo;
             $Url                        = $row->Url;
             $ID_TipoPagina              = $row->ID_TipoPagina;
-            $ID_PaginaPrincipal         = $row->ID_PaginaPrinciapl;
+            $ID_PaginaPrincipal         = $row->ID_PaginaPrincipal;
             $OrdenPagina                = $row->OrdenPagina;
         }
         $data['tipo_paginas_array'] = $this->paginas_model->tipo_pagina_list();

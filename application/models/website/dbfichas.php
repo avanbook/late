@@ -21,6 +21,16 @@ function fotosal ($ID) {
 	$rows =$rows->result_array();
 return $rows;
 }
+
+function servicios ($ID) {
+	$query=sprintf( "Select *  FROM alojamientos_servicios a, servicios s  WHERE ID_Alojamiento= '%s' AND a.ID_Servicio=s.ID_Servicio ",$ID);	
+	$rows=$this->db->query($query);
+	$rows =$rows->result_array();
+return $rows;
+}
+
+
+
 }
 
 
