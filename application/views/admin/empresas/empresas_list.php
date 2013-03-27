@@ -19,6 +19,7 @@
                         <a data-toggle="modal" href= "#myModal" onclick="empresas_delete('<?php echo $var['ID_Empresa'] ?>')"><i class="icon-remove"></i></a>&nbsp;&nbsp;
                         <a data-toggle="modal" href= "<?php echo base_url()."admin/empresas/empresas_publicidad_list/".$var['ID_Empresa'] ?>"><i class="icon-globe"></i></a>&nbsp;&nbsp;
                         <a data-toggle="modal" href= "<?php echo base_url()."admin/empresas/empresas_imagenes_list/".$var['ID_Empresa'] ?>"><i class="icon-picture"></i></a>&nbsp;&nbsp;
+                        <a  href="<?php echo base_url() . "admin/paginas/form_interna/?ID_Empresa=" . $var['ID_Empresa'] . "&ID_TipoEmpresa=" . $var['ID_TipoEmpresa']."&ID_SubtipoEmpresa=".$var['ID_SubtipoEmpresa'] ?>" <i class=" icon-arrow-down"></i></a>&nbsp;&nbsp;
                     </td>
                 </tr>
                 <?php endforeach; ?>

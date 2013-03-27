@@ -23,7 +23,7 @@ class Empresas_model extends CI_Model
     function empresas_list()
     {
         $query="
-                select empresas.ID_Empresa,Empresa,Direccion,Telefono,TipoEmpresa from empresas
+                select empresas.ID_Empresa,Empresa,Direccion,Telefono,TipoEmpresa,ID_TipoEmpresa,ID_SubtipoEmpresa from empresas
                 inner join
                 tipoempresa
                 on 
@@ -90,6 +90,14 @@ class Empresas_model extends CI_Model
     function tipo_empresas_list()
     {
         $query="select * from tipoempresa";
+        $rows= $this->db->query($query);
+        $rows = $rows->result_array();
+        return $rows;
+    }
+    
+    function subtipo_empresas_list()
+    {
+        $query="select * from subtipoempresa";
         $rows= $this->db->query($query);
         $rows = $rows->result_array();
         return $rows;

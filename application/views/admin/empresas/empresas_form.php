@@ -58,6 +58,15 @@
                     </select>
                 </div>
                 <br>
+                <label  class="control-label" >Subtipo Empresa:</label>
+                <div class="controls">
+                    <select class="span10" name="ID_SubtipoEmpresa">
+                        <?php foreach($suptipo_empresa_array as $var): ?>
+                        <option <?php echo $this->gf->comparar_general($var['ID_SubtipoEmpresa'],$ID_SubtipoEmpresa,"selected='selected'") ?> value="<?php echo $var['ID_SubtipoEmpresa'] ?>"><?php echo $var['SubtipoEmpresa'] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+                <br>
                 <?php if($accion=='crear'): ?>
                 <div class="control-group">
                     <label class="control-label" >Agregar Fotos:</label>

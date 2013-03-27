@@ -69,6 +69,7 @@ class Empresas extends CI_Controller
         $data['Descripcion'] = & $Descripcion;
         $data['DescripcionDeta'] = & $DescripcionDeta;
         $data['ID_TipoEmpresa'] = & $ID_TipoEmpresa;
+        $data['ID_SubtipoEmpresa'] = & $ID_SubtipoEmpresa;
 
         $query_rows = $this->empresas_model->empresas_find($id_empresa);
         $row = $query_rows->row();
@@ -95,8 +96,10 @@ class Empresas extends CI_Controller
             $Descripcion = $row->Descripcion;
             $DescripcionDeta = $row->DescripcionDeta;
             $ID_TipoEmpresa = $row->ID_TipoEmpresa;
+            $ID_SubtipoEmpresa= $row->ID_SubtipoEmpresa;
         }
         $data['tipo_empresas_array'] = $this->empresas_model->tipo_empresas_list();
+        $data['suptipo_empresa_array']= $this->empresas_model->subtipo_empresas_list();
         $data['js'] = array('js/ckeditor/ckeditor');
         $data['view'] = "admin/empresas/empresas_form";
         $this->load->view('admin/templates/temp_menu', $data);
@@ -116,7 +119,8 @@ class Empresas extends CI_Controller
             'Web' => $post_array['Web'],
             'Descripcion' => $post_array['Descripcion'],
             'DescripcionDeta' => $post_array['DescripcionDeta'],
-            'ID_TipoEmpresa' => $post_array['ID_TipoEmpresa']
+            'ID_TipoEmpresa' => $post_array['ID_TipoEmpresa'],
+            'ID_SubtipoEmpresa' => $post_array['ID_SubtipoEmpresa']
         );
 
         if ($post_array['accion'] == 'crear')

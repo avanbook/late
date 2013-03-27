@@ -68,6 +68,7 @@ class Paginas extends CI_Controller
         $data['ID_TipoPagina']      = & $ID_TipoPagina;
         $data['ID_PaginaPrincipal'] = & $ID_PaginaPrincipal;
         $data['OrdenPagina']        = & $OrdenPagina;
+        $data['DestaPagina']        = & $DestaPagina;
 
         $query_rows = $this->paginas_model->paginas_find($id_pagina);
         $row        = $query_rows->row();
@@ -95,6 +96,7 @@ class Paginas extends CI_Controller
             $ID_TipoPagina              = $row->ID_TipoPagina;
             $ID_PaginaPrincipal         = $row->ID_PaginaPrincipal;
             $OrdenPagina                = $row->OrdenPagina;
+            $DestaPagina                = $row->DestaPagina;
         }
         $data['tipo_paginas_array'] = $this->paginas_model->tipo_pagina_list();
         $data['js']                 = array('js/ckeditor/ckeditor');
@@ -121,6 +123,7 @@ class Paginas extends CI_Controller
         $data['ID_TipoPagina']      = $ID_TipoPagina;
         $data['ID_PaginaPrincipal'] = $ID_Pagina;
         $data['OrdenPagina']        = "interna";
+        $data['DestaPagina']        = "";
         $data['title']              = 'Crear Página Interna';
         $data['accion']             = 'crear';
         $data['tipo_paginas_array'] = $this->paginas_model->tipo_pagina_list();
@@ -130,28 +133,42 @@ class Paginas extends CI_Controller
     }
 
     function save()
-    {
-        $post_array    = $this->input->post();
+    {   
+        $ID_Pagina=$this->input->post('ID_Pagina');
+        $MetaTitulo=$this->input->post('MetaTitulo');
+        $MetaDescripcion=$this->input->post('MetaDescripcion');
+        $Keywords=$this->input->post('Keywords');
+        $TituloContenido=$this->input->post('TituloContenido');
+        $Contenido=$this->input->post('Contenido');
+        $Subtitulo=$this->input->post('Subtitulo');
+        $Url=$this->input->post('Url');
+        $ID_TipoPagina=$this->input->post('ID_TipoPagina');
+        $ID_PaginaPrincipal=$this->input->post('ID_PaginaPrincipal');
+        $OrdenPagina=$this->input->post('OrdenPagina');
+        $DestaPagina=$this->input->post('DestaPagina');
+        
+        $accion=$this->input->post("accion");
         $paginas_array = array(
-            'MetaTitulo'      => $post_array['MetaTitulo'],
-            'MetaDescripcion' => $post_array['MetaDescripcion'],
-            'Keywords'        => $post_array['Keywords'],
-            'TituloContenido' => $post_array['TituloContenido'],
-            'Contenido'       => $post_array['Contenido'],
-            'Subtitulo'       => $post_array['Subtitulo'],
-            'Url'             => $post_array['Url'],
-            'ID_TipoPagina'   => $post_array['ID_TipoPagina'],
-            'ID_PaginaPrincipal' => $post_array['ID_PaginaPrincipal'],
-            'OrdenPagina' => $post_array['OrdenPagina']
+            'MetaTitulo'      => $MetaTitulo,
+            'MetaDescripcion' => $MetaDescripcion,
+            'Keywords'        => $Keywords,
+            'TituloContenido' => $TituloContenido,
+            'Contenido'       => $Contenido,
+            'Subtitulo'       => $Subtitulo,
+            'Url'             => $Url,
+            'ID_TipoPagina'   => $ID_TipoPagina,
+            'ID_PaginaPrincipal' => $ID_PaginaPrincipal,
+            'OrdenPagina' => $OrdenPagina,
+            'DestaPagina' => $DestaPagina
         );
 
-        if ($post_array['accion'] == 'crear')
+        if ($accion == 'crear')
         {
             $this->paginas_model->insert('paginas', $paginas_array);
         }
-        elseif ($post_array['accion'] == 'editar')
+        elseif ($accion == 'editar')
         {
-            $this->paginas_model->update($post_array['ID_Pagina'], $paginas_array, 'ID_Pagina', 'paginas');
+            $this->paginas_model->update($ID_Pagina, $paginas_array, 'ID_Pagina', 'paginas');
         }
 
         redirect(base_url() . 'admin/paginas/lists/', 'refresh');

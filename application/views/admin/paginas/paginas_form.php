@@ -58,7 +58,11 @@
                         </select>
                     </div>
                 <?php endif; ?>
-
+                <br>
+                <label class="control-label">DestaPagina:</label>
+                <div class="controls">
+                    <input type="checkbox" <?php echo $this->gf->comparar_general($DestaPagina,'1','checked="checked"') ?>  class="span10"  name="DestaPagina" value="1">
+                </div>
                 <br>
                 <div class="offset8"><button class="btn btn-large btn-primary" type="submit" >Guardar</button>&nbsp;&nbsp;<a class="btn btn-large btn-info" href="<?php echo base_url() . "admin/paginas/lists" ?>">Volver</a></div>
             </div>
