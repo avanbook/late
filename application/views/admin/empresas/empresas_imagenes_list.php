@@ -41,7 +41,9 @@
                         </form>
                     </td>
                     <td>
-                        <a href= "<?php echo base_url() . "admin/empresas/empresas_imagenes_delete/?ID_Empresa=" . $var['ID_Empresa'] . "&ImagenEmpresa=" . $var['ImagenEmpresa'] ?>"   data-toggle="modal"><i class="icon-remove"></i></a>
+                        <?php if ($var['ImagenEmpresa'] != 1): ?>
+                            <a href= "<?php echo base_url() . "admin/empresas/empresas_imagenes_delete/?ID_Empresa=" . $var['ID_Empresa'] . "&ImagenEmpresa=" . $var['ImagenEmpresa'] ?>"   data-toggle="modal"><i class="icon-remove"></i></a>
+                        <?php endif ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

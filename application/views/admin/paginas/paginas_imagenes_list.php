@@ -41,7 +41,9 @@
                         </form>
                     </td>
                     <td>
+                        <?php if($var['ImagenPagina']!=1): ?>
                         <a href= "<?php echo base_url() . "admin/paginas/paginas_imagenes_delete/?ID_Pagina=" . $var['ID_Pagina'] . "&ImagenPagina=" . $var['ImagenPagina'] ?>"   data-toggle="modal"><i class="icon-remove"></i></a>
+                        <?php endif ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

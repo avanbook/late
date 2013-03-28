@@ -173,5 +173,15 @@ class Ajax extends CI_Controller
         $this->db->query($query);
         echo $query;
     }
+    
+    function subtipoempresas_list()
+    {
+        $ID_TipoEmpresa = $this->input->post('ID_TipoEmpresa');
+        $query=sprintf("select ID_SubtipoEmpresa,SubtipoEmpresa from subtipoempresa where ID_TipoEmpresa=%s",$ID_TipoEmpresa);
+        $rows=$this->db->query($query);
+        $rows=$rows->result_array();
+        
+        echo json_encode($rows);
+    }
 }
 ?>

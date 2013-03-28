@@ -19,45 +19,45 @@ class Empresas_model extends CI_Model
         $this->db->where($id_nombre, $id);
         $this->db->update($nombre_tabla, $row);
     }
-    
+
     function empresas_list()
     {
-        $query="
-                select empresas.ID_Empresa,Empresa,Direccion,Telefono,TipoEmpresa,ID_TipoEmpresa,ID_SubtipoEmpresa from empresas
+        $query = "
+                select empresas.ID_Empresa,Empresa,Direccion,Telefono,TipoEmpresa,empresas.ID_TipoEmpresa,ID_SubtipoEmpresa from empresas
                 inner join
                 tipoempresa
                 on 
                 empresas.ID_TipoEmpresa = tipoempresa.ID_TipoEmpresa
                 ";
-        $rows = $this->db->query($query);
-        $rows = $rows->result_array();
+        $rows  = $this->db->query($query);
+        $rows  = $rows->result_array();
         return $rows;
     }
-    
+
     function empresas_find($id_empresa)
     {
-        $query=  sprintf("select * from empresas where ID_Empresa=%s",$id_empresa);
-        $row = $this->db->query($query);
+        $query = sprintf("select * from empresas where ID_Empresa=%s", $id_empresa);
+        $row   = $this->db->query($query);
         return $row;
     }
-    
+
     function find_precio_tipo_publicidad($id_tipopublicidad)
     {
-        $query=  sprintf("select Precio from tipopublicidad where ID_TipoPublicidad=%s",$id_tipopublicidad);
-        $row = $this->db->query($query);
-        $row = $row->row();
+        $query = sprintf("select Precio from tipopublicidad where ID_TipoPublicidad=%s", $id_tipopublicidad);
+        $row   = $this->db->query($query);
+        $row   = $row->row();
         return $row->Precio;
     }
-    
+
     function publicidad_select()
     {
         $query = "select * from tipopublicidad";
-        
+
         $rows = $this->db->query($query);
         $rows = $rows->result_array();
         return $rows;
     }
-    
+
     function info_publicidad($id_alojamiento)
     {
         $query = sprintf("
@@ -81,58 +81,71 @@ class Empresas_model extends CI_Model
                             on
                             p.ID_TipoPublicidad = tp.ID_TipoPublicidad            
                             where ID_Empresa=%s order by activo desc", $id_alojamiento);
-        
+
         $rows = $this->db->query($query);
         $rows = $rows->result_array();
         return $rows;
     }
-    
+
     function tipo_empresas_list()
     {
-        $query="select * from tipoempresa";
-        $rows= $this->db->query($query);
-        $rows = $rows->result_array();
+        $query = "select * from tipoempresa";
+        $rows  = $this->db->query($query);
+        $rows  = $rows->result_array();
         return $rows;
     }
-    
+
     function subtipo_empresas_list()
     {
-        $query="select * from subtipoempresa";
-        $rows= $this->db->query($query);
-        $rows = $rows->result_array();
+        $query = "select * from subtipoempresa";
+        $rows  = $this->db->query($query);
+        $rows  = $rows->result_array();
         return $rows;
     }
-    
+
+    function subtipo_empresas_list_by_tipo($ID_TipoEmpresa)
+    {
+        $query = sprintf("select * from subtipoempresa where ID_TipoEmpresa=%s", $ID_TipoEmpresa);
+        $rows  = $this->db->query($query);
+        $rows  = $rows->result_array();
+        return $rows;
+    }
+
     function find_precio_publicidad($id_publicidad)
     {
-        $query=  sprintf("select Precio, ID_TipoPublicidad from publicidad where ID_Publicidad=%s ",$id_publicidad);
-        $row = $this->db->query($query);
-        $row = $row->row();
+        $query = sprintf("select Precio, ID_TipoPublicidad from publicidad where ID_Publicidad=%s ", $id_publicidad);
+        $row   = $this->db->query($query);
+        $row   = $row->row();
         return $row;
     }
-    
-    function update_estado_publicidad_simple($id_publicidad,$estado)
+
+    function update_estado_publicidad_simple($id_publicidad, $estado)
     {
-        $query=  sprintf("update publicidad set Activo=%s where ID_Publicidad=%s",$estado,$id_publicidad);
+        $query = sprintf("update publicidad set Activo=%s where ID_Publicidad=%s", $estado, $id_publicidad);
         $this->db->query($query);
     }
-    
+
     function update_estado_publicidad($id_publicidad)
     {
-        $query=sprintf("select Activo from publicidad where ID_Publicidad=%s",$id_publicidad);
-        $row = $this->db->query($query);
-        $row = $row->row();
+        $query  = sprintf("select Activo from publicidad where ID_Publicidad=%s", $id_publicidad);
+        $row    = $this->db->query($query);
+        $row    = $row->row();
         $activo = $row->Activo;
-        $valor=1;
-        if($activo==1)
-            $valor=0;
+        $valor  = 1;
+        if ($activo == 1)
+            $valor  = 0;
         else
-            $valor=1;
-        
-        $query=sprintf("update publicidad set activo=%s where ID_Publicidad=%s",$valor,$id_publicidad);
+            $valor  = 1;
+
+        $query = sprintf("update publicidad set activo=%s where ID_Publicidad=%s", $valor, $id_publicidad);
         $this->db->query($query);
     }
-    
+
+    function update_tipoempresa_subtipoempresa($id_tipoempresa, $id_subtipoempresa)
+    {
+        
+    }
+
     function empresas_imagenes_list($id_empresa)
     {
         $query = sprintf("  select *
@@ -140,12 +153,12 @@ class Empresas_model extends CI_Model
                             empresas_imagenesemp ei 
                             where 
                             ei.ID_Empresa=%s order by ImagenEmpresa", $id_empresa);
-        
+
         $rows = $this->db->query($query);
         $rows = $rows->result_array();
         return $rows;
     }
-    
+
     function empresas_images_delete($id_empresa)
     {
         $query = sprintf("delete from empresas_imagenesemp where ID_Empresa=%s", $id_empresa);
@@ -157,25 +170,27 @@ class Empresas_model extends CI_Model
         $query = sprintf("delete from empresas_imagenesemp where ID_Empresa=%s and ImagenEmpresa=%s", $id_empresa, $nombre_foto);
         $this->db->query($query);
     }
-    
+
     function empresas_images_count($id_empresa)
     {
         $query = sprintf("select MAX(ImagenEmpresa) as count from empresas_imagenesemp where ID_Empresa=%s", $id_empresa);
-        $rows = $this->db->query($query);
-        $rows = $rows->row();
+        $rows  = $this->db->query($query);
+        $rows  = $rows->row();
         return $rows->count;
     }
-    
+
     function empresas_images_save($id_empresa, $nombre_imagen)
     {
         $query = sprintf("insert into empresas_imagenesemp (ID_Empresa,ImagenEmpresa) values (%s,%s)", $id_empresa, $nombre_imagen);
         $this->db->query($query);
     }
-    
-    function delete_empresas_imagenesemp($id_empresa,$imagenempresa)
+
+    function delete_empresas_imagenesemp($id_empresa, $imagenempresa)
     {
-        $query = sprintf("delete from empresas_imagenesemp where ID_Empresa=%s and ImagenEmpresa=%s",$id_empresa,$imagenempresa);
+        $query = sprintf("delete from empresas_imagenesemp where ID_Empresa=%s and ImagenEmpresa=%s", $id_empresa, $imagenempresa);
         $this->db->query($query);
     }
+
 }
+
 ?>

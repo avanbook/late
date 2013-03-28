@@ -41,7 +41,9 @@
                         </form>
                     </td>
                     <td>
-                        <a href= "<?php echo base_url() . "admin/agendas/agendas_imagenes_delete/?ID_Agenda=" . $var['ID_Agenda'] . "&ImagenAgenda=" . $var['ImagenAgenda'] ?>"   data-toggle="modal"><i class="icon-remove"></i></a>
+                        <?php if($var['ImagenAgenda']!=1): ?>
+                            <a href= "<?php echo base_url() . "admin/agendas/agendas_imagenes_delete/?ID_Agenda=" . $var['ID_Agenda'] . "&ImagenAgenda=" . $var['ImagenAgenda'] ?>"   data-toggle="modal"><i class="icon-remove"></i></a>
+                        <?php endif ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

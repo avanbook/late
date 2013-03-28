@@ -73,6 +73,7 @@
                   <li><a href="<?php echo base_url() ?>admin/servicios/">Servicios</a></li>
                   <li><a href="<?php echo base_url() ?>admin/tipopagina/">Tipo Página</a></li>
                   <li><a href="<?php echo base_url() ?>admin/tipoempresa/">Tipo Empresa</a></li>
+                  <li><a href="<?php echo base_url() ?>admin/subtipoempresa/">Subtipo Empresa</a></li>
                   <li><a href="<?php echo base_url() ?>admin/tipopublicidad/">Tipo Publicidad</a></li>
                 </ul>
               </li>

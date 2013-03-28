@@ -51,7 +51,7 @@
                 <br>
                 <label  class="control-label" >Tipo Empresa:</label>
                 <div class="controls">
-                    <select class="span10" name="ID_TipoEmpresa">
+                    <select class="span10" name="ID_TipoEmpresa" id="ID_TipoEmpresa" onchange="llenar()">
                         <?php foreach($tipo_empresas_array as $var): ?>
                         <option <?php echo $this->gf->comparar_general($var['ID_TipoEmpresa'],$ID_TipoEmpresa,"selected='selected'") ?> value="<?php echo $var['ID_TipoEmpresa'] ?>"><?php echo $var['TipoEmpresa'] ?></option>
                         <?php endforeach ?>
@@ -60,22 +60,15 @@
                 <br>
                 <label  class="control-label" >Subtipo Empresa:</label>
                 <div class="controls">
-                    <select class="span10" name="ID_SubtipoEmpresa">
+                    <select class="span10" name="ID_SubtipoEmpresa" id="ID_SubtipoEmpresa">
+                        <option value="0">Seleccione...</option>
                         <?php foreach($suptipo_empresa_array as $var): ?>
                         <option <?php echo $this->gf->comparar_general($var['ID_SubtipoEmpresa'],$ID_SubtipoEmpresa,"selected='selected'") ?> value="<?php echo $var['ID_SubtipoEmpresa'] ?>"><?php echo $var['SubtipoEmpresa'] ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
                 <br>
-                <?php if($accion=='crear'): ?>
-                <div class="control-group">
-                    <label class="control-label" >Agregar Fotos:</label>
-                    <div class="controls">
-                        <input  type="file" name="filesToUpload[]" id="filesToUpload" multiple="" onchange="makeFileList();">
-                    </div>
-                </div>
-                <?php endif ?>
-                <div class="offset8"><button class="btn btn-large btn-primary" type="submit" >Guardar</button>&nbsp;&nbsp;<a class="btn btn-large btn-info" href="<?php echo base_url()."empresas/lists" ?>">Volver</a></div>
+                <div class="offset8"><button class="btn btn-large btn-primary" type="submit" >Guardar</button>&nbsp;&nbsp;<a class="btn btn-large btn-info" href="<?php echo base_url()."admin/empresas/lists" ?>">Volver</a></div>
             </div>
         </div>
         <input type="hidden" id="base_url" value="<?php echo base_url() ?>">
