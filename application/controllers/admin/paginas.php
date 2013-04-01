@@ -162,6 +162,11 @@ class Paginas extends CI_Controller
             'DestaPagina' => $DestaPagina
         );
 
+        if($OrdenPagina=='interna')
+        {
+            $this->paginas_model->update_pagina_principal_top($ID_PaginaPrincipal);
+        }
+        
         if ($accion == 'crear')
         {
             $this->paginas_model->insert('paginas', $paginas_array);

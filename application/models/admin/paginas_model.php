@@ -65,7 +65,7 @@ class Paginas_model extends CI_Model
                 tipopagina 
                 ON 
                 tipopagina.ID_TipoPagina = paginas.ID_TipoPagina
-                where ID_PaginaPrincipal=%s",$ID_Pagina);
+                where ID_PaginaPrincipal=%s and OrdenPagina<>'top'",$ID_Pagina);
         $rows = $this->db->query($query);
         $rows = $rows->result_array();
         return $rows;
@@ -121,6 +121,15 @@ class Paginas_model extends CI_Model
     {
         $query = sprintf("delete from paginas_imagenespag where ID_Pagina=%s and ImagenPagina=%s",$id_pagina,$imagenpagina);
         $this->db->query($query);
+    }
+    
+    //Cuando se crea un pagina interna hago un update del ID_PaginaPRincipal de la pagina top la 
+    //cual por defecto es 0
+    function update_pagina_principal_top($id_pagina_principal)
+    {
+        $query=sprintf("update paginas set ID_PaginaPrincipal=%s where ID_Pagina=%s",$id_pagina_principal,$id_pagina_principal);
+        $this->db->query($query);
+        
     }
 
 }
