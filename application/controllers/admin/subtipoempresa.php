@@ -35,6 +35,10 @@ class Subtipoempresa extends CI_Controller
         $data['ID_TipoEmpresa']    = & $ID_TipoEmpresa;
         $data['ID_SubtipoEmpresa'] = & $ID_SubtipoEmpresa;
         $data['SubtipoEmpresa']    = & $SubtipoEmpresa;
+        $data['TituloSubEmpresa']  = & $TituloSubEmpresa;
+        $data['UrlSubEmpresa']     = & $UrlSubEmpresa;
+        $data['KeySubEmpresa']     = & $KeySubEmpresa;
+        $data['DesSubEmpresa']     = & $DesSubEmpresa;
 
 
         if ($cant > 0)
@@ -47,6 +51,10 @@ class Subtipoempresa extends CI_Controller
             $ID_TipoEmpresa    = $row['ID_TipoEmpresa'];
             $ID_SubtipoEmpresa = $row['ID_SubtipoEmpresa'];
             $SubtipoEmpresa    = $row['SubtipoEmpresa'];
+            $TituloSubEmpresa  = $row['TituloSubEmpresa'];
+            $UrlSubEmpresa     = $row['UrlSubEmpresa'];
+            $KeySubEmpresa     = $row['KeySubEmpresa'];
+            $DesSubEmpresa     = $row['DesSubEmpresa'];
         }
         else
         {
@@ -63,11 +71,20 @@ class Subtipoempresa extends CI_Controller
         $ID_TipoEmpresa    = $this->input->post('ID_TipoEmpresa');
         $ID_SubtipoEmpresa = $this->input->post('ID_SubtipoEmpresa');
         $SubtipoEmpresa    = $this->input->post('SubtipoEmpresa');
-        $accion            = $this->input->post('accion');
+        $TituloSubEmpresa  = $this->input->post('TituloSubEmpresa');
+        $UrlSubEmpresa     = $this->input->post('UrlSubEmpresa');
+        $KeySubEmpresa     = $this->input->post('KeySubEmpresa');
+        $DesSubEmpresa     = $this->input->post('DesSubEmpresa');
+
+        $accion = $this->input->post('accion');
 
         $subtipoempresa_array = array(
-            'ID_TipoEmpresa' => $ID_TipoEmpresa,
-            'SubtipoEmpresa' => $SubtipoEmpresa
+            'ID_TipoEmpresa'   => $ID_TipoEmpresa,
+            'SubtipoEmpresa'   => $SubtipoEmpresa,
+            'TituloSubEmpresa' => $TituloSubEmpresa,
+            'UrlSubEmpresa'    => $UrlSubEmpresa,
+            'KeySubEmpresa'    => $KeySubEmpresa,
+            'DesSubEmpresa'    => $DesSubEmpresa
         );
 
         if ($accion == 'crear')
@@ -87,7 +104,7 @@ class Subtipoempresa extends CI_Controller
             );
 
             $this->subtipoempresa_model->update($ID_SubtipoEmpresa, $subtipoempresa_array);
-            $this->Tipoempresa_subtipoempresa_model->update($ID_SubtipoEmpresa,$sub_tipo_array);
+            $this->Tipoempresa_subtipoempresa_model->update($ID_SubtipoEmpresa, $sub_tipo_array);
         }
 
         redirect(base_url() . 'admin/subtipoempresa/lists/', 'refresh');

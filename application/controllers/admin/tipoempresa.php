@@ -30,6 +30,10 @@ class Tipoempresa extends CI_Controller
         //Tabla paginas
         $data['ID_TipoEmpresa'] = & $ID_TipoEmpresa;
         $data['TipoEmpresa'] = & $TipoEmpresa;
+        $data['TituloEmpresa'] = & $TituloEmpresa;
+        $data['UrlEmpresa'] = & $UrlEmpresa;
+        $data['DesEmpresa'] = & $DesEmpresa;
+        $data['KeyEmpresa'] = & $KeyEmpresa;
        
         $query_rows = $this->tipoempresa_model->tipoempresa_find($id_tipoempresa);
         $row = $query_rows->row();
@@ -47,7 +51,10 @@ class Tipoempresa extends CI_Controller
             //Tabla agendas
             $ID_TipoEmpresa = $row->ID_TipoEmpresa;
             $TipoEmpresa = $row->TipoEmpresa;
-           
+            $TituloEmpresa = $row->TituloEmpresa;
+            $DesEmpresa = $row->DesEmpresa;
+            $UrlEmpresa = $row->UrlEmpresa;
+            $KeyEmpresa = $row->KeyEmpresa;
            
         }
         $data['view'] = "admin/tipoempresa/tipoempresa_form";
@@ -57,19 +64,29 @@ class Tipoempresa extends CI_Controller
     
     function save()
     {
-        $post_array = $this->input->post();
+        $ID_TipoEmpresa = $this->input->post('ID_TipoEmpresa');
+        $TipoEmpresa = $this->input->post('TipoEmpresa');
+        $TituloEmpresa = $this->input->post('TituloEmpresa');
+        $UrlEmpresa = $this->input->post('UrlEmpresa');
+        $KeyEmpresa = $this->input->post('KeyEmpresa');
+        $DesEmpresa = $this->input->post('DesEmpresa');
+        $accion = $this->input->post('accion');
+        
         $tipoempresa_array = array(
-            'ID_TipoEmpresa' => $post_array['ID_TipoEmpresa'],
-            'TipoEmpresa' => $post_array['TipoEmpresa']
+            'TipoEmpresa' => $TipoEmpresa,
+            'TituloEmpresa' => $TituloEmpresa,
+            'UrlEmpresa' => $UrlEmpresa,
+            'DesEmpresa' => $DesEmpresa,
+            'KeyEmpresa' => $KeyEmpresa
         );
 
-        if ($post_array['accion'] == 'crear')
+        if ($accion == 'crear')
         {
             $this->tipoempresa_model->insert('tipoempresa', $tipoempresa_array);
         }
-        elseif ($post_array['accion'] == 'editar')
+        elseif ($accion == 'editar')
         {
-            $this->tipoempresa_model->update($post_array['ID_TipoEmpresa'],$tipoempresa_array);
+            $this->tipoempresa_model->update($ID_TipoEmpresa,$tipoempresa_array);
         }
 
         redirect(base_url() . 'admin/tipoempresa/lists/', 'refresh');

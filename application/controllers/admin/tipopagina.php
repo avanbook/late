@@ -30,6 +30,10 @@ class Tipopagina extends CI_Controller
         //Tabla paginas
         $data['ID_TipoPagina'] = & $ID_TipoPagina;
         $data['TipoPagina'] = & $TipoPagina;
+        $data['TituloPagina'] = & $TituloPagina;
+        $data['UrlPagina'] = & $UrlPagina;
+        $data['KeyPagina'] = & $KeyPagina;
+        $data['DesPagina'] = & $DesPagina;
        
         $query_rows = $this->tipopagina_model->tipopagina_find($id_tipopagina);
         $row = $query_rows->row();
@@ -47,6 +51,10 @@ class Tipopagina extends CI_Controller
             //Tabla agendas
             $ID_TipoPagina = $row->ID_TipoPagina;
             $TipoPagina = $row->TipoPagina;
+            $TituloPagina = $row->TituloPagina;
+            $KeyPagina = $row->KeyPagina;
+            $UrlPagina = $row->UrlPagina;
+            $DesPagina = $row->DesPagina;
            
            
         }
@@ -57,20 +65,31 @@ class Tipopagina extends CI_Controller
     
     function save()
     {
-        $post_array = $this->input->post();
+        $ID_TipoPagina = $this->input->post('ID_TipoPagina');
+        $TipoPagina = $this->input->post('TipoPagina');
+        $TituloPagina = $this->input->post('TituloPagina');
+        $UrlPagina = $this->input->post('UrlPagina');
+        $KeyPagina = $this->input->post('UrlPagina');
+        $DesPagina = $this->input->post('DesPagina');
+        $accion =$this->input->post('accion');
+        
         
         $tipopagina_array = array(
-            'ID_TipoPagina' => $post_array['ID_TipoPagina'],
-            'TipoPagina' => $post_array['TipoPagina']
+            'ID_TipoPagina' => $ID_TipoPagina,
+            'TipoPagina' => $TipoPagina,
+            'TituloPagina' => $TituloPagina,
+            'UrlPagina' => $UrlPagina,
+            'KeyPagina' => $KeyPagina,
+            'DesPagina' => $DesPagina
         );
 
-        if ($post_array['accion'] == 'crear')
+        if ($accion == 'crear')
         {
             $this->tipopagina_model->insert('tipopagina', $tipopagina_array);
         }
-        elseif ($post_array['accion'] == 'editar')
+        elseif ($accion == 'editar')
         {
-            $this->tipopagina_model->update($post_array['ID_TipoPagina'],$tipopagina_array);
+            $this->tipopagina_model->update($ID_TipoPagina,$tipopagina_array);
         }
 
         redirect(base_url() . 'admin/tipopagina/lists/', 'refresh');

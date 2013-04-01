@@ -8,7 +8,30 @@
                 <div class="controls">
                     <input type="text" class="span10"  name="SubtipoEmpresa" value="<?php echo $SubtipoEmpresa ?>">
                 </div>
-                <br>
+            </div>
+            <div class="control-group">
+                <label class="control-label" >Título:</label>
+                <div class="controls">
+                    <input type="text" class="span10"  name="TituloSubEmpresa" value="<?php echo $TituloSubEmpresa ?>">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" >Url:</label>
+                <div class="controls">
+                    <input type="text" class="span10"  name="UrlSubEmpresa" value="<?php echo $UrlSubEmpresa ?>">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" >Keywords:</label>
+                <div class="controls">
+                    <input type="text" class="span10"  name="KeySubEmpresa" value="<?php echo $KeySubEmpresa ?>">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" >Descripción:</label>
+                <div class="controls">
+                    <input type="text" class="span10"  name="DesSubEmpresa" value="<?php echo $DesSubEmpresa ?>">
+                </div>
             </div>
              <div class="control-group">
                 <label class="control-label" >Tipo Empresa:</label>
@@ -19,9 +42,8 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <br>
-                <div class="offset8"><button class="btn btn-large btn-primary" type="submit" >Guardar</button>&nbsp;&nbsp;<a class="btn btn-large btn-info" href="<?php echo base_url() . "admin/subtipoempresa/lists" ?>">Volver</a></div>
             </div>
+            <div class="offset8"><button class="btn btn-large btn-primary" type="submit" >Guardar</button>&nbsp;&nbsp;<a class="btn btn-large btn-info" href="<?php echo base_url() . "admin/subtipoempresa/lists" ?>">Volver</a></div>
             
         </div>
         <input type="hidden" id="base_url" value="<?php echo base_url() ?>">
