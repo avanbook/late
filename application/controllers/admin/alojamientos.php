@@ -86,6 +86,10 @@ class Alojamientos extends CI_Controller
         $data['Telefono'] = & $Telefono;
         $data['Email'] = &  $Email;
         $data['WebSite'] = & $WebSite;
+        $data['Facebook'] = & $Facebook;
+        $data['Twitter'] = & $Twitter;
+        $data['Pinterest'] = & $Pinterest;
+        $data['Gplus'] = & $Gplus;
         $data['Responsable'] = & $Responsable;
         $data['Descripcion'] = & $Descripcion;
         $data['Coordenadas'] = & $Coordenadas;
@@ -142,6 +146,10 @@ class Alojamientos extends CI_Controller
             $Telefono = $row->Telefono;
             $Email = $row->Email;
             $WebSite = $row->WebSite;
+            $Facebook = $row->Facebook;
+            $Twitter = $row->Twitter;
+            $Pinterest = $row->Pinterest;
+            $Gplus = $row->Gplus;
             $Responsable = $row->Responsable;
             $Descripcion = $row->Descripcion;
             $Coordenadas = $row->Coordenadas;
@@ -221,6 +229,10 @@ class Alojamientos extends CI_Controller
             'Telefono' => $this->input->post('Telefono'),
             'Email' => $this->input->post('Email'),
             'WebSite' => $this->input->post('WebSite'),
+            'Facebook' => $this->input->post('Facebook'),
+            'Twitter' => $this->input->post('Twitter'),
+            'Pinterest' => $this->input->post('Pinterest'),
+            'Gplus' => $this->input->post('Gplus'),
             'Responsable' => $this->input->post('Responsable'),
             'Descripcion' => $this->input->post('Descripcion'),
             'Coordenadas' => $this->input->post('Coordenadas'),

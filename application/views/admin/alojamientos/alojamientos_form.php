@@ -47,6 +47,26 @@
                     <input type="text" name="WebSite" value="<?php echo $WebSite ?>">
                 </div>
                 <br>
+                <label class="control-label" >Facebook:</label>
+                <div class="controls">
+                    <input type="text" name="Facebook" value="<?php echo $Facebook ?>">
+                </div>
+                <br>
+                <label class="control-label" >Twitter:</label>
+                <div class="controls">
+                    <input type="text" name="Twitter" value="<?php echo $Twitter ?>">
+                </div>
+                <br>
+                <label class="control-label" >Pinterest:</label>
+                <div class="controls">
+                    <input type="text" name="Pinterest" value="<?php echo $Pinterest ?>">
+                </div>
+                <br>
+                <label class="control-label" >Gplus:</label>
+                <div class="controls">
+                    <input type="text" name="Gplus" value="<?php echo $Gplus ?>">
+                </div>
+                <br>
                 <label class="control-label" >Responsable:</label>
                 <div class="controls">
                     <input type="text" name="Responsable" value="<?php echo $Responsable ?>">

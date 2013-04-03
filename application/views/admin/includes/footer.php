@@ -29,14 +29,5 @@
         <script type="text/javascript" src="<?php echo base_url() . $var ?>.js"></script>
     <?php endforeach; ?>
 <?php endif; ?>
-
-<script>
-    $(".interna").click( function()
-    {
-        var ids= $(this).attr('id');
-        $("."+ids).toggle();
-    }    
-);
-</script>
 </body>
 </html>
