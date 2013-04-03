@@ -19,7 +19,8 @@ class Empresas extends CI_Controller
 
     function lists()
     {
-        $data['empresas_array'] = $this->empresas_model->empresas_list();
+        $data['tipoempresa_array'] = $this->empresas_model->tipo_empresas_list();
+        //$data['empresas_array'] = $this->empresas_model->empresas_list();
         $data['title']          = "Listado Empresas";
         $data['js']             = array('js/admin/empresas_list');
         $data['view'] = 'admin/empresas/empresas_list';

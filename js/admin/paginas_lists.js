@@ -20,3 +20,11 @@ function paginas_delete(id_pagina)
         
     });
 }
+
+
+    $(".interna").click( function()
+    {
+        var ids= $(this).attr('id');
+        $("."+ids).toggle();
+    }    
+);

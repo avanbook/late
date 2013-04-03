@@ -20,3 +20,16 @@ function empresas_delete(id_empresa)
         
     });
 }
+
+function esconder(id)
+{
+   $("."+id).toggle();
+}
+
+$(".interna").click( function()
+{
+    var ids= $(this).attr('id');
+    $("."+ids).toggle();
+}    
+);
+

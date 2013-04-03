@@ -33,6 +33,37 @@ class Empresas_model extends CI_Model
         $rows  = $rows->result_array();
         return $rows;
     }
+    
+    function empresas_list_by_tipoEmpresa($ID_TipoEmpresa)
+    {
+        $query =sprintf("
+                select 
+                e.ID_Empresa,
+                Empresa,
+                Direccion,
+                Telefono,
+                TipoEmpresa,
+                SubtipoEmpresa,
+                e.ID_TipoEmpresa,
+                e.ID_SubtipoEmpresa
+            from
+                empresas e
+                    inner join
+                tipoempresa t ON e.ID_TipoEmpresa = t.ID_TipoEmpresa
+                    left join
+                subtipoempresa s ON s.ID_SubtipoEmpresa = e.ID_SubtipoEmpresa
+            where
+                e.ID_TipoEmpresa = %s
+
+                ",$ID_TipoEmpresa);
+        $rows  = $this->db->query($query);
+        $total_rows= $rows->num_rows();
+        $rows  = $rows->result_array();
+        
+        $result=array('count'=>$total_rows,'rows'=> $rows);
+        
+        return $result;
+    }
 
     function empresas_find($id_empresa)
     {

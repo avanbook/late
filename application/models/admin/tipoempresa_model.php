@@ -47,5 +47,8 @@ class Tipoempresa_model extends CI_Model
         $this->db->query($query);
     }
     
+    
+    
+    
 }
 ?>
