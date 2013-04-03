@@ -21,8 +21,8 @@ class Empresas extends CI_Controller
     {
         $data['tipoempresa_array'] = $this->empresas_model->tipo_empresas_list();
         //$data['empresas_array'] = $this->empresas_model->empresas_list();
-        $data['title']          = "Listado Empresas";
-        $data['js']             = array('js/admin/empresas_list');
+        $data['title']             = "Listado Empresas";
+        $data['js']                = array('js/admin/empresas_list');
         $data['view'] = 'admin/empresas/empresas_list';
         $this->load->view('admin/templates/temp_menu', $data);
     }
@@ -65,6 +65,9 @@ class Empresas extends CI_Controller
         $data['Telefono']          = & $Telefono;
         $data['Mail']              = & $Mail;
         $data['Facebook']          = & $Facebook;
+        $data['Twitter']           = & $Twitter;
+        $data['Pinterest']         = & $Pinterest;
+        $data['Gplus']             = & $Gplus;
         $data['Web']               = & $Web;
         $data['Url']               = & $Url;
         $data['Descripcion']       = & $Descripcion;
@@ -86,31 +89,33 @@ class Empresas extends CI_Controller
             $data['accion'] = 'editar';
 
             //Tabla paginas
-            $ID_Empresa                    = $row->ID_Empresa;
-            $Empresa                       = $row->Empresa;
-            $Url                           = $row->Url;
-            $Direccion                     = $row->Direccion;
-            $Telefono                      = $row->Telefono;
-            $Mail                          = $row->Mail;
-            $Facebook                      = $row->Facebook;
-            $Web                           = $row->Web;
-            $Descripcion                   = $row->Descripcion;
-            $DescripcionDeta               = $row->DescripcionDeta;
-            $ID_TipoEmpresa                = $row->ID_TipoEmpresa;
-            $ID_SubtipoEmpresa             = $row->ID_SubtipoEmpresa;
+            $ID_Empresa                  = $row->ID_Empresa;
+            $Empresa                     = $row->Empresa;
+            $Url                         = $row->Url;
+            $Direccion                   = $row->Direccion;
+            $Telefono                    = $row->Telefono;
+            $Mail                        = $row->Mail;
+            $Facebook                    = $row->Facebook;
+            $Twitter                     = $row->Twitter;
+            $Pinterest                   = $row->Pinterest;
+            $Gplus                       = $row->Gplus;
+            $Web                         = $row->Web;
+            $Descripcion                 = $row->Descripcion;
+            $DescripcionDeta             = $row->DescripcionDeta;
+            $ID_TipoEmpresa              = $row->ID_TipoEmpresa;
+            $ID_SubtipoEmpresa           = $row->ID_SubtipoEmpresa;
         }
-        $data['tipo_empresas_array']   = $this->empresas_model->tipo_empresas_list();
-        if($ID_TipoEmpresa=="")
+        $data['tipo_empresas_array'] = $this->empresas_model->tipo_empresas_list();
+        if ($ID_TipoEmpresa == "")
         {
-            $ID_TipoEmpresa=0;
+            $ID_TipoEmpresa                = 0;
         }
         $data['suptipo_empresa_array'] = $this->empresas_model->subtipo_empresas_list_by_tipo($ID_TipoEmpresa);
-        $data['js']                    = array('js/ckeditor/ckeditor','js/admin/empresas_form');
+        $data['js']                    = array('js/ckeditor/ckeditor', 'js/admin/empresas_form');
         $data['view'] = "admin/empresas/empresas_form";
         $this->load->view('admin/templates/temp_menu', $data);
     }
 
-    
     function save()
     {
         $ID_Empresa        = $this->input->post('ID_Empresa');
@@ -120,6 +125,9 @@ class Empresas extends CI_Controller
         $Telefono          = $this->input->post('Telefono');
         $Mail              = $this->input->post('Mail');
         $Facebook          = $this->input->post('Facebook');
+        $Twitter           = $this->input->post('Twitter');
+        $Pinterest         = $this->input->post('Pinterest');
+        $Gplus             = $this->input->post('Gplus');
         $Web               = $this->input->post('Web');
         $Descripcion       = $this->input->post('Descripcion');
         $DescripcionDeta   = $this->input->post('DescripcionDeta');
@@ -136,6 +144,9 @@ class Empresas extends CI_Controller
             'Telefono'          => $Telefono,
             'Mail'              => $Mail,
             'Facebook'          => $Facebook,
+            'Twitter'           => $Facebook,
+            'Pinterest'         => $Pinterest,
+            'Gplus'             => $Gplus,
             'Web'               => $Web,
             'Descripcion'       => $Descripcion,
             'DescripcionDeta'   => $DescripcionDeta,
