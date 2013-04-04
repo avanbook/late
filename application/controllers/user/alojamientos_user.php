@@ -68,6 +68,9 @@ class Alojamientos_user extends CI_Controller
     //Formulario Alojamiento
     function form_user($id_alojamiento = 0)
     {
+        $a              = $this->session->userdata('logged_in');
+        $this->gf->comp_sesion($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla alojamientos
@@ -173,6 +176,9 @@ class Alojamientos_user extends CI_Controller
     //Guardar Formulario alojamiento
     function save()
     {
+        $a              = $this->session->userdata('logged_in');
+        $this->gf->comp_sesion($a, base_url());
+        
         $accion                = $this->input->post('accion');
         $ID_Alojamiento        = $this->input->post('ID_Alojamiento');
         $ID_InformacionGeneral = $this->input->post('ID_InformacionGeneral');
@@ -259,6 +265,9 @@ class Alojamientos_user extends CI_Controller
     //Guardar Servicios
     function servicios_user_save()
     {
+        $a              = $this->session->userdata('logged_in');
+        $this->gf->comp_sesion($a, base_url());
+        
         $id_alojamiento = $this->input->post('ID_Alojamiento');
         $post_array     = $this->input->post();
 
@@ -281,6 +290,9 @@ class Alojamientos_user extends CI_Controller
     //Funciones para guardar muchas imagenes
     function alojamientos_imagenes_save()
     {
+        
+        $a              = $this->session->userdata('logged_in');
+        $this->gf->comp_sesion($a, base_url());
 
         $id_alojamiento = $this->input->post('ID_Alojamiento');
         $tipo           = $this->input->post('tipo');
@@ -387,6 +399,9 @@ class Alojamientos_user extends CI_Controller
 
     function alojamientos_ubicacion_save()
     {
+        $a              = $this->session->userdata('logged_in');
+        $this->gf->comp_sesion($a, base_url());
+        
         $post_array = $this->input->post();
         $this->informaciongeneral_user_model->coordenadas_update($post_array['ID_Alojamiento'], $post_array['Coordenadas']);
         redirect(base_url().'user/alojamientos_user/form_view_user/' . $post_array['ID_Alojamiento'] . "/?pestania=ubicacion", 'refresh');
@@ -395,6 +410,9 @@ class Alojamientos_user extends CI_Controller
     //------------------------------------------- Funciones que solo se usan en este controlador-----------------------------------
     private function alojamientos_servicios_array_final($servicios_total = array(), $servicios_alojamiento = array())
     {
+        
+        $ac              = $this->session->userdata('logged_in');
+        $this->gf->comp_sesion($ac, base_url());
 
         //Inicializo la variable que sera a donde se metan todos los array
         $a[]     = "";

@@ -19,6 +19,9 @@ class Empresas extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['tipoempresa_array'] = $this->empresas_model->tipo_empresas_list();
         //$data['empresas_array'] = $this->empresas_model->empresas_list();
         $data['title']             = "Listado Empresas";
@@ -29,6 +32,9 @@ class Empresas extends CI_Controller
 
     function view($id_empresa = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $query_rows = $this->empresas_model->paginas_find($id_empresa);
         $row        = $query_rows->row();
         if ($query_rows->num_rows() == 0)
@@ -56,6 +62,9 @@ class Empresas extends CI_Controller
 
     function form($id_empresa = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -118,6 +127,9 @@ class Empresas extends CI_Controller
 
     function save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $ID_Empresa        = $this->input->post('ID_Empresa');
         $Empresa           = $this->input->post('Empresa');
         $Url               = $this->input->post('Url');
@@ -168,6 +180,9 @@ class Empresas extends CI_Controller
 
     function empresas_publicidad_form($id_empresa)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $empresa_row = $this->empresas_model->empresas_find($id_empresa);
         $row         = $empresa_row->row();
 
@@ -190,6 +205,9 @@ class Empresas extends CI_Controller
 
     function empresas_publicidad_list($id_empresa)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['id_empresa']       = $id_empresa;
         $data['publicidad_array'] = $this->empresas_model->info_publicidad($id_empresa);
         $data['js']               = array('js/admin/empresas_publicidad_list');
@@ -201,6 +219,9 @@ class Empresas extends CI_Controller
     //Guardar Servicios
     function empresas_publicidad_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_empresa = $this->input->post('ID_Empresa');
         $post_array = $this->input->post();
 
@@ -233,6 +254,9 @@ class Empresas extends CI_Controller
 
     function empresas_imagenes_list($id_empresa)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //$data['js'] = array('js/empresas_publicidad_list');
         $row                             = $this->empresas_model->empresas_find($id_empresa);
         $row                             = $row->row();
@@ -248,6 +272,9 @@ class Empresas extends CI_Controller
     //Funciones para guardar muchas imagenes
     function empresas_imagenes_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_empresa    = $this->input->post('ID_Empresa');
         $tipo          = $this->input->post('tipo');
         $nombre_imagen = $this->input->post('foto_numero');
@@ -357,6 +384,9 @@ class Empresas extends CI_Controller
 
     function empresas_imagenes_delete()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_empresa    = $this->input->get('ID_Empresa');
         $ImagenEmpresa = $this->input->get('ImagenEmpresa');
         $this->empresas_model->delete_empresas_imagenesemp($id_empresa, $ImagenEmpresa);
@@ -365,6 +395,9 @@ class Empresas extends CI_Controller
 
     function empresas_publicidad_estado($id_empresa)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_publicidad = $this->input->get('ID_Publicidad');
         $this->empresas_model->update_estado_publicidad($id_publicidad);
         redirect(base_url() . 'admin/empresas/empresas_publicidad_list/' . $id_empresa . "");
@@ -372,6 +405,9 @@ class Empresas extends CI_Controller
 
     function empresas_publicidad_renovar($id_empresa)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_publicidad    = $this->input->get('ID_Publicidad');
         $row              = $this->empresas_model->find_precio_publicidad($id_publicidad);
         $this->empresas_model->update_estado_publicidad_simple($id_publicidad, 0);

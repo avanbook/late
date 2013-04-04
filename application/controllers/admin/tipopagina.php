@@ -17,6 +17,9 @@ class Tipopagina extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['tipopagina_array'] = $this->tipopagina_model->tipopagina_list();
         $data['title'] = "Listado tipos paginas";
         $data['view'] = 'admin/tipopagina/tipopagina_list';
@@ -25,6 +28,9 @@ class Tipopagina extends CI_Controller
     
     function form($id_tipopagina = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -65,6 +71,9 @@ class Tipopagina extends CI_Controller
     
     function save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $ID_TipoPagina = $this->input->post('ID_TipoPagina');
         $TipoPagina = $this->input->post('TipoPagina');
         $TituloPagina = $this->input->post('TituloPagina');
@@ -97,6 +106,9 @@ class Tipopagina extends CI_Controller
     
     function delete($id_tipopagina=0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $this->tipopagina_model->delete($id_tipopagina);
         redirect(base_url() . 'admin/tipopagina/lists/', 'refresh');
     }

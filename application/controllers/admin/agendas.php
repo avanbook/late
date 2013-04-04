@@ -18,6 +18,9 @@ class Agendas extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['agendas_array'] = $this->agendas_model->agendas_list();
         $data['title'] = "Listado Agenda";
         $data['js'] = array('admin/js/agendas_lists');
@@ -27,6 +30,9 @@ class Agendas extends CI_Controller
 
     function form($id_agenda = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -72,6 +78,9 @@ class Agendas extends CI_Controller
 
     function save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $post_array = $this->input->post();
 
         //Cambiar fecha para mysql
@@ -99,12 +108,18 @@ class Agendas extends CI_Controller
 
     function delete($id_agenda = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $this->agendas_model->delete($id_agenda);
         redirect(base_url() . 'admin/agendas/lists/', 'refresh');
     }
 
     function agendas_imagenes_list($id)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //$data['js'] = array('js/empresas_publicidad_list');
         $row = $this->agendas_model->agendas_find($id);
         $row = $row->row();
@@ -120,6 +135,9 @@ class Agendas extends CI_Controller
     //Funciones para guardar muchas imagenes
     function agendas_imagenes_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_agenda = $this->input->post('ID_Agenda');
         $tipo = $this->input->post('tipo');
         $nombre_imagen = $this->input->post('foto_numero');
@@ -228,6 +246,9 @@ class Agendas extends CI_Controller
 
     function agendas_imagenes_delete()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_agenda = $this->input->get('ID_Agenda');
         $ImagenAgenda = $this->input->get('ImagenAgenda');
         $this->agendas_model->delete_agendas_imagenespag($id_agenda, $ImagenAgenda);

@@ -151,6 +151,14 @@ class Gf
             return $a;
     }
     
+    function comp_sesion_admin($a,$base_url)
+    {
+        if($a=="")
+            redirect ($base_url."admin/login");
+        else
+            return $a;
+    }
+    
     
 
 }

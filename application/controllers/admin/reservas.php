@@ -28,6 +28,9 @@ class Reservas extends CI_Controller
 
     function edit($reservas_id = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -70,6 +73,9 @@ class Reservas extends CI_Controller
 
     function update()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $reservas_id = $this->input->post('reservas_id');
         $tipo_pago   = $this->input->post('tipo_pago');
         $fecha_pago  = $this->input->post('fecha_pago');
@@ -99,6 +105,9 @@ class Reservas extends CI_Controller
 
     function liquidacion($id_alojamiento = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         if ($this->alojamientos_model->count($id_alojamiento))
         {
             $data['li_array']                  = $this->reservas_model->liquidacion($id_alojamiento);
@@ -116,6 +125,9 @@ class Reservas extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Traigo Variables
         $order = $this->input->get('order');
         $campo = $this->input->get('campo');
@@ -157,6 +169,9 @@ class Reservas extends CI_Controller
 
     function form()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['title'] = 'Crear Reserva';
         $data['css']   = array('js/jquery-ui/development-bundle/themes/base/jquery.ui.all');
         $data['js'] = array(
@@ -175,6 +190,9 @@ class Reservas extends CI_Controller
 
     function buscar_disponibilidad()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $campo              = $this->input->post('campo');
         $nombre_alojamiento = $this->input->post('nombre_alojamiento');
         $fecha_desde        = $this->input->post('fecha_desde');
@@ -218,6 +236,9 @@ class Reservas extends CI_Controller
 
     function buscar_disponibilidad_ii()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $cantidad_habitaciones = $this->input->post('cant_habitaciones');
         $id_alojamiento        = $this->input->post('id_alojamiento');
 
@@ -270,6 +291,9 @@ class Reservas extends CI_Controller
 
     function buscar_disponibilidad_iii()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
 
         //Datos huesped
         $NombreHuesped   = $this->input->post('huesped_nombre');

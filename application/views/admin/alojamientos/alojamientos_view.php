@@ -77,21 +77,15 @@
                     <br>
                     <br>
                     <div style="text-align: center">
-                        <a class="btn btn-large btn-primary" href="<?php echo base_url() . "alojamientos/servicios_form/" . $info_array->ID_Alojamiento ?>">Agregar un nuevo servicio</a>
+                        <a class="btn btn-large btn-primary" href="<?php echo base_url() . "admin/alojamientos/alojamientos_servicios_form/" . $info_array->ID_Alojamiento ?>">Agregar un nuevo servicio</a>
                     </div>
-
                 <?php endif ?>
-
             </div> <!-- Fin DIV servicios -->
-
-
             <!-- Div publicidad -->
             <div class="tab-pane <?php echo $this->gf->comparar_general('publicidad', $p_a, " active") ?>" id="publicidad">
-
                 <?php if (count($publicidad_array) > 0): ?>
                     <table class="table">
                         <tr><th>Tipo</th><th>Precio</th><th>Fecha</th><th>Estado</th><th>Meses</th><th>Detalle</th><th>Acción</th></tr> 
-
                         <?php
                         foreach ($publicidad_array as $var):
                             $class = "";
@@ -111,14 +105,13 @@
                                 <td><?php echo $var['DetallePublicidad'] ?></td>
                                 <td><a onclick="confirmar(<?php echo $info_array->ID_Alojamiento ?>,<?php echo $var['ID_Publicidad'] ?>,'activar')" href="#"><i class="icon-check"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="confirmar(<?php echo $info_array->ID_Alojamiento ?>,<?php echo $var['ID_Publicidad'] ?>,'renovar')" ><i class="icon-retweet"></i></a></td>
                             </tr>
-
                         <?php endforeach; ?>
                     </table>
                 <?php else: ?>
                     <br>
                     <br>
                     <div style="text-align: center">
-                        <a class="btn btn-large btn-primary" href="<?php echo base_url() . "alojamientos/alojamientos_publicidad_form/" . $info_array->ID_Alojamiento ?>">Agregar una publicidad</a>
+                        <a class="btn btn-large btn-primary" href="<?php echo base_url() . "admin/alojamientos/alojamientos_publicidad_form/" . $info_array->ID_Alojamiento ?>">Agregar una publicidad</a>
                     </div>
 
                 <?php endif ?>

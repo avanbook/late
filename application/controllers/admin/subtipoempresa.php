@@ -19,6 +19,9 @@ class Subtipoempresa extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['subtipoempresa_array'] = $this->subtipoempresa_model->find_tipo_subtipo();
         $data['title']                = "Listado Subtipoempresas";
         $data['view']                 = 'admin/subtipoempresa/subtipoempresa_list';
@@ -27,6 +30,9 @@ class Subtipoempresa extends CI_Controller
 
     function form($id = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -68,6 +74,9 @@ class Subtipoempresa extends CI_Controller
 
     function save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $ID_TipoEmpresa    = $this->input->post('ID_TipoEmpresa');
         $ID_SubtipoEmpresa = $this->input->post('ID_SubtipoEmpresa');
         $SubtipoEmpresa    = $this->input->post('SubtipoEmpresa');
@@ -112,6 +121,9 @@ class Subtipoempresa extends CI_Controller
 
     function delete($id = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $this->subtipoempresa_model->delete($id);
         redirect(base_url() . 'admin/subtipoempresa/lists/', 'refresh');
     }

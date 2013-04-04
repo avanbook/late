@@ -1,3 +1,9 @@
+<?php 
+            
+$a = $this->session->userdata('logged');
+$usuario=$a['Usuario']; 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,14 +49,10 @@
           <a class="brand" href="#">sanrafaelLate</a>
           <div class="nav-collapse collapse">
               <div class="btn-group pull-right">
-                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> User</a>
+                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i><?php echo $usuario ?></a>
                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
-                    <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
-                    <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="i"></i> Make admin</a></li>
+                   <li><a href="<?php echo base_url() ?>admin/login/salir"><i class="icon-ban-circle"></i>Salir</a></li>
                 </ul>
             </div>
             <ul class="nav">

@@ -18,6 +18,9 @@ class Paginas extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['paginas_array'] = $this->paginas_model->paginas_list();
         $data['title']         = "Listado Páginas";
         $data['js']            = array('js/admin/paginas_lists');
@@ -27,6 +30,9 @@ class Paginas extends CI_Controller
 
     function view($id_pagina = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $query_rows = $this->paginas_model->paginas_find($id_pagina);
         $row        = $query_rows->row();
         if ($query_rows->num_rows() == 0)
@@ -54,6 +60,9 @@ class Paginas extends CI_Controller
 
     function form($id_pagina = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -106,6 +115,9 @@ class Paginas extends CI_Controller
 
     function form_interna()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $ID_Pagina=$this->input->get('ID_Pagina');
         $ID_TipoPagina=$this->input->get('ID_TipoPagina');
         
@@ -134,6 +146,9 @@ class Paginas extends CI_Controller
 
     function save()
     {   
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $ID_Pagina=$this->input->post('ID_Pagina');
         $MetaTitulo=$this->input->post('MetaTitulo');
         $MetaDescripcion=$this->input->post('MetaDescripcion');
@@ -181,6 +196,9 @@ class Paginas extends CI_Controller
 
     function paginas_imagenes_list($id_pagina)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //$data['js'] = array('js/empresas_publicidad_list');
         $row                            = $this->paginas_model->paginas_find($id_pagina);
         $row                            = $row->row();
@@ -196,6 +214,8 @@ class Paginas extends CI_Controller
     //Funciones para guardar muchas imagenes
     function paginas_imagenes_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
 
         $id_pagina     = $this->input->post('ID_Pagina');
         $tipo          = $this->input->post('tipo');
@@ -305,6 +325,9 @@ class Paginas extends CI_Controller
 
     function paginas_imagenes_delete()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_pagina    = $this->input->get('ID_Pagina');
         $ImagenPagina = $this->input->get('ImagenPagina');
         $this->paginas_model->delete_paginas_imagenespag($id_pagina, $ImagenPagina);

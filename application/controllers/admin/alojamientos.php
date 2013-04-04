@@ -22,6 +22,9 @@ class Alojamientos extends CI_Controller
     //Listado Alojamientos
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Traigo Variables
         $order = $this->input->get('order');
         $campo = $this->input->get('campo');
@@ -67,6 +70,9 @@ class Alojamientos extends CI_Controller
     //Formulario Alojamiento
     function form($id_alojamiento = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla alojamientos
@@ -194,6 +200,9 @@ class Alojamientos extends CI_Controller
     //Mostrar Alojamiento
     function form_view($id_alojamiento = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['p_a'] = $this->input->get('pestania');
         $data['title'] = "Mostrar Alojamiento";
         $data['menu_activo'] = 'info';
@@ -218,6 +227,9 @@ class Alojamientos extends CI_Controller
     //Guardar Formulario alojamiento
     function save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $accion = $this->input->post('accion');
         $ID_Alojamiento = $this->input->post('ID_Alojamiento');
         $ID_InformacionGeneral = $this->input->post('ID_InformacionGeneral');
@@ -314,6 +326,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_clientes_form($id_alojamiento = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $alojamiento_nombre = $this->alojamientos_model->alojamientos_info_gral($id_alojamiento);
 
         //Comprobar que existe el alojamiento sino tirar error
@@ -370,6 +385,9 @@ class Alojamientos extends CI_Controller
     //Guardar Cliente
     function alojamientos_clientes_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $clientes_post = $this->input->post();
 
         $clientes_array = array(
@@ -405,6 +423,8 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_servicios_form($id_alojamiento = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
 
         $alojamiento_nombre = $this->alojamientos_model->alojamientos_info_gral($id_alojamiento);
         //Comprobar que existe el alojamiento sino tirar error
@@ -433,6 +453,9 @@ class Alojamientos extends CI_Controller
     //Guardar Servicios
     function servicios_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_alojamiento = $this->input->post('ID_Alojamiento');
         $post_array = $this->input->post();
 
@@ -457,6 +480,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_imagenes_form($id_alojamiento)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $alojamiento_nombre = $this->alojamientos_model->alojamientos_info_gral($id_alojamiento);
         //Comprobar que existe el alojamiento sino tirar error
         if ($alojamiento_nombre != null)
@@ -478,6 +504,9 @@ class Alojamientos extends CI_Controller
     //Funciones para guardar muchas imagenes
     function alojamientos_imagenes_save()
     {
+        
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
 
         $id_alojamiento = $this->input->post('ID_Alojamiento');
         $tipo = $this->input->post('tipo');
@@ -590,6 +619,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_habitaciones_form($id_alojamiento)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $alojamiento_nombre = $this->alojamientos_model->alojamientos_info_gral($id_alojamiento);
 
         //Comprobar que existe la habitacion sino tirar error
@@ -650,22 +682,35 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_habitaciones_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_alojamiento = $this->input->post('ID_Alojamiento');
-        $post_array = $this->input->post();
+        $NombreHab=$this->input->post('NombreHab');
+        $DescripcionHab = $this->input->post('DescripcionHab');
+        $ID_Desayuno = $this->input->post('ID_Desayuno');
+        $PaxMax = $this->input->post('ID_Desayuno');
+        $PaxAdulto = $this->input->post('');
+        $PaxNinio = $this->input->post('PaxNinio');
+        $ID_TipoHabitacion = $this->input->post('ID_TipoHabitacion');
+        $UnidadAlojativa = $this->input->post('UnidadAlojativa');
+        
+        $accion=$this->input->post('accion');
+        $tipo = $this->input->post('tipo');
 
 
         $habitaciones_array = array(
-            'NombreHab' => $post_array['NombreHab'],
-            'DescripcionHab' => $post_array['DescripcionHab'],
-            'ID_Desayuno' => $post_array['ID_Desayuno'],
-            'PaxMax' => $post_array['PaxMax'],
-            'PaxAdulto' => $post_array['PaxAdulto'],
-            'PaxNinio' => $post_array['PaxNinio'],
-            'ID_TipoHabitacion' => $post_array['ID_TipoHabitacion'],
-            'UnidadAlojativa' => $post_array['UnidadAlojativa']
+            'NombreHab' => $NombreHab,
+            'DescripcionHab' => $DescripcionHab,
+            'ID_Desayuno' => $ID_Desayuno,
+            'PaxMax' => $PaxMax,
+            'PaxAdulto' => $PaxAdulto,
+            'PaxNinio' => $PaxNinio,
+            'ID_TipoHabitacion' => $ID_TipoHabitacion,
+            'UnidadAlojativa' => $UnidadAlojativa
         );
 
-        if ($post_array['accion'] == 'crear')
+        if ($accion == 'crear')
         {
             $id_habitacion = $this->alojamientos_model->insert('habitaciones', $habitaciones_array);
 
@@ -674,11 +719,11 @@ class Alojamientos extends CI_Controller
                 'ID_Habitacion' => $id_habitacion
             );
             $this->alojamientos_model->insert('alojamientos_habitaciones', $alojamientos_habitaciones_array);
-
+            
             //-----------------------------------------Agregar fotos-----------------------------
-            if (isset($_FILES['filesToUpload']['tmp_name']))
+            if ($_FILES['filesToUpload']['tmp_name'][0]!='')
             {
-                if (count($_FILES['filesToUpload']['tmp_name']))
+                if (count($_FILES['filesToUpload']['tmp_name'])>0)
                 {
 
                     //Borrar las imagenes de la tabla imagenes_alojamientos ya que se agregaran varias mas
@@ -701,19 +746,19 @@ class Alojamientos extends CI_Controller
 
                             if ($tipo == 'muchas_fotos')
                             {
-                                $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $i . ".jpg";
+                                $image_name = $this->config->item('upload_path_hab') . $id_alojamiento . "_" . $i . ".jpg";
                                 $thumb_grande = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $i . "_p" . ".jpg";
                                 $thumb_chica = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $i . ".jpg";
                             }
                             elseif ($tipo == 'foto_comun')
                             {
-                                $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
+                                $image_name = $this->config->item('upload_path_hab') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
                                 $thumb_grande = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $nombre_imagen . "_p" . ".jpg";
                                 $thumb_chica = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
                             }
                             elseif ($tipo == 'foto_mas')
                             {
-                                $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
+                                $image_name = $this->config->item('upload_path_hab') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
                                 $thumb_grande = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $cantidad_fotos . "_p" . ".jpg";
                                 $thumb_chica = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
                             }
@@ -764,19 +809,19 @@ class Alojamientos extends CI_Controller
 
                             //Guardar imagenes en la table alojamientos_imagenes
                             if ($tipo == 'foto_comun')
-                                $this->alojamientos_model->images_save($id_alojamiento, $nombre_imagen);
+                                $this->alojamientos_model->imageshab_save($id_alojamiento, $nombre_imagen);
                             elseif ($tipo == 'muchas_fotos')
-                                $this->alojamientos_model->images_save($id_alojamiento, $i);
+                                $this->alojamientos_model->imageshab_save($id_alojamiento, $i);
                             elseif ($tipo == 'foto_mas')
-                                $this->alojamientos_model->images_save($id_alojamiento, $cantidad_fotos);
+                                $this->alojamientos_model->imageshab_save($id_alojamiento, $cantidad_fotos);
                         }
                     }
                 }
             }
         }
-        elseif ($post_array['accion'] == 'editar')
+        elseif ($accion == 'editar')
         {
-            $this->alojamientos_model->update($post_array['ID_Habitacion'], $habitaciones_array, 'ID_Habitacion', 'habitaciones');
+            $this->alojamientos_model->update($id_habitacion, $habitaciones_array, 'ID_Habitacion', 'habitaciones');
         }
 
         redirect('admin/alojamientos/form_view/' . $id_alojamiento . "/?pestania=habitaciones", 'refresh');
@@ -784,6 +829,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_habitaciones_imagenes_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_habitacion = $this->input->post('ID_Habitacion');
         $id_alojamiento = $this->input->post('ID_Alojamiento');
         $tipo = $this->input->post('tipo');
@@ -889,6 +937,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_habitaciones_list($id_alojamiento)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $alojamiento_nombre = $this->alojamientos_model->alojamientos_info_gral($id_alojamiento);
         $id_habitacion = $this->input->get('ID_Habitacion');
 
@@ -919,6 +970,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_calendario_hab($id_alojamiento)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $alojamiento_nombre = $this->alojamientos_model->alojamientos_info_gral($id_alojamiento);
         $id_habitacion = $this->input->get('ID_Habitacion');
 
@@ -946,6 +1000,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_ubicacion_form($id_alojamiento = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $alojamiento_nombre = $this->alojamientos_model->alojamientos_info_gral($id_alojamiento);
 
         //Comprobar que existe la habitacion sino tirar error
@@ -970,6 +1027,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_ubicacion_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $post_array = $this->input->post();
         $this->alojamientos_model->alojamiento_ubicacion_update($post_array['ID_Alojamiento'], $post_array['Coordenadas']);
         redirect('admin/alojamientos/form_view/' . $post_array['ID_Alojamiento'] . "/?pestania=ubicacion", 'refresh');
@@ -979,6 +1039,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_publicidad_form($id_alojamiento = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
 
         $alojamiento_nombre = $this->alojamientos_model->alojamientos_info_gral($id_alojamiento);
         //Comprobar que existe el alojamiento sino tirar error
@@ -1003,6 +1066,9 @@ class Alojamientos extends CI_Controller
     //Guardar Servicios
     function alojamientos_publicidad_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_alojamiento = $this->input->post('ID_Alojamiento');
         $post_array = $this->input->post();
 
@@ -1035,6 +1101,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_publicidad_estado($id_alojamiento)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_publicidad = $this->input->get('ID_Publicidad');
         $this->alojamientos_model->update_estado_publicidad($id_publicidad);
         redirect('admin/alojamientos/form_view/' . $id_alojamiento . "/?pestania=publicidad");
@@ -1042,6 +1111,9 @@ class Alojamientos extends CI_Controller
 
     function alojamientos_publicidad_renovar($id_alojamiento)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_publicidad = $this->input->get('ID_Publicidad');
         $row = $this->alojamientos_model->find_precio_publicidad($id_publicidad);
         $this->alojamientos_model->update_estado_publicidad_simple($id_publicidad, 0);

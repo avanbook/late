@@ -6,10 +6,13 @@ class Ajax extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->library('gf');
     }
 
     function alojamientos_form_select()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
 
         $pais = $this->input->get('pais');
         $provincia = $this->input->get('provincia');
@@ -63,6 +66,8 @@ class Ajax extends CI_Controller
 
     function clientes_eliminar()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
 
         $query = sprintf("delete from clientes where ID_Cliente=%s", $this->input->post('ID_Cliente'));
         $this->db->query($query);
@@ -70,6 +75,9 @@ class Ajax extends CI_Controller
 
     function habitaciones_eliminar()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $query = sprintf('delete from habitaciones where ID_Habitacion=%s', $this->input->post('ID_Habitacion'));
         $this->db->query($query);
     }
@@ -77,6 +85,9 @@ class Ajax extends CI_Controller
     //Funcion para borrar imagen
     function alojamientos_imagenes_delete()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $nombre_imagen = $this->input->post('NombreImagen');
         $id_alojamiento = $this->input->post('ID_Alojamiento');
         $query = sprintf("delete from alojamientos_imagenes where ID_Alojamiento=%s and NombreImagen=%s", $id_alojamiento, $nombre_imagen);
@@ -86,6 +97,9 @@ class Ajax extends CI_Controller
     //Funcion para borrar imagen
     function habitaciones_imagenes_delete()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $nombre_imagen = $this->input->post('NombreImagenHab');
         $id_habitacion = $this->input->post('ID_Habitacion');
         $query = sprintf("delete from habitaciones_imagenes where ID_Habitacion=%s and NombreImagenHab=%s", $id_habitacion, $nombre_imagen);
@@ -95,6 +109,9 @@ class Ajax extends CI_Controller
     //Funcion para listar los alojamientos con el autocompletado
     function reservas_alojamientos_list()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $query = "select informaciongeneral.nombre as name, alojamientos.ID_Alojamiento from alojamientos inner join informaciongeneral on alojamientos.ID_InformacionGeneral = informaciongeneral.ID_InformacionGeneral";
         $rows = $this->db->query($query);
         $rows = $rows->result_array();
@@ -110,6 +127,9 @@ class Ajax extends CI_Controller
 
     function empresas_imagenes_descripcion()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_empresa = $this->input->post('ID_Empresa');
         $imagenempresa = $this->input->post('ImagenEmpresa');
         $imagendescripcion = $this->input->post('ImagenDescripcion');
@@ -123,6 +143,9 @@ class Ajax extends CI_Controller
     
     function empresas_delete()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_empresa = $this->input->post('ID_Empresa');
         $query = sprintf("delete from empresas where ID_Empresa=%s",$id_empresa);
         $this->db->query($query);
@@ -130,6 +153,9 @@ class Ajax extends CI_Controller
 
     function paginas_imagenes_descripcion()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_pagina = $this->input->post('ID_Pagina');
         $imagenpagina = $this->input->post('ImagenPagina');
         $imagendescripcion = $this->input->post('ImagenDescripcion');
@@ -141,6 +167,9 @@ class Ajax extends CI_Controller
     
     function paginas_delete()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_pagina = $this->input->post('ID_Pagina');
         $query=sprintf("delete from paginas where ID_Pagina=%s",$id_pagina);
         $this->db->query($query);
@@ -148,6 +177,9 @@ class Ajax extends CI_Controller
 
     function agendas_imagenes_descripcion()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_agenda = $this->input->post('ID_Agenda');
         $imagenagenda = $this->input->post('ImagenAgenda');
         $imagendescripcion = $this->input->post('ImagenDescripcion');
@@ -157,6 +189,9 @@ class Ajax extends CI_Controller
 
     function habitaciones_imagenes_descripcion()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_habitacion = $this->input->post('ID_Habitacion');
         $imagenhabitacion = $this->input->post('ImagenHabitacion');
         $imagendescripcion = $this->input->post('ImagenDescripcion');
@@ -166,6 +201,9 @@ class Ajax extends CI_Controller
     
     function alojamientos_imagenes_descripcion()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_alojamiento = $this->input->post('ID_Alojamiento');
         $nombreimagen = $this->input->post('NombreImagen');
         $imagendescripcion = $this->input->post('ImagenDescripcion');
@@ -176,6 +214,9 @@ class Ajax extends CI_Controller
     
     function subtipoempresas_list()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $ID_TipoEmpresa = $this->input->post('ID_TipoEmpresa');
         $query=sprintf("select ID_SubtipoEmpresa,SubtipoEmpresa from subtipoempresa where ID_TipoEmpresa=%s",$ID_TipoEmpresa);
         $rows=$this->db->query($query);

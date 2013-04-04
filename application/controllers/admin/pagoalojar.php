@@ -12,13 +12,11 @@ class Pagoalojar extends CI_Controller
         $this->load->library('gf');
     }
 
-    function index()
-    {
-        
-    }
-
     function reservas_alojamientos($id_alojamiento)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $query_row = $this->reservas_model->reservas_alojamiento($id_alojamiento);
 
         if ($query_row->num_rows() > 0)
@@ -44,6 +42,9 @@ class Pagoalojar extends CI_Controller
 
     function reservas_save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $id_alojamieto     = $this->input->post('id_alojamiento');
         $cantidad_reservas = $this->input->post('cantidad_reservas');
 

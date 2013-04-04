@@ -13,6 +13,9 @@ class Principal extends CI_Controller
 
     function index()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['title']='Home | late.com';
         $data['css']=array('css/tid_base');
         $data['views']=array('includes/header','includes/sidebar','includes/body','includes/footer');

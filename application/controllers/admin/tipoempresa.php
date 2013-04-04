@@ -17,6 +17,9 @@ class Tipoempresa extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['tipoempresa_array'] = $this->tipoempresa_model->tipoempresa_list();
         $data['title'] = "Listado tipos empresas";
         $data['view'] = 'admin/tipoempresa/tipoempresa_list';
@@ -25,6 +28,9 @@ class Tipoempresa extends CI_Controller
     
     function form($id_tipoempresa = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -64,6 +70,9 @@ class Tipoempresa extends CI_Controller
     
     function save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $ID_TipoEmpresa = $this->input->post('ID_TipoEmpresa');
         $TipoEmpresa = $this->input->post('TipoEmpresa');
         $TituloEmpresa = $this->input->post('TituloEmpresa');
@@ -94,6 +103,9 @@ class Tipoempresa extends CI_Controller
     
     function delete($id_tipoempresa=0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $this->tipoempresa_model->delete($id_tipoempresa);
         redirect(base_url() . 'admin/tipoempresa/lists/', 'refresh');
     }

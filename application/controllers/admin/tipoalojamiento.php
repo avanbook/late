@@ -17,6 +17,9 @@ class Tipoalojamiento extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['tipoalojamiento_array'] = $this->tipoalojamiento_model->tipoalojamiento_list();
         $data['title'] = "Listado tipos alojamientos";
         $data['view'] = 'admin/tipoalojamiento/tipoalojamiento_list';
@@ -25,6 +28,9 @@ class Tipoalojamiento extends CI_Controller
     
     function form($id_tipoalojamiento = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -64,6 +70,9 @@ class Tipoalojamiento extends CI_Controller
     
     function save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $ID_TipoAlojamiento = $this->input->post('ID_TipoAlojamiento');
         $TipoAlojamiento = $this->input->post('TipoAlojamiento');
         $KeyAlojamiento = $this->input->post('KeyAlojamiento');
@@ -94,6 +103,9 @@ class Tipoalojamiento extends CI_Controller
     
     function delete($id_tipoalojamiento=0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $this->tipoalojamiento_model->delete($id_tipoalojamiento);
         redirect(base_url() . 'admin/tipoalojamiento/lists/', 'refresh');
     }

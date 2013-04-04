@@ -17,6 +17,9 @@ class Categorias extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['categorias_array'] = $this->categorias_model->categorias_list();
         $data['title'] = "Listado Categorias";
         $data['view'] = 'admin/categorias/categorias_list';
@@ -25,6 +28,9 @@ class Categorias extends CI_Controller
     
     function form($id_categoria = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -57,6 +63,9 @@ class Categorias extends CI_Controller
     
     function save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $post_array = $this->input->post();
         
         $categorias_array = array(
@@ -78,6 +87,9 @@ class Categorias extends CI_Controller
     
     function delete($id_agenda=0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $this->categorias_model->delete($id_agenda);
         redirect(base_url() . 'admin/categorias/lists/', 'refresh');
     }

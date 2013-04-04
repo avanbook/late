@@ -1,30 +1,30 @@
 <?php
-class Login_user extends CI_Controller
+class Login extends CI_Controller
 {
 
     function __construct()
     {
         parent::__construct();
-        $this->load->model('user/clientes_user_model');
         $this->load->library('form_validation');
         $this->load->library('gf');
     }
 
     function index()
     {
-        $a = $this->session->userdata('logged_in');
+        $a = $this->session->userdata('logged');
+        
         if($a=='')
             $this->login();
         else
-            redirect(base_url() . 'user/', 'refresh');
+            redirect(base_url() . 'admin/login/', 'refresh');
             
     }
     
     function login()
     {
         $data['title'] = 'Loguearse';
-        $data['view'] = 'user/login_user/login_user_form';
-        $this->load->view('user/templates_user/temp_menu_user', $data);
+        $data['view'] = 'admin/login/login_form';
+        $this->load->view('admin/templates/temp_menu', $data);
     }
 
     function verificar()
@@ -32,40 +32,39 @@ class Login_user extends CI_Controller
         //This method will have the credentials validation
        
         $this->form_validation->set_rules('Usuario', 'Usuario', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('Usuario', 'Clave', 'trim|required|xss_clean|callback_verificar_bd');
+        $this->form_validation->set_rules('Clave', 'Clave', 'trim|required|xss_clean|callback_verificar_bd');
         if ($this->form_validation->run() == FALSE)
         {
             //Field validation failed.&nbsp; User redirected to login page
             $data['title'] = 'Loguearse';
-            $data['view'] = 'user/login_user/login_user_form';
-            $this->load->view('user/templates_user/temp_menu_user', $data);
+            $data['view'] = 'admin/login/login_form';
+            $this->load->view('admin/templates/temp_menu', $data);
         }
         else
         {
             //Go to private area
-            redirect(base_url() . 'user/alojamientos_user/', 'refresh');
+            redirect(base_url() . 'admin/alojamientos/', 'refresh');
 
         }
     }
 
     function verificar_bd($Clave)
     {
+        $pass="late123";
+        $user="admin";
+        
         $Usuario = $this->input->post('Usuario');
 
         //query the database
-        $row = $this->clientes_user_model->login($Usuario, $Clave);
+        //$row = $this->clientes_user_model->login($Usuario, $Clave);
 
-        if ($row)
+        if ($Clave==$pass && $Usuario==$user)
         {
             $sess_array = array(
-                'ID_Cliente' => $row->ID_Cliente,
-                'Usuario' => $row->Usuario,
-                'NombreCliente' => $row->NombreCliente,
-                'ApellidoCliente' => $row->ApellidoCliente,
-                'EmailCliente' => $row->EmailCliente,
-                'Cargo' => $row->Cargo
+                'Usuario' => "Admin"
+               
             );
-            $this->session->set_userdata('logged_in', $sess_array);
+            $this->session->set_userdata('logged', $sess_array);
 
             return TRUE;
         }
@@ -79,8 +78,8 @@ class Login_user extends CI_Controller
     
     function salir()
     {
-        $this->session->unset_userdata('logged_in');
-        redirect(base_url()."user/login_user/", 'refresh');
+        $this->session->unset_userdata('logged');
+        redirect(base_url()."admin/login/", 'refresh');
     }
 
 }

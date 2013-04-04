@@ -17,6 +17,9 @@ class Tipopublicidad extends CI_Controller
 
     function lists()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $data['tipopublicidad_array'] = $this->tipopublicidad_model->tipopublicidad_list();
         $data['title'] = "Listado tipos publicidad";
         $data['view'] ='admin/tipopublicidad/tipopublicidad_list';
@@ -25,6 +28,9 @@ class Tipopublicidad extends CI_Controller
     
     function form($id_tipopublicidad = 0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         //Apuntadores, segun tipo formulario a mostrar (update or insert) cambian los valores, y para no repetir
         //todo de nuevo uso apuntadores.
         //Tabla paginas
@@ -59,6 +65,9 @@ class Tipopublicidad extends CI_Controller
     
     function save()
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $post_array = $this->input->post();
         
         $tipopublicidad_array = array(
@@ -82,6 +91,9 @@ class Tipopublicidad extends CI_Controller
     
     function delete($id_tipopublicidad=0)
     {
+        $a              = $this->session->userdata('logged');
+        $this->gf->comp_sesion_admin($a, base_url());
+        
         $this->tipopublicidad_model->delete($id_tipopublicidad);
         redirect(base_url() . 'admin/tipopublicidad/lists/', 'refresh');
     }
