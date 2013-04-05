@@ -24,7 +24,7 @@ class Login_user extends CI_Controller
     {
         $data['title'] = 'Loguearse';
         $data['view'] = 'user/login_user/login_user_form';
-        $this->load->view('user/templates_user/temp_menu_user', $data);
+        $this->load->view('user/templates_user/temp_simple_user', $data);
     }
 
     function verificar()
@@ -38,7 +38,7 @@ class Login_user extends CI_Controller
             //Field validation failed.&nbsp; User redirected to login page
             $data['title'] = 'Loguearse';
             $data['view'] = 'user/login_user/login_user_form';
-            $this->load->view('user/templates_user/temp_menu_user', $data);
+            $this->load->view('user/templates_user/temp_simple_user', $data);
         }
         else
         {
