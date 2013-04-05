@@ -85,6 +85,11 @@
                             </select>
                         </div>
                         <br>
+                        <label  class="control-label" >Básico:</label>
+                        <div class="controls">
+                            <input type="checkbox" value="1" name="Basico" <?php echo $this->gf->comparar_general($Basico,'1','checked') ?>>
+                        </div>
+                        <br>
                         <div class="offset8"><button class="btn btn-large btn-primary" type="submit" >Guardar</button>&nbsp;&nbsp;<a class="btn btn-large btn-info" href="<?php echo base_url() . "admin/empresas/lists" ?>">Volver</a></div>
                     </div>
                 </div>
