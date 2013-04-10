@@ -38,18 +38,19 @@ public function alojar($a,$b,$c)
 		$data['row_S']=$this->dbfichas->servicios($id_Al);
 
 //AGENDA 
-		$query4= "Select Date_format(Fecha,'%m/%d') as fechaA, ID_Agenda,Titulo, Descripcion  FROM agendas WHERE Fecha>(now())- interval 8 day ORDER BY  Fecha ASC ";
-		$rowsA=$this->db->query($query4);
-		$rows_A =$rowsA->result_array();
-		$data['row_A']=$rows_A;
+		$data['row_A']=$this->fag->agenda();
+// TIPOS ALOJAMIENTOS 
+		$data['alojarmenu']=$this->fag->tiposalojar();
+
 // DESCRIPCION KEYS Y URLS DE LOS ALOJAMIENTOS
-if ($result_Al['TipoAlojamiento'] =="Hotel") {
+		$datostipo= $this->dbfichas->tipoalojar($result_Al['ID_TipoAlojamiento']);
 		$descripcion=$result_Al['TipoAlojamiento']." ".$result_Al['Nombre']." - ". substr($result_Al['Descripcion'],0,200).".. - San Rafael Late - www.sanrafaellate.com" ;
-		$keywords="hotel, otel, hoteles, hostel, san , rafael, turismo";
-		$tipoalojamientos="hoteles";
-		$urlback="alojamientos/hoteles-san-rafael.html";
-		
-}
+		$keywords=$datostipo['KeyAlojamiento'];
+		$tipoalojamientos=$datostipo['TituloAlojamiento'];
+		$urlback="alojamiento/".$datostipo['UrlAlojamiento'];	
+
+
+/*
 
 if ($result_Al['TipoAlojamiento'] =="Cabañas") {
 		$descripcion=$result_Al['TipoAlojamiento']." ".$result_Al['Nombre']." - ". substr($result_Al['Descripcion'],0,200).".. - San Rafael Late - www.sanrafaellate.com" ;
@@ -121,6 +122,7 @@ if ($result_Al['TipoAlojamiento'] =="Agroturismo") {
 		$urlback="alojamientos/agorturismo-san-rafael.html";
 
 }
+*/
 //DATA ENVIAR
 		$data['body']="website/body_fichas";
 		$data['title']= $result_Al['TipoAlojamiento']." ".$result_Al['Nombre']." | San Rafael Mendoza | San Rafael Late ";

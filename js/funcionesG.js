@@ -18,7 +18,7 @@
       }
     });
 
-
+$('a.tooltip').click(function(e){ e.preventDefault();   })
 // ---------------------REJOJ-----------------------------------------
 // Create two variable with the names of the months and days in an array
 var monthNames = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "diciembre" ]; 

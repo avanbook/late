@@ -5,9 +5,17 @@
 */
 class Dblistado extends CI_Model
 {
-	
+	//DETERMINAR datos del tipo de alojamiento
+	function tipoalojar ($url)
+	{
+$query= sprintf("Select * FROM tipoalojamiento WHERE UrlAlojamiento ='%s'",$url);
+$rows=$this->db->query($query);
+$rows =$rows->row_array();
+return $rows;
+	}
 
-function desta ($Tipoalojar,$Tipoalojar2, $star, $end) {
+function desta ($Tipoalojar,$Tipoalojar2, $star, $end) 
+{
 	//para hoteles y Apart
 if($Tipoalojar2 !="0") {
 $Tipoalojar22="OR a.ID_TipoAlojamiento=$Tipoalojar2 ";

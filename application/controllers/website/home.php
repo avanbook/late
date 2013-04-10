@@ -27,11 +27,9 @@ class Home extends CI_Controller {
 		$data['row_p']=$rows_p;
 
 //AGENDA 
-		$query4= "Select Date_format(Fecha,'%m/%d') as fechaA, ID_Agenda,Titulo, Descripcion  FROM agendas WHERE Fecha>(now())- interval 8 day ORDER BY  Fecha ASC ";
-		$rowsA=$this->db->query($query4);
-		$rows_A =$rowsA->result_array();
-		$data['row_A']=$rows_A;
-
+		$data['row_A']=$this->fag->agenda();
+// TIPOS ALOJAMIENTOS 
+		$data['alojarmenu']=$this->fag->tiposalojar();
 //PASAR DATOS	
 		$data['row4']=$rows4;
 		

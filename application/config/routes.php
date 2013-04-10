@@ -40,7 +40,6 @@
 
 $route['default_controller'] = "principal";
 $route['404_override'] = '';
-$route['franco/nose/vinos.php'] = 'franco/prueba';
 $route['user/loguin']='user/alojamientos_user/form_view_user';
 //AGENDA
 $route['agenda/([^/]+)-([^/]+)'] ='website/agenda/detalle/$2';
@@ -56,3 +55,16 @@ $route['([^/]+)/([^/]+).html'] ='website/general/paginas/$1/$2';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
 
+//EMPRESAS
+$route['servicios/([^/]+)/([^/]+)'] ='website/empresas/listarempresas/$1/$2';
+$route['servicios/([^/]+)'] ='website/empresas/infoempresas/$1';
+
+/*require_once( BASEPATH .'database/DB'. EXT );
+$db =& DB();
+$query = $db->get ("tipoempresa ");
+$result = $query->result();
+foreach( $result as $row )
+{
+    $route[ 'empresas/'.$row->TipoEmpresa.'/([^/]+)' ] = 'website/empresas/'.$row->TipoEmpresa.'/$1';
+}
+*/

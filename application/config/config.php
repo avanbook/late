@@ -249,7 +249,7 @@ $config['encryption_key'] = '123456789polca';
 |
 */
 $config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 7200;
+$config['sess_expiration']		= FALSE;
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= FALSE;
 $config['sess_use_database']	= FALSE;
@@ -364,3 +364,9 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
+
+//VARIABLES GOBLAES
+$config['paginaweb']="sanrafaellate.com.ar";
+$config['nameweb']="San Rafael Late";
+$config['ciudadweb']="San Rafael";
+$config['provinciaweb']="Mendoza"; 

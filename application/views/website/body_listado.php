@@ -6,7 +6,7 @@ BEGUIN CONTENIDOS
 
  <div id="cont_full">
    <!-- BEGUIN CONT FULL-->
-       <div id="toplinks" align="left"><b>Estas en: </b><a href="http://sanrafaellate.com" title="Ir a home">Home</a> >> <a href="<?php echo base_url().'/alojamientos/alojameintos.html';?>" title="Alojamientos en San Rafael"></a> <?php echo $titulo_p; ?> en San rafael</div>
+       <div id="toplinks" align="left"><b>Estas en: </b><a href="http://sanrafaellate.com" title="Ir a home">Home</a> >> <a href="<?php echo base_url().'/alojamientos/alojamientos.html';?>" title="Alojamientos en <?php echo $this->config->item('ciudadweb');; ?>"></a> <?php echo $titulo_p; ?> en San <?php echo $this->config->item('ciudadweb');; ?></div>
 <div class="cont_margin" >
 <div id="buscar_FULL" align="left">
   <div id="buscador_aloja"><h2>Buscador de Alojamientos</h2>
@@ -29,7 +29,7 @@ BEGUIN CONTENIDOS
 
 </div> </div>
 <div align="left">
-  <h1><?php echo $titulo_p; ?> en San Rafael</h1>
+  <h1><?php echo $titulo_p; ?> en <?php echo $this->config->item('ciudadweb');; ?></h1>
 </div>
 <!--   =========================        -->
 <!--    DSTACADOS              -->
@@ -42,15 +42,15 @@ BEGUIN CONTENIDOS
  
   <div>
     <h3><?php echo $name_T." ".ucwords($var['Nombre']); ?></h3>
-    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1_p.jpg"; ?>" alt="<?php echo $name_T." ".ucwords($var['Nombre']); ?> San Rafael" class="princ">
+    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1_p.jpg"; ?>" alt="<?php echo $name_T." ".ucwords($var['Nombre']); ?> <?php echo $this->config->item('ciudadweb');; ?>" class="princ">
   <div class="dir_H" align="center">
       <h3><?php echo $name_T." ".ucwords($var['Nombre']); ?></h3>
       <p><?php echo substr($var['Descripcion'],0,100) ?>..</p>
 <!-- EMAIL-->
-<a href="#" title="<?php echo $name_T." ".ucwords($var['Nombre']); ?>- San Rafael - Ver Ficha Informacion" class="tooltip xleft"> <img src="<?php echo base_url();?>iconos/email_F.png" alt="" > <span><b>Haga click </b>en Icono para enviar email a este alojamiento</span>
+<a href="#" title="<?php echo $name_T." ".ucwords($var['Nombre']); ?>- <?php echo $this->config->item('ciudadweb');; ?> - Ver Ficha Informacion" class="tooltip xleft"> <img src="<?php echo base_url();?>iconos/email_F.png" alt="" > <span><b>Haga click </b>en Icono para enviar email a este alojamiento</span>
 </a>
 <!-- direccion--> 
- <a href="#" title="" class="tooltip xleft"> <img src="<?php echo base_url();?>iconos/direction2.png" alt="" > <span><?php echo ucwords($var['Direccion']); ?> -  San Rafael</span>
+ <a href="#" title="" class="tooltip xleft"> <img src="<?php echo base_url();?>iconos/direction2.png" alt="" > <span><?php echo ucwords($var['Direccion']); ?> -  <?php echo $this->config->item('ciudadweb'); ?></span>
 </a>
 <!-- telefono-->
  <a href="#" title="" class="tooltip xright"> <img src="<?php echo base_url();?>iconos/phone3.png" alt="" > <span><b>Telefono: </b><b class="tel"><?php echo ($var['Telefono']); ?></b></span>
@@ -59,7 +59,7 @@ BEGUIN CONTENIDOS
       <a href="#" title="" class="tooltip xright"> <img src="<?php echo base_url();?>iconos/url.png" alt="" > <span>Ir al WebSite</span>
 </a>
 <br><br>
-<span class="butons"><a href="<?php echo base_url().$var['Url'] ?>" title="<?php echo $name_T." ".ucwords($var['Nombre']); ?>- San Rafael - Ver Ficha Informacion">Ver Ficha</a></span>
+<span class="butons"><a href="<?php echo base_url().$var['Url'] ?>" title="<?php echo $name_T." ".ucwords($var['Nombre']); ?>- <?php echo $this->config->item('ciudadweb');; ?> - Ver Ficha Informacion">Ver Ficha</a></span>
     </div>
   </div>
  
@@ -75,7 +75,7 @@ BEGUIN CONTENIDOS
    if($var['Basico']=="0"){ ?>  
   <div class="items" >
     <h3><?php echo $name_T." ".ucwords($var['Nombre']); ?></h3>
-    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1_p.jpg"; ?>" alt="<?php echo $name_T." ".ucwords($var['Nombre']); ?> San Rafael" class="princ">
+    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1_p.jpg"; ?>" alt="<?php echo $name_T." ".ucwords($var['Nombre']); ?> <?php echo $this->config->item('ciudadweb');; ?>" class="princ">
     <div class="dir_H" align="center">
       <h3><?php echo $name_T." ".ucwords($var['Nombre']); ?></h3>
       <p><?php echo substr($var['Descripcion'],0,100) ?></p>
@@ -86,7 +86,7 @@ BEGUIN CONTENIDOS
 <?php } ?>
 <!-- direccion-->
 <?php if (isset($var['Direccion'])){ ?>
-<a href="#" title="" class="tooltip"> <img src="<?php echo base_url();?>iconos/direction2.png" alt="Direccion" > <span><?php echo ucwords($var['Direccion']); ?> -  San Rafael</span>
+<a href="#" title="" class="tooltip"> <img src="<?php echo base_url();?>iconos/direction2.png" alt="Direccion" > <span><?php echo ucwords($var['Direccion']); ?> -  <?php echo $this->config->item('ciudadweb');; ?></span>
 </a>
 <?php } ?>
 <!-- TELEFONO-->
@@ -99,7 +99,7 @@ BEGUIN CONTENIDOS
 <a href="#" title="" class="tooltip"> <img src="<?php echo base_url();?>iconos/url.png" alt="Website" > <span>Ir al WebSite</span></a>
 <?php } ?>
 <br><br>
-<span class="butons"><a href="<?php echo base_url().$var['Url'] ?>" title="<?php echo $name_T." ".ucwords($var['Nombre']); ?>- San Rafael - Ver Ficha Informacion">Ver Ficha</a></span>
+<span class="butons"><a href="<?php echo base_url().$var['Url'] ?>" title="<?php echo $name_T." ".ucwords($var['Nombre']); ?>- <?php echo $this->config->item('ciudadweb');; ?> - Ver Ficha Informacion">Ver Ficha</a></span>
     </div>
   </div>
  <?php } 
@@ -109,12 +109,12 @@ BEGUIN CONTENIDOS
     <h3><?php echo $name_T." ".ucwords($var['Nombre']); ?></h3>
 <!-- EMAIL-->
 <?php if (isset($var['Email'])){ ?>
-<a href="#" title="<?php echo $name_T." ".ucwords($var['Nombre']); ?>- San Rafael - Ver Ficha Informacion" class="tooltip xleft"> <img src="<?php echo base_url();?>iconos/email_F2.png" alt="" > <span><b>Haga click </b>en Icono para enviar email a este alojamiento</span>
+<a href="#" title="<?php echo $name_T." ".ucwords($var['Nombre']); ?>- <?php echo $this->config->item('ciudadweb');; ?> - Ver Ficha Informacion" class="tooltip xleft"> <img src="<?php echo base_url();?>iconos/email_F2.png" alt="" > <span><b>Haga click </b>en Icono para enviar email a este alojamiento</span>
 </a>
 <?php } ?>
 <!-- direccion-->
 <?php if (isset($var['Direccion'])){ ?>
-<a href="#" title="" class="tooltip xleft"> <img src="<?php echo base_url();?>iconos/direction4.png" alt="" > <span><?php echo ucwords($var['Direccion']); ?> -  San Rafael</span>
+<a href="#" title="" class="tooltip xleft"> <img src="<?php echo base_url();?>iconos/direction4.png" alt="" > <span><?php echo ucwords($var['Direccion']); ?> -  <?php echo $this->config->item('ciudadweb');; ?></span>
 </a><?php } ?>
 <!-- TELEFONO-->
 <?php if (isset($var['Telefono'])){ ?>

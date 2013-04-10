@@ -1,20 +1,20 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 //Trabajo
-$config['upload_path'] ='c:/www/late/upload/alojamientos/';
-$config['upload_path_thumb'] ='C:/www/late/upload/alojamientos/thumb/';
+$config['upload_path'] ='c:wamp/www/late/upload/alojamientos/';
+$config['upload_path_thumb'] ='C:wamp/www/late/upload/alojamientos/thumb/';
 
-$config['upload_path_hab']='C:/www/late/upload/habitaciones/';
-$config['upload_path_hab_thumb']='C:/www/late/upload/habitaciones/thumb/';
+$config['upload_path_hab']='C:wamp/www/late/upload/habitaciones/';
+$config['upload_path_hab_thumb']='C:wamp/www/late/upload/habitaciones/thumb/';
 
-$config['upload_path_emp']='C:/www/late/upload/empresas/';
-$config['upload_path_emp_thumb']='c:/www/late/upload/empresas/thumb/';
+$config['upload_path_emp']='C:wamp/www/late/upload/empresas/';
+$config['upload_path_emp_thumb']='c:wamp/www/late/upload/empresas/thumb/';
 
-$config['upload_path_pag']='C:/www/late/upload/paginas/';
-$config['upload_path_pag_thumb']='C:/www/late/upload/paginas/thumb/';
+$config['upload_path_pag']='C:wamp/www/late/upload/paginas/';
+$config['upload_path_pag_thumb']='C:wamp/www/late/upload/paginas/thumb/';
 
-$config['upload_path_agenda']='C:/www/late/upload/agendas/';
-$config['upload_path_agenda_thumb']='C:/www/late/upload/agendas/thumb/';
+$config['upload_path_agenda']='C:wamp/www/late/upload/agendas/';
+$config['upload_path_agenda_thumb']='C:wamp/www/late/upload/agendas/thumb/';
 //Casa
 //$config['upload_path'] ='/var/www/avanbook/upload/';
 //$config['upload_path_hab']='/var/www/avanbook/upload/habitaciones/';

@@ -13,17 +13,18 @@ class Listado_alojar extends CI_Controller {
 	{
 		//determinar tipo de alojamiento
 	//tipo hoteles
-		if ($tipo=="hoteles-san-rafael.html")
-		{
-			$tipos=1;
-			$titulo_p="Hoteles";
-			$tipos2=4;
-			$name_tipo="Hotel";
-			$descripcion="Hoteles en San Rafael Mendoza, Guia de hoteles y Alojamientos en San Rafael. Reserve Online!";
-			$keywords="Hoteles, Hotel, hotels, otel,san, rafael,cuyo, sur mendoza";
 
-		}
-	//tipo cabanas
+		$dtipos=$this->dblistado->tipoalojar($tipo);
+
+			$tipos=$dtipos['ID_TipoAlojamiento'];
+			$titulo_p=$dtipos['TituloAlojamiento'];
+			if ($dtipos['TituloAlojamiento']==1) {$tipos2=4;} else {	$tipos2="0";}
+			$name_tipo=$dtipos['TipoAlojamiento'];
+			$descripcion=$dtipos['DesAlojamiento'];
+			$keywords=$dtipos['KeyAlojamiento'];
+
+		
+	/*tipo cabanas
 		if ($tipo=="cabanas-san-rafael.html") 
 		{
 			$tipos=2;
@@ -130,12 +131,11 @@ class Listado_alojar extends CI_Controller {
 			$keywords="agroturismo, hostales, agroturismo,turistico, alojamiento,san, rafael,cuyo, sur mendoza";
 
 		}
+		*/
 	//AGENDA 
-		$query4= "Select Date_format(Fecha,'%m/%d') as fechaA, ID_Agenda,Titulo, Descripcion  FROM agendas WHERE Fecha>(now())- interval 8 day ORDER BY  Fecha ASC ";
-		$rowsA=$this->db->query($query4);
-		$rows_A =$rowsA->result_array();
-		$data['row_A']=$rows_A;
-	
+		$data['row_A']=$this->fag->agenda();
+	// TIPOS ALOJAMIENTOS 
+		$data['alojarmenu']=$this->fag->tiposalojar();
 	 //	DESTACADOS DB
 		$data['rowD']=$this->dblistado->desta($tipos,$tipos2,"0","4");
 
@@ -200,5 +200,91 @@ $data['pag_links'] = $this->pagination->create_links();
 
 		$this->load->view('templates/website/template_listado', $data);
 	}
+
+
+public function alojar($tipo,$start)
+	{
+		//determinar tipo de alojamiento
+	//tipo hoteles
+
+		$dtipos=$this->dblistado->tipoalojar($tipo);
+
+			$tipos=$dtipos['ID_TipoAlojamiento'];
+			$titulo_p=$dtipos['TituloAlojamiento'];
+			if ($dtipos['TituloAlojamiento']==1) {$tipos2=4;} else {	$tipos2="0";}
+			$name_tipo=$dtipos['TipoAlojamiento'];
+			$descripcion=$dtipos['DesAlojamiento'];
+			$keywords=$dtipos['KeyAlojamiento'];
+
+	//AGENDA 
+		$data['row_A']=$this->fag->agenda();
+	// TIPOS ALOJAMIENTOS 
+		$data['alojarmenu']=$this->fag->tiposalojar();
+	 //	DESTACADOS DB
+		$data['rowD']=$this->dblistado->desta($tipos,$tipos2,"0","4");
+
+	 // DETERMINAR TIPOS DE ALJAMIENTOS
+		$queryT="SELECT * FROM tipoalojamiento ORDER BY ID_TipoAlojamiento ASC ";
+		$rowsT=$this->db->query($queryT);
+    $rows_T =$rowsT->result_array();
+    $data['row_T']=$rows_T;
+	//ALOJAMIENTOS PAGINADOS
+
+	//cargamos la librería
+
+$this->load->library('pagination');
+
+//Obtenemos resultados
+$porpagina="100";
+$totals=$this->dblistado->getCantidad($tipos,$tipos2);
+$data['rowL']=$this->dblistado->listar($tipos,$tipos2,$start,$porpagina);
+
+ //configuramos
+
+$config['base_url'] = base_url()."alojamiento/".$tipo;
+$config['total_rows'] = $totals;//obtenemos la cantidad de registros
+$config['per_page'] = $porpagina;  //cantidad de registros por página
+$config['num_links'] = '3'; //nro. de enlaces antes y después de la pagina actual
+$config['prev_link'] = 'anterior'; //texto del enlace que nos lleva a la pagina ant.
+$config['next_link'] = 'siguiente'; //texto del enlace que nos lleva a la sig. página
+$config['uri_segment'] = '3';  //segmentos que va a tener nuestra URL
+$config['first_link'] = '<<';  //texto del enlace que nos lleva a la primer página
+$config['last_link'] = '>>';   //texto del enlace que nos lleva a la última página
+$config['full_tag_open']="<div id='paginacion'>"; //div de apertura de paginacion
+$config['full_tag_close']="</div>"; //div de cierre paginacion
+$config['next_tag_open']="<div class='nextR'>";
+$config['next_tag_close']="</div>";
+$config['num_tag_open'] = '<div>';
+$config['num_tag_close'] = '</div>';
+$this->pagination->initialize($config);
+$data['pag_links'] = $this->pagination->create_links();		
+		
+	 //javascript	
+		$data['js']=array(
+			"js/listado",
+			"js/funcionesG"
+				);
+		$data['css']=array(
+			//CSS globales
+			"css/normalize.min",
+			"css/estilos",
+			"css/responsive",
+			"js/scroll-infinite/css/jquery.ias",
+			//TOOLTIP
+			"css/tooltip"
+
+		);
+		//DATOS DE LA PAGINA
+		$data['titulo_p']=$titulo_p;
+		$data['name_T']=$name_tipo;
+		$data['title']=$titulo_p." en San Rafael | San Rafael Late";
+		$data['descripcion']=$descripcion;
+		$data['keywords']=$keywords;
+
+
+		$this->load->view('templates/website/template_listado', $data);
+	}
+
+
 } ?>
 

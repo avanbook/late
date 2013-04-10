@@ -59,7 +59,7 @@
  </div>
  <div class="footerBottom2" align="center">
  <div>
-  <span class="title">© 2013 SAN RAFAEL LATE </span>
+  <span class="title">© 2013 <?php echo $this->config->item('paginaweb');; ?> </span>
 <span><a href="http://sanrafaellate.com.ar/staff.html">Staff</a></span>
 <span><a href="http://sanrafaellate.com.ar/publicidad.html">Publicidad</a></span>
 <span><a href="http://sanrafaellate.com.ar/opina.php">¿Sugerencias?</a></span>

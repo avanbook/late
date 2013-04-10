@@ -5,7 +5,13 @@
 */
 class Dbfichas extends CI_Model
 {
-	
+function tipoalojar ($url)
+	{
+$query= sprintf("Select * FROM tipoalojamiento WHERE ID_TipoAlojamiento ='%s'",$url);
+$rows=$this->db->query($query);
+$rows =$rows->row_array();
+return $rows;
+	}	
 
 function fichaal ($url) {
 $queryAl= sprintf("Select *  FROM alojamientos a, informaciongeneral i, tipoalojamiento t WHERE a.Url='%s' AND a.ID_InformacionGeneral=i.ID_InformacionGeneral and a.ID_TipoAlojamiento=t.ID_TipoAlojamiento",$url);

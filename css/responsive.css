@@ -4,7 +4,7 @@
 
 #menu2>div>ul>li.menuss>div { width: 97%; margin-left: 3px;}
 div.submenu>div { padding: 5px;}
-
+.relactionItem div.intt{width: 58%;}
 #circuitos {padding:3px; }
 #circuitos>div {display: inline-block;padding: 0px 0px; width: 115px; }
 #circuitos>div>img {width: 100%; height: 150px;}
@@ -17,6 +17,7 @@ div.submenu>div { padding: 5px;}
 #block_inf>div.telefonos { padding: 0 5px 0 10px; font-size: 12px;  font-family: tahoma; font-weight: bold; color:#0099FF;} 
 
 #buscadorC { margin: 10px 2px; }
+#buscadorC h2 {font-size: 21px}
 
 }
 /* Si es  menor a 1380 ------------------------ */

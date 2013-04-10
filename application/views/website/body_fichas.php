@@ -1,10 +1,10 @@
 <div id="contenedorInt">
 	<div id="cont_int">
 	<div id="fichasD" >
-    <div id="toplinks" align="left"><b>Estas en: </b><a href="http://sanrafaellate.com" title="Ir a home">Home</a> >>  <a href="<?php echo base_url(). $urlback; ?>" title=" Volver a Pagina <?php $tipoalojamientos ?>"><?php echo $tipoalojamientos; ?> en San Rafael</a> >><?php echo $row_Al['TipoAlojamiento']; ?> <?php echo $row_Al['Nombre']; ?></div>
+    <div id="toplinks" align="left"><b>Estas en: </b><a href="<?php echo base_url(); ?>" title="Ir a home">Home</a> >>  <a href="<?php echo base_url(). $urlback; ?>" title=" Volver a Pagina <?php echo $tipoalojamientos. " en " . $this->config->item('ciudadweb'); ?>"><?php echo $tipoalojamientos; ?> en <?php echo $this->config->item('ciudadweb'); ?></a> >><?php echo $row_Al['TipoAlojamiento']; ?> <?php echo $row_Al['Nombre']; ?></div>
 
     <!-- TITULO FICHAS & SOCIAL MEDIA -->
-    <div class="tituloFicha" align="left">
+    <div class="tituloSocial" align="left">
 		<!-- TITULO  -->
     <div><h1 align="left"><?php echo $row_Al['TipoAlojamiento']; ?> <?php echo $row_Al['Nombre']; ?></h1></div>
 
@@ -89,7 +89,7 @@
 	<div id="ficha_datos">
 		<div id="datos_alojar" class="border-Corner borde-gris " align="left">
 			<h2>Datos Alojamientos</h2>
-			<p><img src="<?php echo base_url() . "iconos/direction.png"; ?>" alt="direccion - <?php echo $row_Al['TipoAlojamiento']; ?>"> <b>Direccion:</b> Almafuerte 225 - San Rafael - Mendoza</p>
+			<p><img src="<?php echo base_url() . "iconos/direction.png"; ?>" alt="direccion - <?php echo $row_Al['TipoAlojamiento']; ?>"> <b>Direccion:</b> <?php echo $row_Al['Direccion']; ?> - <?php echo $this->config->item('ciudadweb');?> - <?php echo $this->config->item('provinciaweb');?></p>
 			<p><img src="<?php echo base_url() . "iconos/phone.png"; ?>" alt=""> <b>Teleono: </b><?php echo $row_Al['Telefono']; ?></p>
 			<p><img src="<?php echo base_url() . "iconos/url2.png"; ?>" alt=""> <b>Website:</b> <a href="<?php echo base_url(). "website/contador/url/" .$row_Al['ID_Alojamiento']; ?>" "Vistie el Web del Alojamiento"><?php echo $row_Al['WebSite']; ?></a></p>
 	

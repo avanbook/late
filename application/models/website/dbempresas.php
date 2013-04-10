@@ -5,18 +5,48 @@
 */
 class Dbempresas extends CI_Model
 {
+
 	
 
-function empresas ($tipoempresa, $star, $end) {
+function empresas ($idsubtipo, $star, $end) {
 
 
-$query= sprintf("Select i.Nombre, i.Descripcion,i.Telefono,i.Email, i.Direccion,a.Url, a.ID_Alojamiento  FROM alojamientos a, informaciongeneral i 
-WHERE i.ID_InformacionGeneral=a.ID_InformacionGeneral AND (a.ID_TipoAlojamiento=%s %s ) AND a.DestaOrden >'0'  ORDER BY a.DestaOrden ASC
-LIMIT %s, %s ",$Tipoalojar,$Tipoalojar22, $star, $end);
+$query= sprintf("Select * From empresas  WHERE 	ID_SubtipoEmpresa='%s'  ORDER BY Basico ASC,RAND()  LIMIT %s, %s ",$idsubtipo, $star, $end);
+$rows=$this->db->query($query);
+$totalrows=$rows->num_rows();
+$rows =$rows->result_array();
+$results=array("rows"=>$rows, "totals"=>$totalrows);
+return $results;
+}
+
+function tipoempresas ($tipoempresa) {
+
+
+$query= sprintf("Select * From tipoempresa  WHERE TipoEmpresa='%s' ",$tipoempresa);
 
 $rows=$this->db->query($query);
-$rows =$rows->result_array();
+$rows =$rows->row_array();
 
+return $rows;
+}
+
+function subtipoempresas ($urlsubtipo) {
+
+
+$query= sprintf("Select * From subtipoempresa WHERE UrlSubEmpresa='%s' ORDER BY ID_SubtipoEmpresa DESC ",$urlsubtipo);
+
+$rows=$this->db->query($query);
+$rows =$rows->row_array();
+
+return $rows;
+}
+
+function listarsubtipo ($tipoempresa) {
+
+
+$query= sprintf("Select * From subtipoempresa WHERE ID_TipoEmpresa='%s' ORDER BY ID_SubtipoEmpresa DESC ",$tipoempresa);
+$rows=$this->db->query($query);
+$rows =$rows->result_array();
 return $rows;
 }
 
