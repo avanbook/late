@@ -74,11 +74,6 @@
                             <input type="text" name="Responsable" value="<?php echo $Responsable ?>">
                         </div>
                         <br>
-                        <label class="control-label" >Descripción:</label>
-                        <div class="controls">
-                            <textarea rows="3" name="Descripcion"><?php echo $Descripcion ?></textarea>
-                        </div>
-                        <br>
                         <label class="control-label" >Tipo acuerdo:</label>
                         <div class="controls">
                             <select name="TipoAcuerdo">
