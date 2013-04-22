@@ -28,6 +28,7 @@ class Imagenes extends CI_Controller
 
     function save()
     {
+
         $im_id_imagen      = $this->input->post('im_id_imagen');
         $im_id_imagen_tipo = $this->input->post('im_id_imagen_tipo');
         $tipo              = $this->input->post('tipo');
@@ -108,14 +109,14 @@ class Imagenes extends CI_Controller
     {
         $im_id_imagen_tipo = $this->input->get('im_id_imagen_tipo');
         $it_row            = $this->it_model->find($im_id_imagen_tipo);
-        $file_image        = $this->config->item('base_hosting') . $it_row['it_gral_upload'] . "/" . $im_id_imagen . ".jpeg";
-        $file_image_thumb  = $this->config->item('base_hosting') . $it_row['it_thumb_upload'] . "/" . $im_id_imagen . ".jpeg";
+        $file_image        = $this->config->item('base_hosting') . $it_row['it_gral_upload']  . $im_id_imagen . ".jpg";
+        $file_image_thumb  = $this->config->item('base_hosting') . $it_row['it_thumb_upload'] . $im_id_imagen . ".jpg";
 
         if (is_file($file_image))
-            unlink($upload_directory);
+            unlink($file_image);
 
         if (is_file($file_image_thumb))
-            unlink($upload_directory_thumb);
+            unlink($file_image_thumb);
 
         $this->im_model->delete($im_id_imagen);
 

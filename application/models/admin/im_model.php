@@ -40,7 +40,7 @@ class Im_model extends CI_Model
     function find_tipo($im_tipo)
     {
 
-        $query = sprintf("select * from imagenes inner join imagenes_tipo on im_id_imagen_tipo=it_id_imagen_tipo where im_id_imagen_tipo='%s'", $im_tipo);
+        $query = sprintf("select * from imagenes inner join imagenes_tipo on im_id_imagen_tipo=it_id_imagen_tipo where im_id_imagen_tipo='%s' order by im_id_imagen", $im_tipo);
         $rows  = $this->db->query($query);
         $rows  = $rows->result_array();
         return $rows;
@@ -92,7 +92,7 @@ class Im_model extends CI_Model
 
     function count_tipo($im_id_imagen_tipo)
     {
-        $query = sprintf("select count(*) as cantidad from imagenes where im_id_imagen_tipo=%s", $im_id_imagen_tipo);
+        $query = sprintf("select max(im_id_imagen) as cantidad from imagenes where im_id_imagen_tipo=%s", $im_id_imagen_tipo);
         $row   = $this->db->query($query);
         $row   = $row->row_array();
         return $row['cantidad'];
