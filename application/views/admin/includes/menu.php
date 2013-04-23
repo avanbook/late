@@ -42,6 +42,7 @@ $usuario=$a['Usuario'];
                             <li><a href="<?php echo base_url() ?>admin/subtipoempresa/">Subtipo Empresa</a></li>
                             <li><a href="<?php echo base_url() ?>admin/tipopublicidad/">Tipo Publicidad</a></li>
                             <li><a href="<?php echo base_url() ?>admin/imagenes_tipo/lists/">Tipos Imagenes</a></li>
+                            <li><a href="<?php echo base_url() ?>admin/videos/lists/">Videos</a></li>
                         </ul>
                     </li>
                     <li><a href="#contact">Contact</a></li>
